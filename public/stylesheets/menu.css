@@ -1,0 +1,11 @@
+.szcjbt, #czselarea,.zizicd{
+	display: none;
+}
+
+.maincd{
+	cursor: pointer;
+}
+.zizicd{
+	width: 82px;height:38px;border: 1px solid gray; margin-bottom: -1px; line-height: 38px;text-align: center;cursor: pointer;position: relative;
+}
+

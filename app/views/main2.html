@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="renderer" content="webkit"/>
+        <title>#{get 'title' /}</title>
+       
+        <link href="/public/stylesheets/se7en/se7en-font.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/public/stylesheets/se7en/font-awesome.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="/public/stylesheets/se7en/se7en-font.css" media="all" rel="stylesheet" type="text/css" /> 
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/se7en/bootstrap.min.css"/>
+        <link href="/public/stylesheets/se7en/style.css" media="all" rel="stylesheet" type="text/css" />
+         <!--[if lte IE 6]>
+		  <link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-ie6.min.css">
+		
+		  <link rel="stylesheet" type="text/css" href="/public/stylesheets/css/ie.css">
+		  <![endif]-->
+        #{get 'moreStyles' /} 
+        <script type="text/javascript">
+        	USER_ID='${session.get("session_merchant_id")}';
+        </script>
+       
+</head>
+<body>
+	<div class="modal-shiftfix">
+      <!-- Navigation -->
+      <div class="navbar navbar-fixed-top scroll-hide">
+        <div class="container-fluid top-bar">
+          <div class="pull-right">
+            <ul class="nav navbar-nav pull-right">
+
+              <li class="dropdown user hidden-xs"><a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img width="34" height="34" src="/public/images/avatar-male.jpg" />${session.get("session_merchant_name")}<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">
+                    <i class="icon-user"></i>账户信息</a>
+                  </li>
+                  <li><a href="#">
+                    <i class="icon-gear"></i>账户设置</a>
+                  </li>
+                  <li><a onClick="javascript:_hmt.push(['_trackEvent', '退出登录', '点击']);"  href="login1.html">
+                    <i class="icon-signout"></i>退出</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <button class="navbar-toggle">
+          	<span class="icon-bar"></span><span class="icon-bar"></span>
+          	<span class="icon-bar"></span>
+          </button>
+          <a class="logo" href="index-2.html"></a>
+        </div>
+        <div class="container-fluid main-nav clearfix">
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a class="current" href="/AssistantUI/home"><span aria-hidden="true" class="se7en-home"></span>首页</a>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：公众号管理
+              -->
+              <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>公众号管理<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">添加公众账号</a>
+                  </li>
+                  <li>
+                    <a href="#">公众号设置</a>
+                  </li>
+                </ul>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：基础服务
+              -->
+              <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>基础服务<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">自动回复</a>
+                  </li>
+                  <li>
+                    <a href="#">无法识别回复</a>
+                  </li>
+                </ul>
+              </li>
+             <!--
+             	作者：738509878@qq.com
+             	时间：2015-01-20
+             	描述：自定义菜单
+             -->
+              <li><a href="#">
+                <span aria-hidden="true" class="se7en-feed"></span>自定义菜单</a>
+              </li>
+             <!--
+             	作者：738509878@qq.com
+             	时间：2015-01-20
+             	描述：营销活动
+             -->
+              <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>营销活动<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">微信墙</a>
+                  </li>
+                  <li>
+                    <a href="#">刮刮卡</a>
+                  </li>
+                  <li>
+                    <a href="#">优惠券</a>
+                  </li>
+                </ul>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：微投票
+              -->
+              <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>微投票<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">微投票管理</a>
+                  </li>
+                  <li>
+                    <a href="#">微投票新增</a>
+                  </li>
+                 
+                </ul>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：微客服
+              -->
+               <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>微客服<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">微客服系统</a>
+                  </li>
+                 
+                </ul>
+               </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：微商城(最后做)
+              -->
+              <li><a href="#">
+                <span aria-hidden="true" class="se7en-feed"></span>微商城</a>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：微网站
+              -->
+              <li><a href="#">
+                <span aria-hidden="true" class="se7en-feed"></span>微网站</a>
+              </li>
+              <!--
+              	作者：738509878@qq.com
+              	时间：2015-01-20
+              	描述：>360全景
+              -->
+               <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>360全景<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">全景图管理</a>
+                  </li>
+                  <li>
+                    <a href="#">添加全景图</a>
+                  </li>
+                </ul>
+               </li>
+               <!--
+               	作者：738509878@qq.com
+               	时间：2015-01-20
+               	描述：二维码管理
+               -->
+               <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>二维码管理<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">生成二维码</a>
+                  </li>
+                  <li>
+                    <a href="#">扫描统计</a>
+                  </li>
+                </ul>
+               </li>
+               <!--
+               	作者：738509878@qq.com
+               	时间：2015-01-20
+               	描述：客户管理
+               -->
+              <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>客户管理<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">粉丝分组</a>
+                  </li>
+                  <li>
+                    <a href="#">粉丝列表</a>
+                  </li>
+                  <li>
+                    <a href="#">地理位置分布</a>
+                  </li>
+                </ul>
+               </li>
+               <!--
+               	作者：738509878@qq.com
+               	时间：2015-01-20
+               	描述：数据统计
+               -->
+               <li class="dropdown"><a data-toggle="dropdown" href="#">
+                <span aria-hidden="true" class="se7en-star"></span>数据统计<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">聊天记录</a>
+                  </li>
+                  <li>
+                    <a href="#">关键词触发统计</a>
+                  </li>
+                </ul>
+               </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--
+      	作者：738509878@qq.com
+      	时间：2015-01-20
+      	描述：模块详细内容
+      -->
+      <div class="container-fluid main-content">
+     	  #{doLayout /}
+     </div>
+</body>
+</html>
+<script type="text/javascript">
+	var _hmt=_hmt||[];
+	(function(){
+		var hm=document.createElement("script");
+		hm.src="//hm.baidu.com/hm.js?25ecc0a6b1f4b3104c6cfff4ce13b028";
+		var s=document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm,s);
+	})();
+</script>
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	Date.prototype.format=function(format){
+		var o={
+			"M+":this.getMonth()+1,//Month
+            "d+":this.grtDate(),//Day
+            "h+":this.getHours(),//hour
+            "m+":this.getMinutes(),//minute
+            "s+":this.getSeconds(),//seconds
+            "q+":Math.floor((this.getMonth()+3)/3),
+            "S":this.getMilliseconds()//millSecond  
+		}
+		if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "")
+		.substr(4 - RegExp.$1.length));
+		for (var k in o) if (new RegExp("(" + k + ")")
+			.test(format)) format = format.replace(RegExp.$1,
+		RegExp.$1.length == 1 ? o[k] : ("00" + o[k])
+			.substr(("" + o[k])
+			.length));
+		return format;
+	}
+	Date.prototype.formatHM=function(){
+		return this.format('h:mm');
+	}
+	Date.prototype.formatYMD=function(){
+		return this.format("yyyy-MM-dd");
+	}
+	Date.prototype.formatYMDHMS=function(){
+		return this.fomrmat('yyyy-MM-dd hh:mm:ss');
+	}
+	
+	//SetConfiguration
+	seajs.config({
+		alias:{
+			"jquery":"jquery.min.js",
+			"bootstrap":"bootstrap.min.js",
+			"bootstrapTable":"bootstrap-table.min.js",
+			"bootstrapTableE":"bootstrap-table-export.js",
+			"dialog":"dialog.js",
+			"pagination":"pagination.js",
+			"template":"template.js",
+			"until":"global.js",
+			"Validform":"Validform_v5.3.2_min.js",
+			
+			"home.js":"home.js"
+		},
+		map: [
+		[ /^(.*\.(?:css|js))(.*)$/i, '$1?20141223' ]
+		],
+		preload: ['jquery','bootstrap']
+	});
+	seajs.use(["jquery","dialog","template"],function($,dialog,template){
+		var tar=location.pathname;
+		var userAgent = navigator.userAgent.toLowerCase(); 
+		template.helper('dateFormat', function (date, format) {
+			date = new Date(date);
+			var map = {
+				"M": date.getMonth() + 1, //月份 
+				"d": date.getDate(), //日 
+				"h": date.getHours(), //小时 
+				"m": date.getMinutes(), //分 
+				"s": date.getSeconds(), //秒 
+				"q": Math.floor((date.getMonth() + 3) / 3), //季度 
+				"S": date.getMilliseconds() //毫秒 
+			};
+			format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+				var v = map[t];
+				if(v !== undefined){
+					if(all.length > 1){
+						v = '0' + v;
+						v = v.substr(v.length-2);
+					}
+					return v;
+				}
+				else if(t === 'y'){
+					return (date.getFullYear() + '').substr(4 - all.length);
+				}
+				return all;
+			});
+			return format;
+	});
+	$.browser = { 
+		version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
+		safari: /webkit/.test( userAgent ), 
+		opera: /opera/.test( userAgent ), 
+		msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+		mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
+	};
+	if(($.browser.msie&&($.browser.version == "6.0")&&!$.support.style)||$.browser.msie&&($.browser.version == "7.0")){
+		dialog({
+			title: '警告!',
+			content: '您的浏览器版本非常低,可能会导致您的浏览体验降低~~<br> 推荐您下载<a href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank">谷歌浏览器</a>或者将360等双核浏览器调至极速模式'
+		}).showModal();
+	}	
+});
+</script>
+#{get 'moreScripts' /}

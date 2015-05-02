@@ -1,0 +1,214 @@
+#{extends 'main3.html' /}
+#{set 'moreStyles'}
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg_multi.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/javascripts/ueditor/themes/default/css/ueditor.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/modal.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/dropzone.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/wysiwyg.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>多图文消息新增</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+			  <div class="form-horizontal">
+                 <div class="form-group">
+                 	<textarea id="ysdata" style="display: none;"></textarea>
+		    		<div class="col-sm-8 msg-preview" id="nrdiv1" style="width:350px;">
+		    			<div class="viewBox">
+							<img src="/public/images/iphone.png" width="375">
+							<div class="viewCon">
+								<div class="msg-item-wrapper over-mark" relid="">
+                                    <div id="appmsgItem" class="appmsgItem msg-item">
+										<p class="msg-meta">
+											<span class="msg-date">${new Date().format('yyyy-MM-dd')}</span>
+										</p>
+										<div class="cover">
+											<img class="i-img m-img" relobj="elfinder_pscgztwm" src="/public/images/fmdtp.jpg" style="width: 440px;height: 176px;">
+											<h4 class="msg-t">
+												<span class="i-title m-title"></span>
+											</h4>
+											<ul class="abs tc sub-msg-opr">                 
+												<li class="b-dib sub-msg-opr-item">                   
+													<a href="javascript:;" onclick="edititem(this);" class="th opr-icon edit-icon">编辑</a>                 
+												</li>               
+											</ul>
+											<img class="i-img" style="" src="/public/images/fmdtp.jpg">
+										</div>
+										<p class="msg-text m-desc" rel="desc"></p>
+										<div rel="con" class="m-con" style="display: none;"></div>
+										<div rel="url" class="m-url"></div>
+										<div rel="share" class="m-share" style="display: none;"></div>
+									</div>
+									<div class="rel sub-msg-item appmsgItem">              
+										<span class="thumb">                    
+										<img class="i-img m-img" id="2" relobj="elfinder_pscgztwm2" src="/public/images/ddspic.png" style="width: 72px;height: 72px;">
+										</span>       
+										<h4 class="msg-t">                    
+										<span class="i-title m-title">标题</span>                
+										</h4>       
+										<ul class="abs tc sub-msg-opr">         
+											<li class="b-dib sub-msg-opr-item">           
+												<a href="javascript:;" onclick="edititem(this);" class="th opr-icon edit-icon">编辑</a>         
+											</li>         
+											<li class="b-dib sub-msg-opr-item">           
+												<a href="javascript:;" onclick="delitem(this);" class="th opr-icon del-icon">删除</a>         
+											</li>       
+										</ul>
+										<div rel="con" class="m-desc" style="display: none;"></div>
+										<div rel="con" class="m-con" style="display: none;"></div>
+										<div rel="url" class="m-url" style="display: none;"></div>
+										<div rel="share" class="m-share" style="display: none;"></div>
+									</div>
+									
+									<div class="sub-add">            
+										<a href="javascript:;" class="block tc sub-add-btn" id="addaline">
+										<span class="vm dib"><i class="fa fa-plus"></i></span>增加一条</a>           
+									</div>
+									<div class="msg-hover-mask"></div>
+									<div class="msg-mask">
+										<span class="dib msg-selected-tip"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="msg-editer-wrapper2">
+							<div class="msg-editer" style="width:400px;">
+							 <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">封面</label>
+								    <div class="col-sm-8">
+								      <div id="dropzone">
+				      					<form action="/merchant/MerchantCtrl/saveImg" class="multi-img dropz dz-clickable" id="demo-upload">
+										  <div class="dz-message">
+										     <p color="rgb(141, 141, 141)">(必须上传一张图片)建议尺寸：550像素 * 290像素</p>
+										  </div>
+									    </form>
+				      				 </div>
+								    </div>
+								 </div>
+							 </div>
+							 <form class="form-horizontal m-t" id="newsForm" novalidate="novalidate"> 
+								<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">标题</label>
+								    <div class="col-sm-9">
+								      <input id="title" name="title" type="text" class="need form-control" aria-required="true" aria-invalid="true" >
+								      <span style="color:#CCC;">必填,不能超过64个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							   
+							    <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">摘要</label>
+								    <div class="col-sm-9">
+								      <textarea id="descr" name="descr" class="need form-control" aria-required="true" aria-invalid="true"></textarea>
+								      <span style="color:#CCC;">不能超过120个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							    
+							    <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">正文</label>
+								    <div class="col-sm-9">
+								      <textarea id="con" name="con" style="width: 400px;height: 400px;" aria-required="true" aria-invalid="true"></textarea>
+								      <span style="color:#CCC;">不能超过120个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							    
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">原文链接</label>
+								    <div class="col-sm-9">
+								      <input id="url" name="url" type="text" class="need form-control"  aria-required="true" aria-invalid="true">
+								    </div>
+								 </div>
+							    </div>
+							</div>
+							<span class="abs msg-arrow a-out" style="margin-top: 0px;"></span>
+							<span class="abs msg-arrow a-in" style="margin-top: 0px;"></span>
+						    <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label"></label>
+								    <div class="col-sm-8">
+								      <button  class="btn btn-w-m btn-primary" type="submit" >保存</button>
+								      <button id="cancel" class="btn btn-w-m btn-danger" type="button">取消</button>
+								    </div>
+								 </div>
+							 </div>
+						   </form>
+						</div>
+					</div>
+				  </div>
+			    </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	function delitem(o){
+			if(window.dqdiv[0] == window.curedt[0]){
+				edititem(null,true);
+			}
+			if($('.appmsgItem').size()>2){
+				$(o).parent().parent().parent().remove();
+			}else{
+				alert('多图文最少不得少于两篇内容');
+			}
+    }
+	function edititem(o,first){
+	  	if(first || ccjy()) {
+		if(first){
+			window.dqdiv = $('#appmsgItem');	
+			$('.msg-editer-wrapper2').css('marginTop','40px');
+		}else{
+			$('.msg-editer-wrapper2').css('marginTop',($(o).offset().top-299)+'px');
+		}		
+		window.dqdiv = window.curedt;	
+		$('#title').val(window.dqdiv.find('.m-title').text());
+		$('#url').val(window.dqdiv.find('.m-url').text());
+		$('#descr').val(window.dqdiv.find('.m-desc').text());
+		//window.ue.setContent("");
+	  }
+	}
+	 function ccjy(){
+	 	    var tit = $.trim(window.dqdiv.find('.m-title').text());
+			var img = window.dqdiv.find('.cover').find(".m-img").attr('src');
+			var url = $.trim(window.dqdiv.find('.m-url').text());
+			var con = $.trim(window.dqdiv.find('.m-con').html());
+			//var share = $.trim(window.dqdiv.find('.m-share').text());
+			if(img=="/public/images/fmdtp.jpg"){
+            	alert("请上传图片!");
+            	return false;
+            }
+			if(url=='' && con==''){
+				alert('请编辑正文或者链接地址');
+				return false;
+			}
+			return true;
+	   }
+	 
+</script>
+<script type="text/javascript">
+	  seajs.use('multiArticle',function(multiArticle){
+	    multiArticle.init();
+      });
+</script>
+#{/set}

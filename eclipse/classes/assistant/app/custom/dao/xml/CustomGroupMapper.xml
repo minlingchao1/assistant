@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.custom.dao.mapper.ICustomGroupMapper">
+   
+    <sql id="tableName">custom_group</sql>
+    
+    <sql id="groupColumns">id,group_id,group_name,custom_count,wechat_id</sql>
+    
+    <resultMap type="CustomGroup" id="resultCustomGroupMap">
+        <id column="id" property="id"/>
+        <result column="group_id" property="groupId"/>
+        <result column="group_name" property="groupName"/>
+        <result column="custom_count" property="customCount"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="CustomGroup" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,group_id,group_name,custom_count,gmt_created)
+       value(#{wechatId},#{groupId},#{groupName},#{customCount},now())
+    </insert>
+    
+    <update id="update">
+        update <include refid="tableName"/>
+        <set>
+            <if test="group_name!=null">group_name=#{groupName}</if>
+            <if test="custom_count!=null">custom_count=#{customCount}</if>
+        </set>
+       where id=#{id}
+    </update>
+    
+    <select id="findById"  resultMap="resultCustomGroupMap">
+        select <include refid="groupColumns"/> from <include refid="tableName"/>
+        where id=#{id} and wechat_id=#{wechatId}
+    </select>
+ 
+</mapper>

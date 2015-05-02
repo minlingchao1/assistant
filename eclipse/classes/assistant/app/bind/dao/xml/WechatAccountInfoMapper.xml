@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.bind.dao.mapper.IWechatAccountInfoMapper">
+   
+    <sql id="tableName">wechat_account_info</sql>
+    
+    <sql id="wechatInfoColumns">id,account_id,account_name,wechat_number,type,authenticate,qrcode,head_image,app_id,app_secret,url,token</sql>
+    
+    <resultMap type="WechatAccountInfo" id="resultWechatAccountInfoMap">
+        <id column="id" property="id"/>
+        <result column="account_id" property="accountId"/>
+        <result column="account_name" property="accountName"/>
+        <result column="wechat_number" property="wechatNumber"/>
+        <result column="type" property="type"/>
+        <result column="authenticate" property="authenticate"/>
+        <result column="qrcode" property="qrcode"/>
+        <result column="head_image" property="headImage"/>
+        <result column="app_secret" property="appSecret"/>
+        <result column="app_id" property="appId"/>
+        <result column="url" property="url"/>
+        <result column="token" property="token"/>
+        <result column="access_token" property="accessToken"/>
+    </resultMap>
+    
+    
+    <insert id="insert" parameterType="WechatAccountInfo" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (account_id,account_name,wechat_number,type,authenticate,qrcode,head_image,app_id,app_secret,url,token,gmt_created)
+       value(#{accountId},#{accountName},#{wechatNumber},#{type},#{authenticate},#{qrcode},#{headImage},#{appId},#{appSecret},#{url},#{token},now())
+    </insert>
+    
+    <update id="update">
+        update <include refid="tableName"/>
+        <set>
+            <if test="accountId!=null">account_id=#{accountId},</if>
+            <if test="accountName!=null">account_name=#{accountName},</if>
+            <if test="wechatNumber!=null">wechat_number=#{wechatNumber},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="authenticate!=null">authenticate=#{authenticate},</if>
+            <if test="qrcode!=null">qrcode=#{qrcode},</if>
+            <if test="headImage!=null">head_image=#{headImage},</if>
+            <if test="appId!=null">app_id=#{appId},</if>
+            <if test="appSecret!=null">app_secret=#{appSecret}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="delete" parameterType="long">
+        delete from <include refid="tableName"/> where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="long" resultMap="resultWechatAccountInfoMap" >
+        select <include refid="wechatInfoColumns"/> from <include refid="tableName"/>
+        where id=#{id}
+    </select>
+    
+    <select id="findByAppId" parameterType="string" resultMap="resultWechatAccountInfoMap">
+        select <include refid="wechatInfoColumns"/> from <include refid="tableName"/>
+        where app_id=#{appId}
+    </select>
+    
+    <select id="getWXInfo" parameterType="long" resultMap="resultWechatAccountInfoMap">
+        select wai.id,wai.account_id,wai.account_name,wai.wechat_number,wai.type,wai.authenticate,wai.qrcode,wai.head_image,wai.app_id,wai.app_secret,wai.url,wai.token,wai.access_token
+        from wechat_account_info wai
+        left join
+          wechat_account_user_ref waur
+        on
+          wai.id=waur.wechat_id
+        left join 
+          merchant m
+        on
+          waur.user_id=m.id
+        where m.id=#{userId}
+    </select>
+    
+    <select id="findByUserIdAndWechatId" resultMap="resultWechatAccountInfoMap">
+        select wai.id,wai.account_id,wai.account_name,wai.wechat_number,wai.type,wai.authenticate,wai.qrcode,wai.head_image,wai.app_id,wai.app_secret,wai.url,wai.token,wai.access_token
+        from wechat_account_info wai
+        left join
+          wechat_account_user_ref waur
+        on
+          wai.id=waur.wechat_id
+        left join 
+          merchant m
+        on
+          waur.user_id=m.id
+        where m.id=#{userId} and wai.id=#{wechatId}
+    </select>
+    
+</mapper>

@@ -1,0 +1,115 @@
+.modal-scrollable {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+.modal.modal-overflow {
+    top: 0;
+}
+.modal {
+	outline: none;
+	position: absolute;
+	margin-top: 0;
+	/*top: 50%;*/
+	overflow: visible;
+}
+.modal {
+	left: 40%;
+	bottom: auto;
+	right: auto;
+	padding: 0;
+	width: 840px;
+	margin-left: -250px;
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+	box-shadow: 0 3px 9px rgba(0,0,0,.5);
+	background-clip: padding-box;
+}
+.modal-header {
+padding: 8px 10px;
+}
+h4 {
+font-size: 18px;
+}
+/*h1, h2, h3, h4, h5, h6 {
+font-weight: 300;
+font-family: inherit;
+}*/
+.modal-body {
+max-height: none;
+overflow: auto;
+}
+.changeStyle {
+width: 800px;
+overflow: hidden;
+margin-top: -10px;
+}
+.editorStyle {
+width: 100%;
+padding: 0;
+float: left;
+}
+.modal-scrollable {
+position: fixed;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+overflow: auto;
+}
+.modal-backdrop, .modal-backdrop.fade.in {
+opacity: .7;
+filter: alpha(opacity=70);
+background: #fff;
+}
+.selColorBox {
+float: left;
+width: 200px;
+height: 360px;
+border: 1px solid #cbcbcb;
+}
+.farbtastic, .farbtastic .wheel {
+width: 195px;
+height: 195px;
+}
+.farbtastic {
+position: relative;
+}
+.farbtastic .color, .farbtastic .overlay {
+top: 47px;
+left: 47px;
+width: 101px;
+height: 101px;
+}
+.farbtastic * {
+position: absolute;
+cursor: crosshair;
+}
+.farbtastic .wheel {
+background: url(/public/images/weel.png) no-repeat;
+width: 195px;
+height: 195px;
+}
+.farbtastic .overlay {
+background: url(/public/images/overlay.png) no-repeat;
+}
+.farbtastic .marker {
+width: 17px;
+height: 17px;
+margin: -8px 0 0 -8px;
+overflow: hidden;
+background: url(/public/images/marker.png) no-repeat;
+}
+.farbtastic .marker {
+width: 17px;
+height: 17px;
+margin: -8px 0 0 -8px;
+overflow: hidden;
+background: url(/public/images/marker2.png) no-repeat;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.scene.dao.mapper.ISceneImgMapper">
+   
+    <sql id="tableName">scene_img</sql>
+    
+    <sql id="sceneImgColumns">id,scene_id,re_order,img_url</sql>
+    
+    <resultMap type="SceneImg" id="resultSceneImgMap">
+        <id column="id" property="id"/>
+        <result column="scene_id" property="sceneId"/>
+        <result column="re_order" property="reOrder"/>
+        <result column="img_url" property="imgUrl"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="SceneImg" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (scene_id,re_order,img_url,gmt_created)
+      value(#{sceneId},#{reOrder},#{imgUrl},now())
+    </insert>
+    
+    <select id="findBySceneId" parameterType="long" resultMap="resultSceneImgMap">
+        select <include refid="sceneImgColumns"/> from <include refid="tableName"/>
+        where scene_id=#{sceneId} order by re_order desc 
+    </select>
+</mapper>

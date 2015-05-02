@@ -1,0 +1,100 @@
+#{extends 'main3.html' /}
+#{set title:'素材管理' /}
+#{set 'moreStyles'}
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>素材管理</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            	<div class="tj msg-list">
+                  <div id="first_col" class="b-dib vt msg-col">
+                    <div id="addAppmsg" class="tc add-access">       
+						<a id="single" class="dib vm add-btn">+单图文消息</a>         
+						<a id="multi"  class="dib vm add-btn multi-access">+多图文消息</a>
+					</div>
+               	    #{list items:single, as:'s'}
+					      <div class="msg-item-wrapper" id="${s.msgId}">
+					       <div class="msg-item" itemid="164119">
+							<h4 class="msg-t"><a href="javascript:;" class="i-title">${s.title}</a></h4>           
+	   							<p class="msg-meta"><span class="msg-date">${new Date().format('yyyy-MM-dd')}</span></p>
+								<div class="cover">
+									<p class="default-tip" style="display:none">封面图片</p>
+									<img src="${s.imgUrl}" class="i-img" style="">
+								</div>
+								<div class="msg-text">${s.content.raw()}</div>        
+							</div>		   								   
+							<div class="msg-opr">
+								<ul class="f0 msg-opr-list">
+									<li class="b-dib opr-item"><a data-mul="false" class="block tc opr-btn edit-btn" href="contresourceone-164119.html" data-rid="20330"><span class="th vm dib opr-icon edit-icon">编辑</span></a></li>           
+									<li class="b-dib opr-item"><a class="block tc opr-btn del-btn" href="javascript:;" data-rid="20330" onclick="deldsc(164119,this)"><span class="th vm dib opr-icon del-icon">删除</span></a></li>         
+								</ul>       
+							</div> 
+						  </div>
+					  #{/list}
+                  </div>
+                  <div id="second_col" class="b-dib vt msg-col" style="margin-left: 20px;">
+                  	 #{list items:newsMulti, as:'M'}
+                  	     <div class="msg-item-wrapper" id="${M.msgId}">
+					           <div class="msg-item multi-msg" itemid="">  
+			                  	  %{for(int i=0;i<M.multiTempl.size();i++){ }%
+			                  	  		%{ if(i==0){ }%
+			                  	  			<div class="appmsgItem">
+					   							<h4 class="msg-t"><a href="javascript:;" class="i-title">${M.multiTempl.get(i).title}</a></h4>           
+					   							<p class="msg-meta"><span class="msg-date">${new Date().format('yyyy-MM-dd')}</span></p>
+												<div class="cover">
+													<img src="${M.multiTempl.get(i).imgUrl}" class="i-img" style="">
+												</div>
+												<p class="msg-text">${M.multiTempl.get(i).content.raw()}</p>         
+											</div>		
+			                  	  		%{ }else { }%
+			                  	  		  <div class="rel sub-msg-item appmsgItem">              
+												<span class="thumb">                 
+												<img src="${M.multiTempl.get(i).imgUrl}" class="i-img" style="">
+												</span>       
+												<h4 class="msg-t">                 
+												 <a href="javascript:;" target="_blank" class="i-title">${M.multiTempl.get(i).title}</a>                
+												</h4>       
+										  </div>
+			                  	  	%{ }}%
+			                  	  %{}}%
+						   	  </div>   
+							  <div class="msg-opr">
+								 <ul class="f0 msg-opr-list">
+									<li class="b-dib opr-item"><a data-mul="true" class="block tc opr-btn edit-btn" href="contresourcemore-157853.html" data-rid="20331"><span class="th vm dib opr-icon edit-icon">编辑</span></a></li>           
+									<li class="b-dib opr-item"><a class="block tc opr-btn del-btn" href="javascript:delddsc(157853,this);" data-rid="20331"><span class="th vm dib opr-icon del-icon">删除</span></a></li>         
+								 </ul>
+						   </div>
+						  </div>
+                  	 #{/list}
+
+                  </div>
+            	</div>
+            </div>
+         </div>
+     </div>
+</div>
+#{set 'moreScripts'}
+   <script type="text/javascript">
+   	  seajs.use(['jquery','until'],function($,until){
+   	  	window.wechatId=until.getUrlParam("wechatId");
+		/**
+		 * 连接设置
+		 * 
+		 */
+		document.getElementById("single").setAttribute("href","/AssistantUI/singleArticle?wechatId="+wechatId);
+		document.getElementById("multi").setAttribute("href","/AssistantUI/multiArticle?wechatId="+wechatId);
+   	  });
+   </script>
+#{/set}

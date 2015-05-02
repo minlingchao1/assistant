@@ -1,0 +1,758 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td, figure {
+	padding: 0;
+	margin: 0;
+	font-family:"microsoft yahei", "微软雅黑";
+}
+fieldset, img, html, body, iframe {
+	border: 0;
+}
+table {
+ *border-collapse: collapse;
+	border-spacing: 0;
+}
+em, strong {
+	font-weight: bold;
+}
+ol, ul, li {
+	list-style: none;
+}
+caption, th {
+	text-align: left;
+}
+i {
+	font-style: normal;
+}
+html {
+	overflow-y: scroll;
+}
+body, textarea, select, input, td {
+	font-family: arial, helvetica, sans-serif;
+	font-size: 12px;
+}
+body {
+	font: 12px/1.5 tahoma, arial, "Hiragino Sans GB", "Microsoft Yahei", 宋体b8b\4f53;
+	height: 100%;
+	color: #666;
+	background-color: #f7f7f7;
+}
+.red {
+	color:#F00;
+}
+a:hover {
+	text-decoration: none;
+}
+.clearfix:after {
+	clear: both;
+	content: '.';
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix {
+	zoom: 1;
+}
+.hidden {
+	display: none;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.page-bottom {
+	text-align: center;
+	margin: 10px 0;
+	height: 30px;
+}
+.jumpTo {
+	width: 30px;
+	border: 1px solid #ccc;
+	margin: 0!important;
+}
+.page-bottom .current {
+	background-color: #ffa405;
+	border: 1px solid #ee8100;
+	color: #fff;
+	font-weight: 700;
+}
+.page-bottom a {
+	background-image: -webkit-linear-gradient(#f5f5f5, #f5f5f5 38%, #fcfcfc);
+	border: 1px solid #ccc;
+	color: #666;
+}
+.page-bottom a, .page-bottom span {
+	font-size: 14px;
+	margin-right: 5px;
+	overflow: hidden;
+	padding: 5px 10px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	display: inline-block;
+}
+.page-bottom a:hover {
+	background-image: -webkit-linear-gradient(#fcfcfc, #fcfcfc 38%, #f5f5f5);
+}
+.page-bottom .page-prev-disabled {
+	color: #999;
+	cursor: not-allowed;
+}
+.page-bottom .page-next-disabled {
+	color: #999;
+	cursor: not-allowed;
+}
+/*login*/
+/* 
+
+
+Credit: www.cssmoban.com
+	1. General
+	2. login-form-1
+	3. login-form-2
+	4. inline-login
+	5. create-account
+	6. forgot-password
+	7. contact-form-1
+	8. contact-form-2
+	9. payment-form
+	10. Media Queries
+	
+--------------------------------------------*/
+/* 1. General
+--------------------------------------------*/
+
+body {
+	margin-bottom: 30px;
+}
+tbody, tbody td {
+	color:#969696;
+	font-family:"微软雅黑";
+}
+h1 {
+	font-weight: 300;
+	font-size: 36px;
+	line-height: normal;
+	margin: auto;
+	margin-top: 30px;
+	text-align: center;
+}
+h2 {
+	font-weight: 500;
+	font-size: 20px;
+	line-height: normal;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	color: #09F;
+}
+.green {
+	color: #3C3;
+}
+.gray {
+	color: #999;
+}
+.form-horizontal.templatemo-payment-form .radio.templatemo-no-padding-top {
+	padding-top: 0;
+}
+.control-wrapper {
+	position: relative;
+	padding-left: 30px;
+}
+.control-wrapper label.fa-label {
+	position: absolute;
+	left: 4px;
+	top: 6px;
+}
+.form-group:last-child {
+	margin-bottom: 0;
+}
+.table {
+	margin-bottom: 0;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+	vertical-align: middle;
+}
+.templatemo-form-list-container {
+	max-width: 600px;
+}
+.templatemo-input-icon-container {
+	position: relative;
+}
+.templatemo-input-icon-container .fa {
+	color: gray;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+.templatemo-input-icon-container input, .templatemo-input-icon-container textarea {
+	padding-left: 30px;
+}
+.login-container {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid #dedede;
+	border-radius: 8px;
+	margin: 0 auto;
+	padding: 30px;
+}
+.templatemo-bg-gray {
+	background-color: #eee;
+}
+.templatemo-bg-gray h1 {
+	color: rgb(74, 164, 180);
+}
+.templatemo-bg-image-1 {
+	background-color: rgb(60,60,60);
+	background-image: url(/public/images/templatemo-bg-1.jpg);
+}
+.templatemo-bg-image-2 {
+	background-color: rgb(70, 90, 40);
+	background-image: url(/public/images/templatemo-bg-2.jpg);
+}
+.templatemo-bg-image-1, .templatemo-bg-image-2 {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+}
+.templatemo-bg-image-1, .templatemo-bg-image-2 {
+	background-size: cover;
+}
+.font-size-small {
+	font-size: 0.8em;
+}
+.margin-bottom-15 {
+	margin-bottom: 15px;
+}
+.margin-bottom-30 {
+	margin-bottom: 30px;
+}
+.form-group {
+	margin-bottom: 20px;
+}
+.form-group a {
+	line-height: 34px;
+}
+.fa {
+	font-size: 16px;
+}
+.fa.login-with {
+	font-size: 30px;
+	margin: 0 5px;
+}
+.fa-medium {
+	font-size: 20px;
+}
+.inline-block {
+	display: inline-block;
+}
+/*-------------------------------------
+2. login-form-1
+---------------------------------------*/
+.login-form {
+	max-width: 500px;
+}
+.login-form a {
+	color: gray;
+}
+.login-form a:hover {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+.templatemo-create-new {
+	color: #58B4BB;
+	font-size: 18px;
+	font-weight: 300;
+}
+.templatemo-create-new:hover {
+	color: #138892;
+	text-decoration: none;
+}
+/*-------------------------------------
+3. login-form-2
+---------------------------------------*/
+.templatemo-login-form-2 {
+	background-color: rgba(13, 13, 13, 0.25);
+	border-radius: 8px;
+	color: #fff;
+	font-weight: 300;
+	max-width: 650px;
+	padding: 0 30px 30px 30px;
+	margin: 30px auto 0 auto;
+}
+.templatemo-login-form-2 h1 {
+	color: #fff;
+	margin-bottom: 40px;
+}
+.templatemo-login-form-2 a {
+	color: #DBDBDB;
+}
+.templatemo-login-form-2 .form-control {
+	background-color: rgba(83, 78, 78, 0.35);
+	border: 1px solid rgba(255, 255, 255, 0.27);
+	color: rgb(255,255,255);
+}
+.templatemo-login-form-2 .templatemo-input-icon-container .fa {
+	color: rgb(190, 190, 190);
+}
+.templatemo-login-form-2 .control-label {
+	margin-bottom: 10px;
+}
+.templatemo-login-form-2 .btn {
+	width: 100%;
+}
+.templatemo-login-form-2 .btn-social {
+	max-width: 220px;
+}
+.templatemo-login-form-2 label {
+	font-weight: 400;
+}
+.templatemo-login-form-2 .templatemo-one-signin {
+	border-right: 1px solid rgba(200, 200, 200, 0.5);
+}
+/*-------------------------------------
+4. inline-login
+--------------------------------------*/
+.templatemo-header {
+	background-color: #0B8290;
+	color: white;
+	min-height: 90px;
+}
+.templatemo-header .checkbox {
+	display: block;
+	margin-top: 5px;
+}
+.templatemo-header form {
+	margin-top: 25px;
+}
+.templatemo-header .form-inline .form-group {
+	vertical-align: top;
+}
+.logo {
+	margin: 18px;
+}
+/*-------------------------------------
+5. create-account
+---------------------------------------*/
+.templatemo-create-account {
+	background-color: #fff;
+	border: none;
+	max-width: 700px;
+}
+.templatemo-create-account label {
+	font-weight: 400;
+}
+.templatemo-create-account input[type='checkbox'] {
+	margin-right: 10px;
+	position: relative;
+	top: -1.5px;
+}
+.templatemo-radio-group {
+	margin-top: 30px;
+}
+/*-------------------------------------
+6. forgot-password
+---------------------------------------*/
+.templatemo-forgot-password-form {
+	background-color: #fff;
+	max-width: 550px;
+	margin: 0 auto;
+	padding: 30px;
+}
+/*-------------------------------------
+7. contact-form-1
+---------------------------------------*/
+.templatemo-contact-form-1 {
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 8px;
+	color: rgb(197,197,197);
+	max-width: 600px;
+	margin: 30px auto 0 auto;
+	padding: 0 30px 30px 30px;
+}
+.templatemo-contact-form-1 h1, .templatemo-contact-form-1 p {
+	color: rgb(255,255,255);
+}
+.templatemo-contact-form-1 a {
+	color: #FF9;
+	text-decoration: underline;
+}
+.templatemo-contact-form-1 a:hover {
+	color: rgb(255,255,255);
+}
+.templatemo-contact-form-1 label {
+	font-weight: 400;
+}
+.templatemo-contact-form-1 .form-control {
+	font-size: 16px;
+	padding: 10px 12px 10px 35px;
+}
+.templatemo-contact-form-1 input.form-control {
+	height: 45px;
+}
+.templatemo-contact-form-1 .fa {
+	font-size: 20px;
+}
+.templatemo-contact-form-1 .form-control {
+	background-color: rgba(0, 0, 0, 0.6);
+	border: 1px solid rgba(176, 176, 176, 0.4);
+	color: white;
+}
+.templatemo-contact-form-1 .form-control:focus {
+	box-shadow: inset 0 1px 1px rgba(140, 220, 60, 0.7), 0 0 10px rgba(140, 220, 60, 0.7);
+}
+.templatemo-contact-form-1 .templatemo-input-icon-container .fa {
+	color: rgb(197,197,197);
+	left: 12px;
+	top: 12px;
+}
+.templatemo-contact-form-1 .templatemo-input-icon-container .fa-envelope-o {
+	font-size: 18px;
+	top: 14px;
+}
+/*-------------------------------------
+8. contact form 2
+---------------------------------------*/
+.templatemo-contact-form-2 {
+	border-radius: 8px;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 30px 30px 0 30px;
+}
+.templatemo-contact-form-2 .form-group {
+	margin-bottom: 30px;
+}
+.templatemo-contact-form-2 label {
+	font-weight: 400;
+}
+.templatemo-contact-form-2 textarea {
+	min-height: 225px;
+}
+/*-------------------------------------
+9. payment-form
+---------------------------------------*/
+.templatemo-payment-form {
+	background-color: #fff;
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 30px;
+}
+.templatemo-payment-form .control-label {
+	margin-bottom: 10px;
+}
+.templatemo-payment-form .btn {
+	width: 150px;
+}
+.templatemo-select-container {
+	padding: 0;
+}
+.cvv2 {
+	width: 50px;
+	padding: 5px;
+	display: inline-block;
+}
+.cvv2-group > div {
+	display: inline-block;
+}
+.cvv2-group > div > label {
+	display: block;
+}
+.cvv2-group img {
+	vertical-align: bottom;
+}
+.templatemo-card-details label {
+	font-weight: 400;
+}
+.btn-round {
+	border-radius: 30px;
+}
+.templatemo-inline-group {
+	display: inline-block;
+	vertical-align: middle;
+	height: 71px;
+	padding-right: 20px;
+}
+.form-horizontal .control-label.text-left {
+	text-align: left;
+}
+.radio-inline {
+	margin-right: 10px;
+}
+.radio-inline+.radio-inline {
+	margin-left: 0;
+}
+.templatemo-radio-container {
+	margin-left: 15px;
+}
+
+
+/*-------------------------------------
+10. Media Queries
+---------------------------------------*/
+@media screen and (max-width: 767px) {
+ .templatemo-header .col-md-12 {
+line-height: 20px;
+}
+ .templatemo-header .btn {
+margin-bottom: 15px;
+}
+ .login-container {
+padding: 15px;
+}
+ .control-wrapper label.fa-label {
+top: 6px;
+}
+ .templatemo-header form {
+margin-top: 0;
+}
+}
+@media screen and (max-width: 991px) {
+ .templatemo-login-form-2 .templatemo-one-signin {
+ border-right: none;
+ border-bottom: 1px solid rgba(200, 200, 200, 0.5);
+}
+ .templatemo-login-form-2 .templatemo-other-signin {
+padding-top: 30px;
+}
+ .templatemo-login-form-2 .form-group:last-child {
+margin-bottom: 30px;
+}
+ .templatemo-create-account .col-md-6, .templatemo-create-account .col-md-12 {
+ padding-top: 5px;
+ padding-bottom: 15px;
+}
+ .templatemo-create-account .form-group {
+margin-bottom: 0;
+}
+ .templatemo-radio-group {
+margin-top: 0;
+}
+ .templatemo-contact-form-2 .checkbox {
+margin-bottom: 15px;
+}
+ .templatemo-contact-form-2 {
+padding: 30px 30px 0 30px;
+}
+ .templatemo-radio-container {
+margin-left: 30px;
+}
+}
+.form-group {
+*width:100%;
+}
+/*main*/
+/* Sidebar */
+#sidebar-nav {
+	position: absolute;
+	width: 180px;
+	left:0;
+	float: left;
+	margin: 0em;
+	padding-top: 5.8em;
+}
+#dashboard-menu {
+	list-style: none;
+	margin-bottom: 0;
+	margin-left: 20px;
+}
+#dashboard-menu > li > a {
+	display: block;
+	margin-right: -15px;
+	margin-left: -15px;
+	padding: 19px 14px 15px 14px;
+	margin-bottom: 5px;
+	color: rgb(110, 130, 155);
+	outline: 0px;
+	width: 88%;
+}
+#dashboard-menu > li {
+	position: relative;
+}
+/* font awesome icon */
+#dashboard-menu > li .fa {
+	font-size: 22px;
+}
+#dashboard-menu > li i {
+	font-size: 23px;
+	top: 17px;
+}
+#dashboard-menu .pointer {
+	position: absolute;
+	right: 9px;
+	top: 20px;
+}
+#dashboard-menu .pointer .arrow, #dashboard-menu .pointer .arrow_border {
+	border-color: transparent #fff transparent transparent;
+	border-width: 11px;
+	border-style: solid;
+	font-size: 0;
+	left: 50%;
+	line-height: 0;
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	width: 0;
+	z-index: 1002;
+	left: 0;
+	margin-left: 45%;
+}
+#dashboard-menu .pointer .arrow_border {
+	border-color: transparent rgb(192, 210, 221) transparent transparent;
+	border-width: 11px;
+	margin-left: -1px;
+	border-style: solid;
+	z-index: 1001;
+	top: 0px;
+}
+#dashboard-menu a span {
+	margin-left: 30px;
+ transition: color .1s linear;
+ -moz-transition: color .1s linear;
+ -webkit-transition: color .1s linear;
+ -o-transition: color .1s linear;
+	font-size:16px;
+}
+#dashboard-menu a.ui-elements span {
+	margin-left: 25px;
+}
+#dashboard-menu a i {
+	position: absolute;
+	left: 0;
+	height: 24px;
+	width: 24px;
+	opacity: 0.7;
+ transition: opacity .1s ease;
+ -moz-transition: opacity .1s ease;
+ -webkit-transition: opacity .1s ease;
+ -o-transition: opacity .1s ease;
+}
+#dashboard-menu a i.fa-angle-down {
+	position: relative;
+	float: right;
+	top: 0px;
+	left:10px;
+	font-size: 11px;
+	color: rgb(104, 104, 104);
+	width: initial;
+	height: initial;
+}
+#dashboard-menu > li:hover i {
+	opacity: 1;
+}
+#dashboard-menu > li.active > a, #dashboard-menu > li > a:hover {
+	color: rgba(51, 69, 90, 1);
+	text-decoration: none;
+}
+#dashboard-menu > li.active a {
+	font-weight: 600;
+	text-shadow: 1px 1px 1px #fff;
+}
+#dashboard-menu > li.active i {
+	opacity: 1;
+}
+/* sidebar submenus */
+#dashboard-menu > li.active .dropdown-toggle {
+	border-bottom: 0px;
+	box-shadow: none;
+}
+#dashboard-menu ul.submenu {
+	list-style-type: none;
+	margin-top: 7px;
+	margin-bottom: 15px;
+	margin-right: 5px;
+	margin-left: -15px;
+	padding-left: 15px;
+	border-bottom: 1px solid #dae1e8;
+	box-shadow: 0 2px 1px -1px #FFFFFF;
+	padding-bottom: 10px;
+}
+#dashboard-menu ul.submenu.active {
+	display: block;
+}
+#dashboard-menu ul.submenu a {
+	font-weight: normal;
+	font-size: 14px;
+	color: rgb(76, 83, 90);
+	text-decoration: none;
+	display: block;
+	margin-bottom: 7px;
+	padding-left:30px;
+}
+#dashboard-menu ul.submenu a:hover {
+	text-decoration: underline;
+}
+#dashboard-menu ul.submenu a.active {
+	font-weight: bold;
+	text-shadow: none;
+}
+#top {
+	min-width: 990px;
+	width:100%;
+	height:63px;
+	padding-top:15px;
+}
+.foot, .foot a {
+	text-align: center;
+	width: 100%;
+	min-width: 750px;
+	padding: 20px 0;
+	color: #666;
+	font-family: "微软雅黑";
+	font-size: 12px;
+}
+.wrap {
+	min-width: 1130px;
+	min-height: 620px;
+	margin-bottom: 100px;
+	padding-bottom: 50px;
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+	margin-left: 177px;
+	border-left: 1px solid #dae3e9;
+	border-bottom: 1px solid #dae3e9;
+	border-top: 1px solid #dae3e9;
+	box-shadow: -3px 3px 3px -2px #f1f1f3;
+	border-radius: 0px 0px 0px 5px;
+}
+#main {
+	padding:25px;
+}
+.section {
+	margin-bottom:15px;
+}
+.bg-info, .bg-danger {
+	margin:15px auto;
+	padding:15px;
+}
+.tab-content {
+	margin-top:15px;
+}
+.ui-loader {
+	display:none;
+}
+.copy {
+	padding:0 30px;
+}
+.subact {
+	float:right;
+	padding:5px 45px;
+}
+.badge {
+	font-size:10px;
+	padding: 2px 4px;
+}
+.add-ticket {
+	text-decoration:underline;
+}
+
+#brand {
+float: left;
+color: #fff;
+font-size: 20px;
+margin-top: 5px;
+margin-left: 180px;
+width: 160px;
+height: 32px;
+padding-bottom: 2px;
+}

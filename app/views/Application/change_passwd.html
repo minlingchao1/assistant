@@ -1,0 +1,58 @@
+#{extends 'main4.html' /}
+#{set title:'密码修改' /}
+<div class="row">
+      <div class="col-lg-12">
+           <div class="ibox float-e-margins">
+	            <div class="ibox-title">
+	                <h5>密码修改</h5>
+	                <div class="ibox-tools">
+	                    <a class="collapse-link">
+	                        <i class="fa fa-chevron-up"></i>
+	                    </a>
+	                    <a class="close-link">
+	                        <i class="fa fa-times"></i>
+	                    </a>
+	                </div>
+	            </div>
+                <div class="ibox-content">
+                     <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">原始密码</label>
+                            <div class="col-sm-5">
+                                <input id="old-pass" type="password" class="need form-control">
+                            </div>
+                        </div>
+                     </div>
+                     <div class="hr-line-dashed"></div>
+                     <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-5">
+                                <input id="new-pass" type="password" class="need form-control">
+                            </div>
+                        </div>
+                     </div>
+                     <div class="hr-line-dashed"></div>
+                     <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">重复新密码</label>
+                            <div class="col-sm-5">
+                                <input id="new-pass2" type="password" class="need form-control">
+                            </div>
+                        </div>
+                     </div>
+                     <div class="hr-line-dashed"></div>
+
+                    <button type="button" class="changepasswd btn btn-block  btn-primary" style="margin:0 auto;width:200px">确认</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use(["jquery","accountInfo"],function($,accountInfo){
+		accountInfo.init();
+	})
+</script>
+#{/set}

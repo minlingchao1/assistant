@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.qrcode.dao.mapper.IQrcodeMapper">
+   
+    <sql id="tableName">qrcode</sql>
+    
+    <sql id="qrcodeColumns">id,wechat_id,qr_img,create_time,expire_seconds,action_name,scene_id,ticket,scene_name,status</sql>
+    
+    <resultMap type="Qrcode" id="resultQrcodeMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="expire_seconds" property="expireSeconds"/>
+        <result column="action_name" property="actionName"/>
+        <result column="scene_id" property="sceneId"/>
+        <result column="scene_name" property="sceneName"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="qr_img" property="qrImg"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Qrcode" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (wechat_id,expire_seconds,action_name,scene_id,ticket,scene_name,status,create_time,qr_img,gmt_created)
+      value(#{wechatId},#{expireSeconds},#{actionName},#{sceneId},#{ticket},#{sceneName},#{status},#{createTime},#{qrImg},now())
+    </insert>
+    
+    <update id="update" parameterType="Qrcode">
+        update <include refid="tableName"/>
+        <set>
+            <if test="status!=null">status=#{status}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultQrcodeMap">
+        select <include refid="qrcodeColumns"/> from <include refid="tableName"/>
+        where wechat_id=#{wechat_id} 
+    </select>
+    
+    <select id="findTempQrcode" resultMap="resultQrcodeMap">
+        select <include refid="qrcodeColumns"/> from <include refid="tableName"/> where action_name='QR_SCENE'
+    </select>
+    
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.menu.dao.mapper.IMenuMapper">
+   
+    <sql id="tableName">menu</sql>
+    
+    <sql id="menuColumns">id,wechat_id,user_id,menu_json</sql>
+    
+    <resultMap type="Menu" id="resultMenuMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="user_id" property="userId"/>
+        <result column="menu_json" property="menuJson"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Menu" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (wechat_id,user_id,menu_json,gmt_created)
+      value(#{wechatId},#{userId},#{menuJson},now())
+    </insert>
+    
+    <update id="update" parameterType="Menu">
+        update <include refid="tableName"/>
+        <set>
+            <if test="menuJson!=null">menu_json=#{menuJson}</if>
+        </set>
+        where wechat_id=#{wechatId}
+    </update>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultMenuMap">
+        select <include refid="menuColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+</mapper>

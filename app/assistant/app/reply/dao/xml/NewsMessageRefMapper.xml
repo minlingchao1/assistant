@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.INewsMessageRefMapper">
+   
+    <sql id="tableName">news_message_ref</sql>
+    <sql id="newsMessageColumns">id,wechat_id,msg_id,msg_type</sql>
+    
+    <resultMap type="NewsMessageRef" id="resultNewsMessageRefMap">
+        <id column="id" property="id"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="msg_type" property="msgType"/>
+        <result column="wechat_id" property="wechatId"/>
+    </resultMap>
+     
+    <insert id="insert" parameterType="NewsMessageRef" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (user_id,wechat_id,msg_id,msg_type,gmt_created)
+       value(#{userId},#{wechatId},#{msgId},#{msgType},now())
+    </insert>
+    
+    <select id="getNews" resultMap="resultNewsMessageRefMap" >
+       select <include refid="newsMessageColumns"/> from <include refid="tableName"/>
+       where user_id=#{userId} and wechat_id=#{wechatId}
+    </select>
+    
+    <select id="findById"  parameterType="long"  resultMap="resultNewsMessageRefMap" >
+       select <include refid="newsMessageColumns"/> from <include refid="tableName"/>
+       where id=#{id}
+    </select>
+</mapper>

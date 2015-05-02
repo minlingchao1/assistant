@@ -1,0 +1,107 @@
+#{extends 'main3.html' /}
+#{set title:'二维码信息管理' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/addwechat.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-table.min.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>场景二维码添加</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <a id="qrcodeAdd" class="btn btn-primary" ><i class="fa fa-plus"> </i>添加二维码</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped qrcode-list">
+                        <thead>
+                            <tr>
+                            	<th data-field="sceneId" data-align="center" data-sortable="true">场景ID</th>
+                                <th data-field="sceneName" data-align="center" data-sortable="true">场景名称</th>
+                                <th data-field="actionName" data-align="center"  data-formatter="qrcodeType" data-sortable="true">二维码类型</th>
+                                <th data-field="qrImg" data-align="center"  data-formatter="qrImg"  data-sortable="true">二维码图片</th>
+                                <th data-field="createTime" data-align="center" data-formatter="time" data-sortable="true">创建时间</th>
+                                <th data-field="expireSeconds" data-align="center" data-sortable="true">有效时间</th>
+                                <th data-field="status" data-align="center" data-formatter="qrcodeStatus" data-sortable="true">状态</th>
+                                <th data-field="id" data-align="center" data-formatter="wxEdit" data-sortable="true">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use(["jquery","qrcode","bootstrapTable"],function($,qrcode,bootstrapTable){
+		$.extend($.fn.bootstrapTable.defaults,{
+			formatLoadingMessage:function(){
+				return '正在努力地加载数据中，请稍候......';
+			},
+			formatRecordPerPage:function(pageNumber){
+				return '每页显示'+pageNumber+'条记录';
+			},
+			formatShowingRows:function(pageFrom,pageTo,totalRows){
+				return '显示第'+pageFrom+'到第'+pageTo+'条记录,总共'+totalRows+'条记录';
+			},
+			formatSearch:function(){
+				return '搜索';
+			},
+			formatNoMatches: function () {
+				return '没有找到匹配的记录';
+			},
+			formatRefresh: function () {
+				return '刷新';
+			},
+			formatToggle: function () {
+				return '切换';
+			},
+			formatColumns: function () {
+				return '列';
+			}
+		});
+		qrcode.init();
+	});
+	seajs.use(["jquery","until"],function($,until){
+		var wechatId=until.getUrlParam("wechatId");
+		document.getElementById("qrcodeAdd").setAttribute("href","/AssistantUI/qrcodeCreate?wechatId="+wechatId);
+	})
+	function wxEdit(value, row) {
+		return '<a href="/AssistantUI/addWechat?wechatId='+value+'" target="_self" lid="'+value+'" ><span class="label label-primary">编辑</span></a>  <a href="/ActivityUi/creatact?aid='+value+'" target="_self" lid="'+value+'" ><span class="label label-danger">删除</span></a> ';
+	}
+	function qrcodeStatus(value, row) {
+		if(row.status==1)
+		  return '<span class="label label-primary">有效</span>';
+		else
+		  return '<span class="label label-danger">失效</span>';
+	}
+	function qrcodeType(value, row) {
+		if(row.actionName=="QR_SCENE")
+		  return '<span>临时二维码</span>';
+		else
+		  return '<span>永久二维码</span>';
+	}
+	function qrImg(value, row) {
+		if(row.qrImg!=null)
+		  return '<img src='+row.qrImg+' style="width:120px;height:120px;"/>';
+	}
+	function time(value, row) {	
+	    return new Date(value).formatYMDHMS()
+    }
+</script>
+#{/set}

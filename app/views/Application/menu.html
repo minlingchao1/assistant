@@ -1,0 +1,417 @@
+#{extends 'main3.html' /}
+#{set title:'自定义菜单' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/menu.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/wysiwyg.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/face.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+         <div class="ibox-title">
+                <h5>自定义菜单设置</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+          </div>
+          <div class="ibox-content"> 
+              <div class="form-group">
+                 <div id="top" class="alert alert-info" style="margin:0 0 ;">
+						1.使用本模块，必须在微信公众平台<strong>申请</strong>自定义菜单使用的<strong>AppId和AppSecret</strong>，然后在【<a href="customSecImpower.html">授权设置</a>】中设置。<br>
+						2.最多创建<span style="color:#f00">3 个一级菜单</span>，每个一级菜单下最多可以创建 <span style="color:#f00">5 个二级菜单</span>，菜单<span style="color:#f00">最多支持两层</span>。
+				 </div>                   
+               </div> 
+               <div class="form-group">
+                  <textarea style="display:none;" id="initdatat"></textarea>
+			       <table>
+				       <tbody>
+				          <tr>
+			               <td>
+						    <div style="background-image: url('/public/images/3CustomLt.png');width: 344px;height: 623px;position: relative;" class="bgdpng">
+							<div style="position: absolute;bottom: 170px;left: 46px; width: 82px;" zcdrel="maincd1" class="zicaidan1">
+								<div class="zizicd" rel="zizicd1" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd2" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd3" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd4" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd5" style="display: none;">
+								子菜单
+								</div>
+							</div>
+			
+							<div style="position: absolute;bottom: 170px;left: 131px; width: 83px;" zcdrel="maincd2" class="zicaidan2">
+								<div class="zizicd" rel="zizicd1" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd2" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd3" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd4" style="display: none;">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd5" style="display: none;">
+								子菜单
+								</div>
+							</div>
+							<div style="position: absolute;bottom: 170px;left: 216px; width: 83px;" zcdrel="maincd3" class="zicaidan3">
+								<div class="zizicd" rel="zizicd1">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd2">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd3">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd4">
+								子菜单
+								</div>
+								<div class="zizicd" rel="zizicd5">
+								子菜单
+								</div>
+							</div>
+			
+							<div style="position: absolute;bottom: 122px;left: 43px;">
+								<table style="border: none;" cellpadding="0" cellspacing="0" class="caiduannum">
+									<tbody>
+										<tr>
+										 <td><div style="height: 45px;width: 85px;line-height: 45px;text-align: center;" id="maincd1"  class="maincd">菜单一</div></td>
+										 <td><div style="height: 45px;width: 87px;line-height: 45px;text-align: center;" id="maincd2"  class="maincd">菜单二</div></td>
+										 <td><div style="height: 45px;width: 85px;line-height: 45px;text-align: center;" id="maincd3"  class="maincd">菜单三</div></td>
+									    </tr>
+								    </tbody>
+								</table>
+							</div>
+			               </div>
+			           </td>
+			           <td valign="top"><br>
+						<div style="position: relative;width: 100%">
+							<button class="btn btn-big btn-primary" id="sync">启用/发布菜单</button>&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-big btn-primary" id="stop">停用菜单</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						    <button class="btn btn-big btn-primary" id="saveOrder">保存菜单数据</button> <a href="javascript:guide();">使用教程</a>   
+						</div><br>
+						<div id="czselarea" style="display: block;">
+							<div class="form-horizontal">
+                                 <div class="form-group ">
+								    <label  class="col-sm-4 control-label">菜单数量</label>
+								    <div class="col-sm-8">
+								      <select id="menunum" class="form-control  span2">
+											<option value="1">一个</option>
+											<option value="2">二个</option>
+											<option selected="selected" value="3">三个</option>
+										</select>
+								    </div>
+								 </div>
+							 </div>
+							<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label  class="col-sm-4 control-label">菜单名称</label>
+								    <div class="col-sm-8">
+								      <input type="text" id="cdmcinpo" class="need form-control">
+								    </div>
+								 </div>
+							 </div>
+							<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="answertype" class="col-sm-4 control-label">菜单点击事件</label>
+								    <div class="col-sm-8">
+								      <select class="form-control  span2" id="answertype" name="answertype">
+										  <option value="res_wb">回复文字</option>
+										  <option value="res_news" >图文</option>
+										  <option value="res_gjz">关键字</option>
+										  <option value="res_url">链接地址</option>
+									   </select>
+								    </div>
+								 </div>
+							 </div>
+						</div>
+
+						<!-- 二级菜单 -->
+						<div class="szcjbt" id="res_ejcd" style="display: none;">
+						   <div id="top" class="alert alert-info">至少填写一项子菜单</div>
+						     <div class="form-horizontal res_ejcd_1">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">菜单一</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control">
+								    </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal res_ejcd_2">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">菜单二</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control">
+								    </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal res_ejcd_3">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">菜单三</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control">
+								    </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal res_ejcd_4">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">菜单四</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control">
+								    </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal res_ejcd_5">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">菜单五</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control">
+								    </div>
+								 </div>
+							  </div>
+		                     
+						</div>	
+			
+			            <!--
+                        	作者：738509878@qq.com
+                        	时间：2015-02-20
+                        	描述：文本
+                        -->
+                        <!--<div class="szcjbt" id="res_wb" style="display: block;">	
+                          
+                        </div>-->
+						<!-- 单图文 -->
+						<div class="form-horizontal szcjbt" id="res_news" style="display: none;">
+	                         <div class="form-group">
+							    <label for="appSecret" class="col-sm-4 control-label">图文消息选择</label>
+							    <div class="col-sm-8">
+							       <a id="news-select" data-toggle="modal" href="/reply/NewsTemplCtrl/sourceManageSelect" data-target="#newsModal" class="btn btn-w-m btn-primary" >选择图文消息</a>   
+							    </div>
+							    <input type="text" name="newsMsgId" id="newsMsgId" value="" style="display:none" />
+							    <iframe id="multiArticle11if" name="newspaper" src="" scrolling="no" style="border:none;width: 380px;margin-left: 200px;margin-top: 20px;" onload="this.height=0;var fdh=(this.Document?this.Document.body.scrollHeight:this.contentDocument.body.offsetHeight);this.height=(fdh>380?fdh:380)"></iframe>
+							 </div>				
+						</div>
+						<!-- 关键字  -->
+						<div class="form-horizontal szcjbt" id="res_gjz" style="display: none;">
+                             <div class="form-group">
+							    <label  class="col-sm-4 control-label">要触发的关键字</label>
+							    <div class="col-sm-8">
+							      <input type="text" id="cdmcinpo" name="event_gjz" class="need form-control">
+							    </div>
+							 </div>
+						 </div>
+							<!--<div class="szcjbt" id="res_gjz" style="display: none;">
+							要触发的关键字：<input type="text" name="event_gjz">
+							</div>-->
+		
+							<!-- 链接地址  -->
+							<div id="res_url" class="form-horizontal szcjbt" style="display: none;">
+                                 <div class="form-group">
+								    <label  class="col-sm-4 control-label">URL地址</label>
+								    <div class="col-sm-8">
+								      <input type="text"name="event_url" class="need form-control">
+								      <span style="color:#CCC;">此URL为外网的地址，例如：http://www.baidu.com</span>
+								    </div>
+								 </div>
+							</div>
+				            <!-- 文本 -->
+                           <!--<div class="szcjbt" id="res_wb" style="display: block;"></div>-->
+                           <div id="res_wb" class="form-horizontal szcjbt" style="display: none;">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-4 control-label">回复内容</label>
+								    <div class="col-sm-8">
+					                <div class="wysiwyg-container some-more-classes">
+				      			    	<div class="editArea" style="">
+											<textarea  style="display: none;"></textarea>
+											<div id="txtMsgArea" style="min-height: 200px;overflow-y: auto; overflow-x: hidden;" class="wysiwyg-editor"  contenteditable="true"></div>
+										</div>
+		
+				      			    	<div class="wysiwyg-toolbar wysiwyg-toolbar-bottom">
+				      			    		<a class="wysiwyg-toolbar-icon" href="javascript:;" title="表情" unselectable="on"><i class="fa fa-smile-o"></i></a>
+				      			    	</div>
+				      			     </div>
+			      			    	 <div class="emotions">
+										<table cellpadding="0" cellspacing="0">
+											<tbody>
+												<tr>
+													<td><div class="eItem" style="background-position: 0px 0;" data-title="微笑" data-gifurl="/public/images/emoji/0.gif"></div></td>
+													<td><div class="eItem" style="background-position: -24px 0;" data-title="撇嘴" data-gifurl="/public/images/emoji/1.gif"></div></td>
+													<td><div class="eItem" style="background-position: -48px 0;" data-title="色" data-gifurl="/public/images/emoji/2.gif"></div></td>
+													<td><div class="eItem" style="background-position: -72px 0;" data-title="发呆" data-gifurl="/public/images/emoji/3.gif"></div></td>
+													<td><div class="eItem" style="background-position: -96px 0;" data-title="得意" data-gifurl="/public/images/emoji/4.gif"></div></td>
+													<td><div class="eItem" style="background-position: -120px 0;" data-title="流泪" data-gifurl="/public/images/emoji/5.gif"></div></td>
+													<td><div class="eItem" style="background-position: -144px 0;" data-title="害羞" data-gifurl="/public/images/emoji/6.gif"></div></td>
+													<td><div class="eItem" style="background-position: -168px 0;" data-title="闭嘴" data-gifurl="/public/images/emoji/7.gif"></div></td>
+													<td><div class="eItem" style="background-position: -192px 0;" data-title="睡" data-gifurl="/public/images/emoji/8.gif"></div></td>
+													<td><div class="eItem" style="background-position: -216px 0;" data-title="大哭" data-gifurl="/public/images/emoji/9.gif"></div></td>
+													<td><div class="eItem" style="background-position: -240px 0;" data-title="尴尬" data-gifurl="/public/images/emoji/10.gif"></div></td>
+													<td><div class="eItem" style="background-position: -264px 0;" data-title="发怒" data-gifurl="/public/images/emoji/11.gif"></div></td>
+													<td><div class="eItem" style="background-position: -288px 0;" data-title="调皮" data-gifurl="/public/images/emoji/12.gif"></div></td>
+													<td><div class="eItem" style="background-position: -312px 0;" data-title="呲牙" data-gifurl="/public/images/emoji/13.gif"></div></td>
+													<td><div class="eItem" style="background-position: -336px 0;" data-title="惊讶" data-gifurl="/public/images/emoji/14.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -360px 0;" data-title="难过" data-gifurl="/public/images/emoji/15.gif"></div></td>
+													<td><div class="eItem" style="background-position: -384px 0;" data-title="酷" data-gifurl="/public/images/emoji/16.gif"></div></td>
+													<td><div class="eItem" style="background-position: -408px 0;" data-title="冷汗" data-gifurl="/public/images/emoji/17.gif"></div></td>
+													<td><div class="eItem" style="background-position: -432px 0;" data-title="抓狂" data-gifurl="/public/images/emoji/18.gif"></div></td>
+													<td><div class="eItem" style="background-position: -456px 0;" data-title="吐" data-gifurl="/public/images/emoji/19.gif"></div></td>
+													<td><div class="eItem" style="background-position: -480px 0;" data-title="偷笑" data-gifurl="/public/images/emoji/20.gif"></div></td>
+													<td><div class="eItem" style="background-position: -504px 0;" data-title="可爱" data-gifurl="/public/images/emoji/21.gif"></div></td>
+													<td><div class="eItem" style="background-position: -528px 0;" data-title="白眼" data-gifurl="/public/images/emoji/22.gif"></div></td>
+													<td><div class="eItem" style="background-position: -552px 0;" data-title="傲慢" data-gifurl="/public/images/emoji/23.gif"></div></td>
+													<td><div class="eItem" style="background-position: -576px 0;" data-title="饥饿" data-gifurl="/public/images/emoji/24.gif"></div></td>
+													<td><div class="eItem" style="background-position: -600px 0;" data-title="困" data-gifurl="/public/images/emoji/25.gif"></div></td>
+													<td><div class="eItem" style="background-position: -624px 0;" data-title="惊恐" data-gifurl="/public/images/emoji/26.gif"></div></td>
+													<td><div class="eItem" style="background-position: -648px 0;" data-title="流汗" data-gifurl="/public/images/emoji/27.gif"></div></td>
+													<td><div class="eItem" style="background-position: -672px 0;" data-title="憨笑" data-gifurl="/public/images/emoji/28.gif"></div></td>
+													<td><div class="eItem" style="background-position: -696px 0;" data-title="大兵" data-gifurl="/public/images/emoji/29.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -720px 0;" data-title="奋斗" data-gifurl="/public/images/emoji/30.gif"></div></td>
+													<td><div class="eItem" style="background-position: -744px 0;" data-title="咒骂" data-gifurl="/public/images/emoji/31.gif"></div></td>
+													<td><div class="eItem" style="background-position: -768px 0;" data-title="疑问" data-gifurl="/public/images/emoji/32.gif"></div></td>
+													<td><div class="eItem" style="background-position: -792px 0;" data-title="嘘" data-gifurl="/public/images/emoji/33.gif"></div></td>
+													<td><div class="eItem" style="background-position: -816px 0;" data-title="晕" data-gifurl="/public/images/emoji/34.gif"></div></td>
+													<td><div class="eItem" style="background-position: -840px 0;" data-title="折磨" data-gifurl="/public/images/emoji/35.gif"></div></td>
+													<td><div class="eItem" style="background-position: -864px 0;" data-title="衰" data-gifurl="/public/images/emoji/36.gif"></div></td>
+													<td><div class="eItem" style="background-position: -888px 0;" data-title="骷髅" data-gifurl="/public/images/emoji/37.gif"></div></td>
+													<td><div class="eItem" style="background-position: -912px 0;" data-title="敲打" data-gifurl="/public/images/emoji/38.gif"></div></td>
+													<td><div class="eItem" style="background-position: -936px 0;" data-title="再见" data-gifurl="/public/images/emoji/39.gif"></div></td>
+													<td><div class="eItem" style="background-position: -960px 0;" data-title="擦汗" data-gifurl="/public/images/emoji/40.gif"></div></td>
+													<td><div class="eItem" style="background-position: -984px 0;" data-title="抠鼻" data-gifurl="/public/images/emoji/41.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1008px 0;" data-title="鼓掌" data-gifurl="/public/images/emoji/42.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1032px 0;" data-title="糗大了" data-gifurl="/public/images/emoji/43.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1056px 0;" data-title="坏笑" data-gifurl="/public/images/emoji/44.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -1080px 0;" data-title="左哼哼" data-gifurl="/public/images/emoji/45.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1104px 0;" data-title="右哼哼" data-gifurl="/public/images/emoji/46.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1128px 0;" data-title="哈欠" data-gifurl="/public/images/emoji/47.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1152px 0;" data-title="鄙视" data-gifurl="/public/images/emoji/48.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1176px 0;" data-title="委屈" data-gifurl="/public/images/emoji/49.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1200px 0;" data-title="快哭了" data-gifurl="/public/images/emoji/50.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1224px 0;" data-title="阴险" data-gifurl="/public/images/emoji/51.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1248px 0;" data-title="亲亲" data-gifurl="/public/images/emoji/52.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1272px 0;" data-title="吓" data-gifurl="/public/images/emoji/53.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1296px 0;" data-title="可怜" data-gifurl="/public/images/emoji/54.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1320px 0;" data-title="菜刀" data-gifurl="/public/images/emoji/55.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1344px 0;" data-title="西瓜" data-gifurl="/public/images/emoji/56.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1368px 0;" data-title="啤酒" data-gifurl="/public/images/emoji/57.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1392px 0;" data-title="篮球" data-gifurl="/public/images/emoji/58.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1416px 0;" data-title="乒乓" data-gifurl="/public/images/emoji/59.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -1440px 0;" data-title="咖啡" data-gifurl="/public/images/emoji/60.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1464px 0;" data-title="饭" data-gifurl="/public/images/emoji/61.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1488px 0;" data-title="猪头" data-gifurl="/public/images/emoji/62.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1512px 0;" data-title="玫瑰" data-gifurl="/public/images/emoji/63.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1536px 0;" data-title="凋谢" data-gifurl="/public/images/emoji/64.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1560px 0;" data-title="示爱" data-gifurl="/public/images/emoji/65.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1584px 0;" data-title="爱心" data-gifurl="/public/images/emoji/66.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1608px 0;" data-title="心碎" data-gifurl="/public/images/emoji/67.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1632px 0;" data-title="蛋糕" data-gifurl="/public/images/emoji/68.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1656px 0;" data-title="闪电" data-gifurl="/public/images/emoji/69.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1680px 0;" data-title="炸弹" data-gifurl="/public/images/emoji/70.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1704px 0;" data-title="刀" data-gifurl="/public/images/emoji/71.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1728px 0;" data-title="足球" data-gifurl="/public/images/emoji/72.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1752px 0;" data-title="瓢虫" data-gifurl="/public/images/emoji/73.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1776px 0;" data-title="便便" data-gifurl="/public/images/emoji/74.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -1800px 0;" data-title="月亮" data-gifurl="/public/images/emoji/75.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1824px 0;" data-title="太阳" data-gifurl="/public/images/emoji/76.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1848px 0;" data-title="礼物" data-gifurl="/public/images/emoji/77.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1872px 0;" data-title="拥抱" data-gifurl="/public/images/emoji/78.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1896px 0;" data-title="强" data-gifurl="/public/images/emoji/79.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1920px 0;" data-title="弱" data-gifurl="/public/images/emoji/80.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1944px 0;" data-title="握手" data-gifurl="/public/images/emoji/81.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1968px 0;" data-title="胜利" data-gifurl="/public/images/emoji/82.gif"></div></td>
+													<td><div class="eItem" style="background-position: -1992px 0;" data-title="抱拳" data-gifurl="/public/images/emoji/83.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2016px 0;" data-title="勾引" data-gifurl="/public/images/emoji/84.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2040px 0;" data-title="拳头" data-gifurl="/public/images/emoji/85.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2064px 0;" data-title="差劲" data-gifurl="/public/images/emoji/86.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2088px 0;" data-title="爱你" data-gifurl="/public/images/emoji/87.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2112px 0;" data-title="NO" data-gifurl="/public/images/emoji/88.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2136px 0;" data-title="OK" data-gifurl="/public/images/emoji/89.gif"></div></td>
+												</tr>
+												<tr>
+													<td><div class="eItem" style="background-position: -2160px 0;" data-title="爱情" data-gifurl="/public/images/emoji/90.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2184px 0;" data-title="飞吻" data-gifurl="/public/images/emoji/91.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2208px 0;" data-title="跳跳" data-gifurl="/public/images/emoji/92.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2232px 0;" data-title="发抖" data-gifurl="/public/images/emoji/93.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2256px 0;" data-title="怄火" data-gifurl="/public/images/emoji/94.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2280px 0;" data-title="转圈" data-gifurl="/public/images/emoji/95.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2304px 0;" data-title="磕头" data-gifurl="/public/images/emoji/96.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2328px 0;" data-title="回头" data-gifurl="/public/images/emoji/97.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2352px 0;" data-title="跳绳" data-gifurl="/public/images/emoji/98.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2376px 0;" data-title="挥手" data-gifurl="/public/images/emoji/99.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2400px 0;" data-title="激动" data-gifurl="/public/images/emoji/100.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2424px 0;" data-title="街舞" data-gifurl="/public/images/emoji/101.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2448px 0;" data-title="献吻" data-gifurl="/public/images/emoji/102.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2472px 0;" data-title="左太极" data-gifurl="/public/images/emoji/103.gif"></div></td>
+													<td><div class="eItem" style="background-position: -2496px 0;" data-title="右太极" data-gifurl="/public/images/emoji/104.gif"></div></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="emotionsGif"></div>
+									</div>
+								</div>
+							 </div>
+							</div>
+				         </td>
+						   </tr>
+						</tbody
+					</table>     
+	               </div> 
+           </div>
+      </div>
+    </div>
+</div>
+<div class="modal inmodal" id="newsModal" tabindex="-1" role="dialog" style="display: none;">
+	<div class="modal-dialog modal-lg">
+        <div class="modal-content animated flipInY">
+            <small class="font-bold">
+	            <div class="modal-body">
+	            	<iframe></iframe>
+	            </div>
+	         </small>
+	      </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+   <script>
+   	 seajs.use('menu',function(menu){
+   	 	menu.init();
+   	 })
+
+   	 seajs.use(["jquery","until"],function($,until){
+		var wechatId=until.getUrlParam("wechatId");
+		$.each($("#news-select"),function(i,n){
+		    var $dataUrl = $(this).attr("href");
+		    $(this).attr("href",$dataUrl+"?wechatId="+wechatId);
+		    
+		});
+		$("a[data-target=#newsModal]").click(function(){
+			 $('#newsModal iframe').attr('src', $(this).attr("href"));	
+		});
+		
+	})
+   </script>
+#{/set}

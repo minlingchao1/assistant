@@ -1,0 +1,131 @@
+#{extends 'main3.html' /}
+#{set title:'商家LBS设置' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/lbs.css"/>
+<link rel="stylesheet" type="text/css" href="http://developer.amap.com/Public/css/demo.Default.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>商家LBS设置</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content"> 
+			    <div class="row">
+			      		<div class="col-lg-12 lbsInfo">
+			      			<div class="ibox-content">
+                              <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="sellerName" class="col-sm-3 control-label">商家名称</label>
+			                        <div class="col-sm-8">
+			                            <input id="sellerName" name="sellerName" class="form-control need" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">门店简介</label>
+			                        <div class="col-sm-8">
+			                            <input id="descr" name="descr" class="need form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">商家所在地区</label>
+			                        <div id="city">
+								        <div class="col-sm-2">
+								          <select id="prov" class="prov form-control"></select>
+								        </div>
+								        <div class="col-sm-2">
+								          <select id="cityName" class="city form-control" disabled="disabled"></select>
+								        </div>
+								        <div class="col-sm-2">
+								          <select id="dist" class="dist form-control" disabled="disabled"></select>
+								        </div>
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class="col-sm-3 control-label">商家类别</label>
+			                        <div class="col-sm-8">
+			                            <input id="category" name="category" class="need  form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                <div class="form-group">
+							      <label class="col-sm-3 control-label">详细地址</label>
+							      <div class="col-sm-8" id="map">
+							        <input type="text" class="form-control need" id="address" disabled placeholder="详细地址">
+							        <span style="color:#CCC;">例如：西湖区益乐路39号。请在地图里标记地址。</span>
+							        <div class="search-map">
+							          <input type="text" class="form-control"/>
+							          <a href="javascript:;" target="_self" class="btn btn-primary">搜索</a></div>
+							        <div id="mapcont"></div>
+							      </div>
+							    </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class="col-sm-3 control-label">电话</label>
+			                        <div class="col-sm-8">
+			                            <input id="mobile" name="mobile" class="need  form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">展示图片</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-outImg dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+						
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button id="subLbs" class="btn btn-primary" type="button" >保存</button>
+                                <button class="btn btn-white" type="button" id="cancel">取消</button>
+                              </div>
+                            </div>
+			      		</div>
+			      	</div>
+            </div>
+        </div>
+   </div>
+</div>
+#{set 'moreScripts'} 
+<script language="javascript" src="http://webapi.amap.com/maps?v=1.3&key=c5a26de68e5d2d3af9a1b1cb5ef47bf4"></script>
+<script>
+seajs.config({
+	alias: {
+	  "city":"jquery.cityselect.js"
+	}
+});
+seajs.use(["jquery","lbsAdd"],function($,lbsAdd){
+	lbsAdd.init();
+});
+</script> 
+#{/set}

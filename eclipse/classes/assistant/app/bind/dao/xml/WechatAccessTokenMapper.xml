@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.bind.dao.mapper.IWechatAccessTokenMapper">
+   
+    <sql id="tableName">wechat_access_token</sql>
+    
+    <sql id="accessTokenColumns">id,wechat_id,access_token,create_time</sql>
+    
+    <resultMap type="WechatAccessToken" id="resultAccessTokenMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="access_token" property="accessToken"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="WechatAccessToken" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,access_token,create_time,gmt_created)
+       value(#{wechatId},#{accessToken},#{createTime},now())
+    </insert>
+    
+    <update id="update" parameterType="WechatAccessToken">
+        update <include refid="tableName"/>
+        <set>
+            <if test="accessToken!=null">access_token=#{accessToken},</if>
+            <if test="createTime!=null">create_time=#{createTime}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultAccessTokenMap">
+        select <include refid="accessTokenColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+    
+    <select id="findAll"  resultMap="resultAccessTokenMap">
+        select <include refid="accessTokenColumns"/> from <include refid="tableName"/>
+    </select>
+</mapper>

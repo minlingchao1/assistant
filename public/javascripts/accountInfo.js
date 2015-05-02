@@ -1,0 +1,98 @@
+define(function(require,exports,module){
+	var $=require('jquery');
+	var until=require('until');
+	var dialog=require('dialog');
+	var ACCOUNT={
+		init:function(){
+			ACCOUNT.bind();
+			ACCOUNT.getInfo();
+		},
+		bind:function(){
+			$(".subinfo").click(ACCOUNT.subAccount);
+			$(".changepasswd").click(ACCOUNT.changePassword);
+		},
+		getInfo:function(){
+			$.ajax({
+				type:"post",
+				url:"/merchant/MerchantCtrl/getInfo",
+				dataType:"json",
+				success:function(data){
+					if(data.success){
+						$("#account-userName").val(data.results.userName);
+						$("#account-email").val(data.results.email);
+						$("#account-mobile").val(data.results.mobile);
+						$("#account-qq").val(data.results.qq);
+					}else{
+						
+					}
+				}
+			});
+		},
+		subAccount:function(){
+			for(var i=0;i<$(".need").length;i++){
+				if($(".need").val()==""){
+					alert("请填写"+$(".need").eq(i).parents(".form-group").find("label").html());
+					return;
+					break;
+				}
+			}
+			if(!until.isMobile($("#account-mobile").val())){
+				alert("手机号码格式错误!");
+			}
+			if(!until.isEmail($("#account-email").val())){
+				alert("邮箱格式错误!");
+			}
+			$.ajax({
+				type:"post",
+				url:"/merchant/MerchantCtrl/edit",
+				dataType:"json",
+				data:{
+					userName:$("#account-userName").val(),
+					email:$("#account-email").val(),
+					mobile:$("#account-mobile").val(),
+					qq:$("#account-qq").val()
+				},
+				success:function(data){
+					if(data.success){
+						alert(data.message||"修改成功");
+					}else{
+						alert(data.message||"失败");
+					}
+				}
+			});
+		},
+		changePassword:function(){
+			if($("#new-pass").val().length<6){
+				dialog({
+					title:'警告!',
+					content:'密码必须大于六位'
+				}).showModal();
+				return;
+			}
+			if($("#new-pass").val()!=$("#new-pass2").val()){
+				dialog({
+					title:'警告!',
+					content:'两次输入密码不一致!'
+				}).showModal();
+				return ;
+			}
+			$.ajax({
+				type:"post",
+				url:"/merchant/MerchantCtrl/changePasswd",
+				dataType:"json",
+				data:{
+					oldPasswd:$("#old-pass").val(),
+					newPasswd:$("#new-pass").val()
+				},
+				success:function(data){
+					if(data.success){
+						alert("修改成功");
+					}else{
+						alert(data.message);
+					}
+				}
+			});
+		}
+	}
+	module.exports=ACCOUNT
+});

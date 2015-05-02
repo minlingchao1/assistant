@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+		PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- Ex: -->
+		<!-- <typeAlias type="models.*" alias="*" /> -->
+		<!-- 微信基本信息 -->
+		
+		<typeAlias type="assistant.app.user.model.Merchant" alias="Merchant" />
+		<typeAlias type="assistant.app.bind.model.WechatAccessToken" alias="WechatAccessToken" />
+		<typeAlias type="assistant.app.bind.model.WechatAccountInfo" alias="WechatAccountInfo" />
+		<typeAlias type="assistant.app.bind.model.WechatAccountUserRef" alias="WechatAccountUserRef" />
+		
+		<!-- 自动回复消息 -->
+		<typeAlias type="assistant.app.reply.model.MenuReplyRule" alias="MenuReplyRule" />
+		<typeAlias type="assistant.app.reply.model.TextMessage" alias="TextMessage" />
+		<typeAlias type="assistant.app.reply.model.ImageMessage" alias="ImageMessage" />
+		<typeAlias type="assistant.app.reply.model.VoiceMessage" alias="VoiceMessage" />
+		<typeAlias type="assistant.app.reply.model.VideoMessage" alias="VideoMessage" />
+		<typeAlias type="assistant.app.reply.model.ReplyMsgTemplete" alias="ReplyMsgTemplete" />
+		<typeAlias type="assistant.app.reply.model.KeywordReplyRule" alias="KeywordReplyRule" />
+	    <typeAlias type="assistant.app.reply.model.NewsMessageRef" alias="NewsMessageRef" />
+	    <typeAlias type="assistant.app.reply.model.ScanCount" alias="ScanCount" />
+	    <typeAlias type="assistant.app.reply.model.Article" alias="Article" />
+		<typeAlias type="assistant.app.reply.dto.KeywordReplyInfoDto" alias="KeywordReplyInfoDto" />
+		<typeAlias type="assistant.app.reply.dto.NewsListDto" alias="NewsListDto" />
+		
+		<!-- 关注回复 -->
+		<typeAlias type="assistant.app.subscribe.model.Subscribe" alias="Subscribe" />
+		
+		<!-- 二维码 -->
+		<typeAlias type="assistant.app.qrcode.model.ScanQrcode" alias="ScanQrcode" />
+		<typeAlias type="assistant.app.qrcode.model.Qrcode" alias="Qrcode" />
+		
+		<!-- 用户信息 -->
+		<typeAlias type="assistant.app.custom.model.CustomGroup" alias="CustomGroup" />
+		<typeAlias type="assistant.app.custom.model.CustomInfo" alias="CustomInfo" />
+		<typeAlias type="assistant.app.custom.model.NextOpenId" alias="NextOpenId" />
+		<typeAlias type="assistant.app.custom.model.CustomLocation" alias="CustomLocation" />
+		<typeAlias type="assistant.app.base.dto.Statistics" alias="Statistics" />
+		
+		<!-- 菜单 -->
+		<typeAlias type="assistant.app.menu.model.Menu" alias="Menu" />
+		
+		<!-- 场景 -->
+		<typeAlias type="assistant.app.scene.model.Scene" alias="Scene" />
+		<typeAlias type="assistant.app.scene.model.SceneImg" alias="SceneImg" />
+		<typeAlias type="assistant.app.scene.model.SceneStatistics" alias="SceneStatistics" />
+		<typeAlias type="assistant.app.scene.model.SceneMessageRef" alias="SceneMessageRef" />
+		
+		<!-- 全景图 -->
+		<typeAlias type="assistant.app.overall.model.Overall" alias="Overall" />
+		<typeAlias type="assistant.app.overall.model.OverallMessageRef" alias="OverallMessageRef" />
+		
+		<!-- LBS -->
+		<typeAlias type="assistant.app.lbs.model.Seller" alias="Seller" />
+		<typeAlias type="assistant.app.lbs.model.SellerMessageRef" alias="SellerMessageRef" />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${user}" />
+				<property name="password" value="${pass}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- <settings> <setting name="cacheEnabled" value="true" /> <setting name="defaultStatementTimeout" 
+		value="30000" /> </settings> -->
+	<mappers>
+		<!-- Ex: -->
+		<!-- <mapper resource="models/mappers/*.xml" /> -->
+	    <mapper resource="assistant/app/user/dao/xml/MerchantMapper.xml" />
+	    <mapper resource="assistant/app/bind/dao/xml/WechatAccessTokenMapper.xml" />
+	    <mapper resource="assistant/app/bind/dao/xml/WechatAccountInfoMapper.xml" />
+	    <mapper resource="assistant/app/bind/dao/xml/WechatAccountUserRefMapper.xml" /> 
+	    <mapper resource="assistant/app/subscribe/dao/xml/SubscribeMapper.xml" /> 
+	     
+	    <mapper resource="assistant/app/reply/dao/xml/MenuReplyRuleMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/KeywordReplyRuleMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/ReplyMsgTempleteMapper.xml" />
+	    <mapper resource="assistant/app/reply/dao/xml/TextMessageMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/ImageMessageMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/VoiceMessageMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/VideoMessageMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/NewsMessageRefMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/ArticleMapper.xml" /> 
+	    <mapper resource="assistant/app/reply/dao/xml/ScanCountMapper.xml" /> 
+	    
+	    <mapper resource="assistant/app/qrcode/dao/xml/ScanQrcodeMapper.xml" />
+	    <mapper resource="assistant/app/qrcode/dao/xml/QrcodeMapper.xml" /> 
+	    
+	    <mapper resource="assistant/app/custom/dao/xml/CustomGroupMapper.xml" /> 
+	    <mapper resource="assistant/app/custom/dao/xml/CustomInfoMapper.xml" /> 
+	    <mapper resource="assistant/app/custom/dao/xml/NextOpenIdMapper.xml" /> 
+	    <mapper resource="assistant/app/custom/dao/xml/CustomLocationMapper.xml" /> 
+	    
+	    <mapper resource="assistant/app/menu/dao/xml/MenuMapper.xml" />
+	    
+	    <mapper resource="assistant/app/scene/dao/xml/SceneMapper.xml" />
+	    <mapper resource="assistant/app/scene/dao/xml/SceneImgMapper.xml" />
+	    <mapper resource="assistant/app/scene/dao/xml/SceneMessageRefMapper.xml" />
+	    <mapper resource="assistant/app/scene/dao/xml/SceneStatisticsMapper.xml" />
+	    
+	    <mapper resource="assistant/app/overall/dao/xml/OverallMapper.xml" />
+	    <mapper resource="assistant/app/overall/dao/xml/OverallMessageRefMapper.xml" />
+	    
+	    <mapper resource="assistant/app/lbs/dao/xml/SellerMapper.xml" />
+	    <mapper resource="assistant/app/lbs/dao/xml/SellerMessageRefMapper.xml" />
+	    
+	</mappers>
+</configuration>
+

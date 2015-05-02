@@ -1,0 +1,79 @@
+#{extends 'main3.html' /}
+#{set title:'微信公众号管理' /}
+<div class="wrapper wrapper-content">
+<div class="row">
+	 <div class="col-lg-4">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-success pull-right">总</span>
+		            <h5>关注数</h5>
+		        </div>
+		        <div class="ibox-content" id="fans">
+		        	<span class="no-margins" id="totalFans"><img id="fansLoading" src="/public/images/loading.gif" width="16" height="16"/><h1></h1></span>
+		            <div class="stat-percent font-bold text-success">昨日新增:98</div>
+		            <small>总关注用户数</small>
+		        </div>
+		    </div>
+	 </div>
+	 <div class="col-lg-4">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-primary pull-right">总</span>
+		            <h5>浏览量</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <span class="no-margins"><h1 >40 886,200</h1></span>
+		            <div class="stat-percent font-bold text-navy">昨日浏览:98</div>
+		            <small>总浏览量</small>
+		        </div>
+		    </div>
+	 </div>
+	 <div class="col-lg-4">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-danger pull-right">最近一个月</span>
+		            <h5>访客数</h5>
+		        </div>
+		        <div class="ibox-content">
+		            <span class="no-margins"><h1>40 886,200</h1></span>
+		            <div class="stat-percent font-bold text-danger">昨日新增:80</div>
+		            <small>总收入</small>
+		        </div>
+		    </div>
+	 </div>
+</div>
+<div class="row">
+	 <div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-success pull-right">总</span>
+		            <h5>用户增加趋势图</h5>
+		        </div>
+		        <div class="ibox-content">
+		           <div class="echarts" id="echarts-line-chart"   style="background-color: rgba(0, 0, 0, 0); cursor: default;"></div>
+		        </div>
+		    </div>
+	 </div>
+</div>
+<div class="row">
+	 <div class="col-lg-12">
+		    <div class="ibox float-e-margins">
+		        <div class="ibox-title">
+		            <span class="label label-success pull-right">总</span>
+		            <h5>请求点击数</h5>
+		        </div>
+		        <div class="ibox-content">
+		           <div class="echarts" id="click-scan" style="background-color: rgba(0, 0, 0, 0); cursor: default;"></div>
+		        </div>
+		    </div>
+	 </div>
+</div>
+</div>
+#{set 'moreScripts'}
+
+<script type="text/javascript">
+	seajs.use("wxindex",function(wxindex){
+		wxindex.init();
+	})
+</script>
+#{/set}

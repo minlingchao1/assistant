@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="renderer" content="webkit"/>
+        <title>#{get 'title' /}</title>
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css"/>
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/sb-admin-2.css"/>
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-responsive.min.css"/>
+        <link href="/public/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css" />
+         <!--[if lte IE 6]>
+		  <link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-ie6.min.css">
+		
+		  <link rel="stylesheet" type="text/css" href="/public/stylesheets/css/ie.css">
+		  <![endif]-->
+        #{get 'moreStyles' /} 
+        <script type="text/javascript">
+        	USER_ID = '${session.get("session_merchant_id")}';
+        </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="brand" href="index.html"><img src="/public/images/logo.png"/></a>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+            	
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i>  
+                        <span class="nick">${session.get("session_merchant_name")}</span>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>账户信息</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>系统设置</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a onClick="javascript:_hmt.push(['_trackEvent', '退出登录', '点击']);" href="login.html"><i class="fa fa-sign-out fa-fw"></i>退出</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+           
+           <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+<<<<<<< HEAD
+                            <a href="#"><!-- <i class="fa fa-bar-chart-o fa-fw"></i> -->公众号号管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">添加公众号</a>
+                                </li>
+                                <li>
+                                    <a href="#">公众号设置</a>
+=======
+                            <a href="#"><i class="fa fa-gear fa-fw"></i>公众号管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="flot.html">添加公众号</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">公众号设置</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->基础服务<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">自动回复</a>
+                                </li>
+                                <li>
+                                    <a href="#">无法识别回复</a>
+                                </li>
+                                <li>
+                                    <a href="#">素材管理</a>
+                                </li>
+                                <li>
+                                    <a href="#">LBS设置</a>
+                                </li>                    
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->自定义菜单<span class="fa arrow"></span></a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->营销活动<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">微信墙</a>
+                                </li>
+                                <li>
+                                    <a href="#">刮刮卡</a>
+                                </li>
+                                <li>
+                                    <a href="#">摇一摇中将</a>
+                                </li>
+                                <li>
+                                    <a href="#">优惠券</a>
+                                </li>
+                                <li>
+                                    <a href="#">一站到底</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微投票<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">微投票管理</a>
+                                </li>
+                                <li>
+                                    <a href="#">微投票新增</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微客服<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">微客服系统</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微商城(最后做)<span class="fa arrow"></span></a>
+                            
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微行业(最后做)<span class="fa arrow"></span></a>
+                            
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微网站(最后做)<span class="fa arrow"></span></a>
+                            
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->360全景<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">全景图管理</a>
+                                </li>
+                                <li>
+                                    <a href="#">添加全景图</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->二维码管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">生成二维码</a>
+                                </li>
+                                <li>
+                                    <a href="#">管理二维码</a>
+                                </li>
+                                <li>
+                                    <a href="#">扫描统计</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->客户管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">粉丝分组</a>
+                                </li>
+                                <li>
+                                    <a href="#">粉丝列表</a>
+                                </li>
+                                <li>
+                                    <a href="#">地理位置分布</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->微网站<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">粉丝分组</a>
+                                </li>
+                                <li>
+                                    <a href="#">粉丝列表</a>
+                                </li>
+                                <li>
+                                    <a href="#">地理位置分布</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#"><!--<i class="fa fa-bar-chart-o fa-fw"></i>-->数据统计<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">聊天记录</a>
+                                </li>
+                                <li>
+                                    <a href="#">粉丝列表</a>
+                                </li>
+                                <li>
+                                    <a href="#">地理位置分布</a>
+                                </li>
+                                <li>
+                                    <a href="#">关键词触发统计</a>
+>>>>>>> 8369f5908acf0bbdd03bf0f6d94aaff074119a60
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+        </nav>
+    <div id="page-wrapper" style="min-height: 237px;">
+    	<div id="main">#{doLayout /}</div>
+    </div>
+    <div class="foot"><a href="www.yueyue.in" target="_self">www.yueyue.in</a> 2011-2014 © All Rights Reserved.</div>
+</body>
+</html>
+<script type="text/javascript">
+	var _hmt=_hmt||[];
+	(function(){
+		var hm=document.createElement("script");
+		hm.src="//hm.baidu.com/hm.js?25ecc0a6b1f4b3104c6cfff4ce13b028";
+		var s=document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm,s);
+	})();
+</script>
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	Date.prototype.format=function(format){
+		var o={
+			"M+":this.getMonth()+1,//Month
+            "d+":this.grtDate(),//Day
+            "h+":this.getHours(),//hour
+            "m+":this.getMinutes(),//minute
+            "s+":this.getSeconds(),//seconds
+            "q+":Math.floor((this.getMonth()+3)/3),
+            "S":this.getMilliseconds()//millSecond  
+		}
+		if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "")
+		.substr(4 - RegExp.$1.length));
+		for (var k in o) if (new RegExp("(" + k + ")")
+			.test(format)) format = format.replace(RegExp.$1,
+		RegExp.$1.length == 1 ? o[k] : ("00" + o[k])
+			.substr(("" + o[k])
+			.length));
+		return format;
+	}
+	Date.prototype.formatHM=function(){
+		return this.format('h:mm');
+	}
+	Date.prototype.formatYMD=function(){
+		return this.format("yyyy-MM-dd");
+	}
+	Date.prototype.formatYMDHMS=function(){
+		return this.fomrmat('yyyy-MM-dd hh:mm:ss');
+	}
+	
+	//SetConfiguration
+	seajs.config({
+		alias:{
+			"jquery":"jquery.min.js",
+			"bootstrap":"bootstrap.min.js",
+			"bootstrapTable":"bootstrap-table.min.js",
+			"bootstrapTableE":"bootstrap-table-export.js",
+			"dialog":"dialog.js",
+			"pagination":"pagination.js",
+			"template":"template.js",
+			"until":"global.js",
+			"Validform":"Validform_v5.3.2_min.js",
+			"metisMenu":"metisMenu.min.js",
+			"sbAdmin":"sb-admin-2.js",
+			"echart":"echart.js",
+			"home.js":"home.js"
+		},
+		map: [
+		[ /^(.*\.(?:css|js))(.*)$/i, '$1?20141223' ]
+		],
+		preload: ['jquery','bootstrap','metisMenu','sbAdmin']
+	});
+	seajs.use(["jquery","dialog","template"],function($,dialog,template){
+		var tar=location.pathname;
+		var userAgent = navigator.userAgent.toLowerCase(); 
+		template.helper('dateFormat', function (date, format) {
+			date = new Date(date);
+			var map = {
+				"M": date.getMonth() + 1, //月份 
+				"d": date.getDate(), //日 
+				"h": date.getHours(), //小时 
+				"m": date.getMinutes(), //分 
+				"s": date.getSeconds(), //秒 
+				"q": Math.floor((date.getMonth() + 3) / 3), //季度 
+				"S": date.getMilliseconds() //毫秒 
+			};
+			format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+				var v = map[t];
+				if(v !== undefined){
+					if(all.length > 1){
+						v = '0' + v;
+						v = v.substr(v.length-2);
+					}
+					return v;
+				}
+				else if(t === 'y'){
+					return (date.getFullYear() + '').substr(4 - all.length);
+				}
+				return all;
+			});
+			return format;
+	});
+	$.browser = { 
+		version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
+		safari: /webkit/.test( userAgent ), 
+		opera: /opera/.test( userAgent ), 
+		msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+		mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
+	};
+	if(($.browser.msie&&($.browser.version == "6.0")&&!$.support.style)||$.browser.msie&&($.browser.version == "7.0")){
+		dialog({
+			title: '警告!',
+			content: '您的浏览器版本非常低,可能会导致您的浏览体验降低~~<br> 推荐您下载<a href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank">谷歌浏览器</a>或者将360等双核浏览器调至极速模式'
+		}).showModal();
+	}	
+});
+</script>
+#{get 'moreScripts' /}

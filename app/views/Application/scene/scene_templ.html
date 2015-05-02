@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+		<title>${scene.sceneName}</title>
+		<!--
+        	作者：738509878@qq.com
+        	时间：2015-03-03
+        	描述：css
+        -->
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/scene/main.css"/>
+        <link rel="stylesheet" type="text/css" href="/public/stylesheets/fakeloader.css"/>
+        <!--
+        	作者：738509878@qq.com
+        	时间：2015-03-03
+        	描述：script
+        -->
+        <script src="/public/javascripts/hui/jquery-2.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/scene/yyucadapter.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/scene/player.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/scene/stackBlur.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/scene/swipe.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/scene/app.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/public/javascripts/fakeloader.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+			(function(){
+				var phoneWidth = parseInt(window.screen.width),
+					phoneScale = phoneWidth/640,
+					ua = navigator.userAgent;
+	
+				if (/Android (\d+\.\d+)/.test(ua)){
+					var version = parseFloat(RegExp.$1);
+					// andriod 2.3
+					if(version > 2.3){
+						document.write('<meta name="viewport" content="width=640, minimum-scale = '+phoneScale+', maximum-scale = '+phoneScale+', target-densitydpi=device-dpi">');
+					// andriod 2.3以上
+					}else{
+						document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+					}
+					// 其他系统
+				} else {
+					document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+				}
+			})();
+			
+			if (1 == 2){
+				if(1 == 1){
+					 var config = {
+						coverUrl:"http://www.weixinguanjia.cn",
+						swipeCur: 0,
+						swipeDir:'vertical',
+					}
+				}else{
+					 var config = {
+						coverUrl:"http://www.weixinguanjia.cn",
+						swipeCur: 0,
+						swipeDir:'horizontal',
+					}
+				}
+				
+			} else {
+				if(1 == 1){
+					 var config = {
+						coverUrl:"",
+						swipeCur: 0,
+						swipeDir:'vertical',
+					}
+				}else{
+					 var config = {
+						coverUrl:"",
+						swipeCur: 0,
+						swipeDir:'horizontal',
+					}
+				}
+			}     
+		</script>
+	</head>
+	<body onselectstart="return true;" ondragstart="return false;">
+		<div class="container">
+			<input id="sceneName" style="display: none;" value="${scene.sceneName}" />
+			<div class="swipe" id="swipe">
+			 %{if(scene.status==0){}%
+			 <p>场景活动还未开始</p>
+			 %{}else if(scene.status==2){}%
+				 <ul>
+				 %{ if(scene.outSet==0){ }%
+			  			<li class="cur">
+						  <div style="background-image: url(${scene.openImg})"></div> 	
+						</li>
+					%{ }else{ }%
+					    <li class="cur">
+						  <div class="${scene.outBtnPos}" style="background-image: url(${scene.outImg})">
+					       	<a class="links" href="${scene.outBtnUrl}"><img src="${scene.outBtnImg}"></a>								
+					       </div>
+						</li>
+				  	%{ } }% 
+				 </ul>
+			 %{}else{}%
+			  <ul>
+			  	%{ if(scene.openSet==0){ }%
+		  			<li class="cur">
+					  <div style="background-image: url(${scene.openImg})"></div> 	
+					</li>
+				%{ }else{ }%
+				    <li class="cur">
+					  <div class="${scene.openBtnPos}" style="background-image: url(${scene.openImg})">
+				       	<a class="links" href="${scene.openBtnUrl}"><img src="${scene.openBtnImg}"></a>								
+				       </div>
+					</li>
+			  	%{ } }%  
+			  	 <!-- 如果画面为纯图模式 -->
+			  	 #{list items:sceneImgs,as:'sceneImg'}
+			  	   <li class="cur animated" style="-webkit-transform: translate(0px, 7.499956px) scale(0.958449);"><div style="background-image: url(${sceneImg.imgUrl})"></div></li>
+			  	 #{/list}
+               </ul>
+             %{}}%
+			</div>
+			<div id="musicWrap" class="music_wrap">
+				<span class="text move hide">打开</span>
+				<i id="audioBtn" data-src="${scene.backMusic}" class="btn_music ${musicSet}"></i>
+		    </div>
+            			
+			<div id="arrowV" class="arrow_v"><p class="move"></p></div>
+
+			<div id="arrowH" class="arrow_h f-hide">
+				<span class="arrow_l "></span>
+				<span class="arrow_r "></span>
+			</div>
+
+		<div class="lottery show" id="lottery" style="display: none;"></div>
+	    <div class="download_mask" id="downloadMask"><i></i></div>              		       
+	   </div>	
+	   <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+	   <script>
+//  	$(function(){
+//  		  var id=1339;
+//            var wid=67463;
+//            var wxid=$('#wxid').val();
+//            if(wxid != '@111'){
+//          	  ajax('index-1339-hit.html',{ id:id,wid:wid,wxid:wxid},function(m){
+//        			/*  if(m=='ok'){
+//          				tusi('dfasfsf');
+//          			}  */
+//          		});
+//            }
+//    		 
+//  	});
+
+    	wx.config({
+    	    appId: "wxd8aaf0413c3f9ad2",
+    	    timestamp: "1425376210",
+    	    nonceStr: "HCGJNld6bOEQmMC0",
+    	    signature: "97d60beba5a35d576608fa9f712157980da422ce",
+    	    jsApiList: [
+    	      // 所有要调用的 API 都要加到这个列表中
+    		   'checkJsApi',
+    	        'onMenuShareTimeline',
+    	        'onMenuShareAppMessage',
+    			'showOptionMenu'
+    	    ]
+    	  });
+    	   wx.ready(function () {
+    	  
+    	      // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+    		  //document.querySelector('#checkJsApi').onclick = function () {
+    			wx.checkJsApi({
+    			  jsApiList: [
+    				'getNetworkType',
+    				'previewImage'
+    			  ],
+    			  success: function (res) {
+    				//alert(JSON.stringify(res));
+    			  }
+    			 
+    			});
+    		  //};
+    		  
+    		 // document.querySelector('#showOptionMenu').onclick = function () {
+    			wx.showOptionMenu();
+    		 // };
+ 			window.shareData = {
+
+ 				"imgUrl": "http://sta.www.weixinguanjia.cn/ups/2015/03/72373/1fd0001135e3673573fd1968cfac544a.jpg",
+
+ 				"timeLineLink": "http://www.weixinguanjia.cn/chang/index-1339.html?wxid=o8S4Ej9Y8e2zc0IiCwVzgA8BWvXU&wid=67463&from=singlemessage&isappinstalled=0",
+
+ 				"sendFriendLink": "http://www.weixinguanjia.cn/chang/index-1339.html?wxid=o8S4Ej9Y8e2zc0IiCwVzgA8BWvXU&wid=67463&from=singlemessage&isappinstalled=0",
+
+ 				"weiboLink": "http://www.weixinguanjia.cn/chang/index-1339.html?wxid=o8S4Ej9Y8e2zc0IiCwVzgA8BWvXU&wid=67463&from=singlemessage&isappinstalled=0",
+
+ 				"tTitle": "12121",
+
+ 				"tContent": "212121",
+
+ 				"fTitle": "12121",
+
+ 				"fContent": "212121",
+
+ 				"wContent": "212121"
+
+ 			};
+    		  
+    		  
+    		  // 2. 分享接口
+    		  // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    		 // document.querySelector('#onMenuShareAppMessage').onclick = function () {
+    			wx.onMenuShareAppMessage({
+    			  title: window.shareData.fTitle,
+    			  desc: window.shareData.fContent,
+    			  link: window.shareData.sendFriendLink,
+    			  imgUrl: window.shareData.imgUrl,
+    			  trigger: function (res) {
+    				//alert('用户点击发送给朋友');
+    			  },
+    			  success: function (res) {
+    				  shareReport();
+    			  },
+    			  cancel: function (res) {
+    				//alert('已取消');
+    			  },
+    			  fail: function (res) {
+    				alert(JSON.stringify(res));
+    			  }
+    			});
+    			//alert('已注册获取“发送给朋友”状态事件');
+    		  //};
+
+    		  // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+    		 // document.querySelector('#onMenuShareTimeline').onclick = function () {
+    			wx.onMenuShareTimeline({
+    			  title: window.shareData.fTitle,
+    			  link: window.shareData.timeLineLink,
+    			  imgUrl: window.shareData.imgUrl,
+    			  trigger: function (res) {
+    				//alert('用户点击分享到朋友圈');
+    			  },
+    			  success: function (res) {
+    				  shareReport();
+    			  },
+    			  cancel: function (res) {
+    				//alert('已取消');
+    			  },
+    			  fail: function (res) {
+    				alert(JSON.stringify(res));
+    			  }
+    			});
+    			//alert('已注册获取“分享到朋友圈”状态事件');
+    		 // };
+
+    	    // 在这里调用 API
+    	  });
+
+		  function shareReport(){
+		        var id=1339;
+		        var wid=67463;
+		        var wxid=$('#wxid').val();
+				ajax('index-1339-sh.html',{ id:id,wid:wid,wxid:wxid},function(m){
+					if(m=='ok'){
+						console.log(m);
+						 tusi('已分享');
+						 window.location.href="http:www.baidu.com"; 
+					}
+				});
+		    }
+</script>
+	
+<style>.tb_button {padding:1px;cursor:pointer;border-right: 1px solid #8b8b8b;border-left: 1px solid #FFF;border-bottom: 1px solid #fff;}.tb_button.hover {borer:2px outset #def; background-color: #f8f8f8 !important;}.ws_toolbar {z-index:100000} .ws_toolbar .ws_tb_btn {cursor:pointer;border:1px solid #555;padding:3px}   .tb_highlight{background-color:yellow} .tb_hide {visibility:hidden} .ws_toolbar img {padding:2px;margin:0px}</style></body>
+</html>

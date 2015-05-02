@@ -1,0 +1,141 @@
+#{extends 'main3.html' /}
+#{set title:'添加微信公众号' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/addwechat.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-table.min.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>微信公众号管理</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <a id="keywordAdd" class="btn btn-primary" ><i class="fa fa-plus"> </i>添加关键字回复</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped keyword-list" data-toolbar-align="left" data-toolbar=".toolbar" data-search="true" data-search-align="left">
+                        <thead>
+                            <tr>
+                            	<th data-field="keyword" data-align="center" data-sortable="true">关键字</th>
+                                <th data-field="isAllMatch" data-align="center" data-formatter="isAllMatch" data-sortable="true">是否完全匹配</th>
+                                <th data-field="type" data-align="center"  data-formatter="msgType" data-sortable="true">回复消息类型</th>
+                                
+                                <th data-field="id" data-align="center" data-formatter="wxEdit" data-events="operateEvents"  data-sortable="true">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use(["jquery","keywordReply","bootstrapTable"],function($,keywordReply,bootstrapTable){
+		$.extend($.fn.bootstrapTable.defaults,{
+			formatLoadingMessage:function(){
+				return '正在努力地加载数据中，请稍候......';
+			},
+			formatRecordPerPage:function(pageNumber){
+				return '每页显示'+pageNumber+'条记录';
+			},
+			formatShowingRows:function(pageFrom,pageTo,totalRows){
+				return '显示第'+pageFrom+'到第'+pageTo+'条记录,总共'+totalRows+'条记录';
+			},
+			formatSearch:function(){
+				return '搜索';
+			},
+			formatNoMatches: function () {
+				return '没有找到匹配的记录';
+			},
+			formatRefresh: function () {
+				return '刷新';
+			},
+			formatToggle: function () {
+				return '切换';
+			},
+			formatColumns: function () {
+				return '列';
+			}
+		});
+		keywordReply.init();
+	});
+	seajs.use(["jquery","until"],function($,until){
+		var wechatId=until.getUrlParam("wechatId");
+		document.getElementById("keywordAdd").setAttribute("href","/AssistantUI/keywordAdd?wechatId="+wechatId);
+	})
+	function wxEdit(value, row) {
+		var url="/AssistantUI/keywordAdd?wechatId="+wechatId+"&id="+value;
+		return '<a href='+url+' target="_self" lid="'+value+'" ><span class="label label-primary">编辑</span></a>  <a href="javascript:void(0)" target="_self" lid="'+value+'" ><span class="label label-danger delete">删除</span></a> ';
+	}
+	
+	function msgType(value,row){
+		if(value==0){
+			return '<p><span></span>文本消息</p>';
+		}else if(value==1){
+			return '<p><span></span>图片消息</p>';
+		}else if(value==2){
+			return '<p><span></span>语音消息</p>';
+		}else if(value==3){
+			return '<p><span></span>视频消息</p>';
+		}else if(value==4){
+			return '<p><span></span>单图文消息</p>';
+		}else if(value==5){
+			return '<p><span></span>多图文消息</p>';
+		}else if(value==6){
+			return '<p><span></span>微场景</p>';
+		}else if(value==7){
+			return '<p><span></span>360全景</p>';
+		}else if(value==8){
+			return '<p><span></span>LBS</p>';
+		}
+		
+	}
+	function isAllMatch(value,row){
+		if(row.isAllMatch==0){
+			return '<p><span></span>完全匹配</p>';
+		}else if(row.isAllMatch==1){
+			return '<p><span></span>模糊匹配</p>';
+		}
+		
+	}
+	
+	window.operateEvents = {
+        'click .delete': function (e, value, row, index) {
+            alert('确定删除？');
+            $.ajax({
+            	type:"post",
+            	url:"/reply/KeywordReplyRuleCtrl/delete",
+            	dataType:"json",
+            	data:{
+            		id:value,
+            	},
+            	success:function(data){
+            		if(data.success){
+            			alert("删除成功!");
+            			location.reload() 
+            		}else{
+            			alert("删除失败!");
+            		}
+            	}
+            });
+            console.log(value, row, index);
+        }
+    };
+	
+</script>
+#{/set}

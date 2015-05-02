@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.subscribe.dao.mapper.ISubscribeMapper">
+   
+    <sql id="tableName">subscribe</sql>
+    <sql id="subscribeColumns">id,type,msg_id,user_id,wechat_id</sql>
+    <resultMap type="Subscribe" id="resultSubscribeMap">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="user_id" property="userId"/>
+        <result column="wechat_id" property="wechatId"/>
+    </resultMap>
+    
+    
+    <insert id="insert" parameterType="Subscribe" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (type,msg_id,user_id,wechat_id,gmt_created)
+       value(#{type},#{msgId},#{userId},#{wechatId},now())
+    </insert>
+    
+    <update id="update" parameterType="Subscribe">
+        update <include refid="tableName"/>
+        <set>
+            <if test="type!=null">type=#{type}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="delete" parameterType="Subscribe">
+        delete from <include refid="tableName"/> where id=#{id}
+    </delete>
+    
+    <delete id="deleteByWechatId" parameterType="long">
+        delete from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </delete>
+    
+    <select id="countByWechatId" parameterType="long" resultType="long">
+        select count(*) from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultSubscribeMap">
+        select <include refid="subscribeColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+     
+    <select id="findLimitOneByDate" parameterType="long" resultMap="resultSubscribeMap">
+        select <include refid="subscribeColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId} order by gmt_created limit 1;
+    </select>
+    
+    <select id="findByMsgId" parameterType="long" resultMap="resultSubscribeMap">
+        select <include refid="subscribeColumns"/> from <include refid="tableName"/> where msg_id=#{msgId}
+    </select>
+</mapper>

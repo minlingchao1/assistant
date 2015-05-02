@@ -1,0 +1,413 @@
+#{extends 'main4.html' /}
+#{set title:'添加微信公众号' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/addwechat.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/jquery.step.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ystep.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加微信公众账号</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            	 <ul class="nav nav-tabs" id="addWechat"> 
+			      <li class="active"><a  href="#normal" data-toggle='tab'>普通模式</a></li> 
+			      <li><a href="#akey" data-toggle='tab'>一键绑定</a></li>
+			    </ul> 
+			    <div class="tab-content"> 
+			      <div class="tab-pane active" id="normal">
+			      	<div class="row">
+			      		<div class="col-lg-12 wechatInfo">
+			      			<div class="ibox-content">
+			      			  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">公众号名称</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="accountName" >
+								      <span style="color:#CCC;">您可以给此公众号起一个名字, 方便下次修改和查看.</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+							  	
+                                 <div class="form-group">
+                                 	
+								    <label for="type" class="col-sm-3 control-label">公众号类型</label>
+								    <div class="col-sm-8">
+								     <select class="form-control m-b" name="account" id="type">
+                                        <option>订阅号</option>
+                                        <option>服务号</option>
+                                     </select> 						     
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="authenticate" class="col-sm-3 control-label">认证情况</label>
+								    <div class="col-sm-8">
+								      <select class="form-control m-b" name="account" id="authenticate">
+                                        <option>已认证</option>
+                                        <option>未认证</option>
+                                     </select>
+								    </div>
+								 </div>
+							  </div>
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">公众号APPID</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="appId" >
+								      <span style="color:#CCC;">请填写微信公众平台后台的AppId.</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">公众号AppSecret</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="appSecret" >
+								      <span style="color:#CCC;">请填写微信公众平台后台的AppSecret, 只有填写这两项才能管理自定义菜单.</span> 
+								    </div>
+								 </div>
+							  </div>
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="wechatNumber" class="col-sm-3 control-label">公众账号</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="wechatNumber" >
+								      <span style="color:#CCC;">您的微信帐号，本平台支持管理多个公众号</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountId" class="col-sm-3 control-label">原始账号</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="accountId" >
+								      <span style="color:#CCC;">微信公众帐号的原ID串，</span> 
+								    </div>
+								 </div>
+							  </div>
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="inputPassword" class="col-sm-3 control-label">二维码</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-qrcode dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								      
+								    <span style="color:#CCC;">只支持JPG图片<span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="inputPassword" class="col-sm-3 control-label">头像</label>
+								    <div class="col-sm-8 uploadwrap">
+									    <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg" class="dropz-headimage dropz dz-clickable" id="demo-upload">
+											  <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+					      				 </div>
+								       <!--<div id="headImage-review" class="file-item thumbnail" style="display: none;"> 
+						                 <img id="headImage-img" style="width:100px;height:100px" >
+						               </div>-->
+								      <!--<span><img src="/public/images/uploadimg .png" class="uploadimg-headImage"/></span>
+								      <div id="upload-headImage" class="upload-pic">
+								          <form action="/merchant/MerchantCtrl/saveHeadImage" method="post" target="submitIframe" enctype="multipart/form-data">
+								            <input type="file" name="file">
+								            <input type="hidden" class="imgupload-aid" name="wechatId" value="" />
+								          </form>
+							         </div>-->
+							         <!--<div id="uploader-demo">
+								         <div id="headImage-fileList" class="uploader-list"></div>
+								         <div id="upload-headImage" class="webuploader-container">选择图片</div>-->
+								         <!--<button class="btn btn-white remove-this" type="submit">取消</button>-->
+                                    <!-- </div>-->
+								     <!--<ul>
+								       <li style="list-style-type:none;"><span style="color:#CCC;">只支持JPG图片</span> </li>
+							         </ul> -->
+							         <span style="color:#CCC;">只支持JPG图片<span> 
+								    </div>
+								 </div>
+							  </div>
+							  
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button class="manualBind btn btn-primary" type="submit" >保存</button>
+                                <button class="btn btn-white" type="submit" id="cancel">取消</button>
+                              </div>
+                            </div>
+			      		</div>
+			      	</div>
+			      </div> 
+			      <div class="tab-pane" id="akey">
+			      	<div class="row">
+			      		<div class="col-lg-12">
+			      			<div class="ibox-content">
+			      			  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="inputPassword" class="col-sm-3 control-label">公众号登录用户</label>
+								    <div class="col-sm-8">
+								      <input type="password" class="form-control" id="inputPassword" >
+								      <span style="color:#CCC;">请输入你的公众平台用户名.</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="inputPassword" class="col-sm-3 control-label">公众号登录密码</label>
+								    <div class="col-sm-8">
+								      <input type="password" class="form-control" id="inputPassword" >
+								      <span style="color:#CCC;">请输入你的公众平台密码</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit">确认</button>
+                                <button class="btn btn-white" type="submit">取消</button>
+                              </div>
+                              <div class="ystep2" style="padding-left: 150px;margin-top: 20px;">
+                              	<div class="ystep-container ystep-lg ystep-green" >
+                              		<ul class="ystep-container-steps">
+                              			<li class="ystep-step-undone" data-container="body" data-toggle="popover" data-placement="top" data-title="发起" data-content="实名用户/公益组织发起项目" data-trigger="hover" data-original-title="" title="">发起</li>
+                              			<li class="ystep-step-undone" data-container="body" data-toggle="popover" data-placement="top" data-title="审核" data-content="乐捐平台工作人员审核项目" data-trigger="hover" data-original-title="" title="">审核</li>
+                              			<li class="ystep-step-undone" data-container="body" data-toggle="popover" data-placement="top" data-title="募款" data-content="乐捐项目上线接受公众募款" data-trigger="hover" data-original-title="" title="">募款</li>
+                              			<li class="ystep-step-undone" data-container="body" data-toggle="popover" data-placement="top" data-title="执行" data-content="项目执行者线下开展救护行动" data-trigger="hover" data-original-title="" title="">执行</li>
+                              			<li class="ystep-step-undone" data-container="body" data-toggle="popover" data-placement="top" data-title="结项" data-content="项目执行者公示善款使用报告" data-trigger="hover" data-original-title="" title="">结项</li>
+                              		</ul>
+                              		<div class="ystep-progress" style="width: 400px;">
+                              			<p class="ystep-progress-bar" style="width: 400px;">
+                              				<span class="ystep-progress-highlight" style="width: 100%;"></span>
+                              			</p>
+                              		</div>
+                              	</div>
+                              </div>
+                              </div>
+			      		</div>
+			      	</div>
+			      </div> 
+			    </div> 
+
+            </div>
+        </div>
+   </div>
+</div>
+<iframe id="submitIframe" name="submitQrcodeIframe" style="display:none;"></iframe>
+<iframe id="submitIframe" name="submitHeadImageIframe" style="display:none;"></iframe>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use("addWechat",function(addWechat){
+	addWechat.init();
+    });
+//  seajs.use(["jquery","webuploader"],function($){
+//  	    // 优化retina, 在retina下这个值是2
+//  var ratio = window.devicePixelRatio || 1;
+//  // 缩略图大小
+//  var thumbnailWidth = 100 * ratio;
+//  var thumbnailHeight = 100 * ratio;
+//  var webloader= WebUploader.create({
+//	    // 自动上传。
+//	    auto: true,
+//	    // swf文件路径
+//	    swf: '/public/javascripts/webuploader-0.1.5/Uploader.swf',
+//	    // 文件接收服务端。
+//	    server: '/merchant/MerchantCtrl/saveImg',
+//	
+//	    // 选择文件的按钮。可选。
+//	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+//	    pick: '#upload-qrcode',
+//	    // 只允许选择文件，可选。
+//	    accept: {
+//	        title: 'Images',
+//	        extensions: 'gif,jpg,jpeg,bmp,png',
+//	        mimeTypes: 'image/*'
+//	    },
+//	    fileNumLimit:1
+//  });
+//  // 当有文件添加进来的时候
+//  webloader.on( 'fileQueued', function( file ) {
+//  	            $("#qrcode-review").hide();
+//			        var $li = $(
+//			                '<div id="' + file.id + '" class="file-item thumbnail">' +
+//			                    '<img id="qrcode-img" style="width:'+thumbnailWidth+'px;height:'+thumbnailHeight+'px">' +
+//			                    '<div class="info">' + file.name + '</div>' +
+//			                '</div>'
+//			                ),
+//			            $img = $li.find('img');
+//			
+////			       $li.on('click', '.remove-this', function() {
+////				        	alert();
+////	                        webloader.removeFile(file);
+////	                   });
+//			        $("#qrCode-fileList").append( $li );
+//			       
+//			
+//			        // 创建缩略图
+//			        webloader.makeThumb( file, function( error, ret ) {
+//			            if ( error ) {
+//			                $img.replaceWith('<span>不能预览</span>');
+//			                return;
+//			            }
+//			
+//			            $img.attr( 'src', ret );
+//			        }, thumbnailWidth, thumbnailHeight );
+//			        
+//			         // 文件上传过程中创建进度条实时显示。
+//				    webloader.on( 'uploadProgress', function( file, percentage ) {
+//				        var $li = $( '#'+file.id ),
+//				            $percent = $li.find('.progress span');
+//				
+//				        // 避免重复创建
+//				        if ( !$percent.length ) {
+//				            $percent = $('<p class="progress"><span></span></p>')
+//				                    .appendTo( $li )
+//				                    .find('span');
+//				        }
+//				
+//				        $percent.css( 'width', percentage * 100 + '%' );
+//				    });
+//				    
+//				    // 文件上传失败，现实上传出错。
+//				    webloader.on( 'uploadError', function( file ) {
+//				        var $li = $( '#'+file.id ),
+//				            $error = $li.find('div.error');
+//				
+//				        // 避免重复创建
+//				        if ( !$error.length ) {
+//				            $error = $('<div class="error"></div>').appendTo( $li );
+//				        }
+//				
+//				        $error.text('上传失败');
+//				    });
+//				
+//				    // 完成上传完了，成功或者失败，先删除进度条。
+//				    webloader.on( 'uploadComplete', function( file ) {
+//				        $( '#'+file.id ).find('.progress').remove();
+//				    });
+//				    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+//				    webloader.on( 'uploadSuccess', function(file,response) {
+//				    	$img.attr( 'src', response.url );
+//				    	//$img.attr()
+////				    	$img.style.width=thumbnailWidth;
+////				    	$img.style.height=thumbnailHeight;
+////				    	$img.attr('width',thumbnailWidth);
+////				    	$img.attr('height',thumbnailHeight);
+//				    	//alert(file.id);
+//				        $( '#'+file.id ).addClass('upload-state-done');
+//				    });
+//   });
+//  })
+//  
+//  seajs.use(["jquery","webuploader"],function($){
+//  	    // 优化retina, 在retina下这个值是2
+//  var ratio = window.devicePixelRatio || 1;
+//  // 缩略图大小
+//  var thumbnailWidth = 100 * ratio;
+//  var thumbnailHeight = 100 * ratio;
+//  var webloader= WebUploader.create({
+//	    // 自动上传。
+//	    auto: true,
+//	    // swf文件路径
+//	    swf: '/public/javascripts/webuploader-0.1.5/Uploader.swf',
+//	    // 文件接收服务端。
+//	    server: '/merchant/MerchantCtrl/saveImg',
+//	
+//	    // 选择文件的按钮。可选。
+//	    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+//	    pick: '#upload-headImage',
+//	    // 只允许选择文件，可选。
+//	    accept: {
+//	        title: 'Images',
+//	        extensions: 'gif,jpg,jpeg,bmp,png',
+//	        mimeTypes: 'image/*'
+//	    },
+//	    fileNumLimit:1
+//  });
+//  // 当有文件添加进来的时候
+//  webloader.on( 'fileQueued', function( file ) {
+//  	
+//  	            $("#headImage-review").hide();
+//			        var $li = $(
+//			                '<div id="' + file.id + '" class="file-item thumbnail">' +
+//			                '<img id="qrcode-img" style="width:'+thumbnailWidth+'px;height:'+thumbnailHeight+'px">' +
+//			                '<div class="info">' + file.name + '</div>' +
+//			                '</div>'
+//			                ),
+//			            $img = $li.find('img');
+//				        $li.on('click', '.remove-this', function() {
+//				        	alert();
+//	                        webloader.removeFile(file);
+//	                   });
+//			
+//			        $("#headImage-fileList").append( $li );
+//			        
+//			        // 创建缩略图
+//			        webloader.makeThumb( file, function( error, ret ) {
+//			            if ( error ) {
+//			                $img.replaceWith('<span>不能预览</span>');
+//			                return;
+//			            }
+//			
+//			            $img.attr( 'src', ret );
+//			        }, thumbnailWidth, thumbnailHeight );
+//			        
+//			         // 文件上传过程中创建进度条实时显示。
+//				    webloader.on( 'uploadProgress', function( file, percentage ) {
+//				        var $li = $( '#'+file.id ),
+//				            $percent = $li.find('.progress span');
+//				
+//				        // 避免重复创建
+//				        if ( !$percent.length ) {
+//				            $percent = $('<p class="progress"><span></span></p>')
+//				                    .appendTo( $li )
+//				                    .find('span');
+//				        }
+//				
+//				        $percent.css( 'width', percentage * 100 + '%' );
+//				    });
+//				    
+//				    // 文件上传失败，现实上传出错。
+//				    webloader.on( 'uploadError', function( file ) {
+//				        var $li = $( '#'+file.id ),
+//				            $error = $li.find('div.error');
+//				
+//				        // 避免重复创建
+//				        if ( !$error.length ) {
+//				            $error = $('<div class="error"></div>').appendTo( $li );
+//				        }
+//				
+//				        $error.text('上传失败');
+//				    });
+//				
+//				    // 完成上传完了，成功或者失败，先删除进度条。
+//				    webloader.on( 'uploadComplete', function( file ) {
+//				        $( '#'+file.id ).find('.progress').remove();
+//				    });
+//				    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+//				    webloader.on( 'uploadSuccess', function(file,response) {
+//				    	$img.attr( 'src', response.url );
+////				    	$img.style.width=thumbnailWidth;
+////				    	$img.style.height=thumbnailHeight;
+////				    	$img.attr('width',thumbnailWidth);
+////				    	$img.attr('height',thumbnailHeight);
+//
+//				        $( '#'+file.id ).addClass('upload-state-done');
+//				    });
+//   });
+//  })
+</script>
+#{/set}

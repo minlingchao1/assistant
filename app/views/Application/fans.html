@@ -1,0 +1,102 @@
+#{extends 'main3.html' /}
+#{set title:'粉丝列表' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/addwechat.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-table.min.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>粉丝列表</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <a id="qrcodeAdd" class="btn btn-primary" ><i class="fa fa-tag"> </i>为选中用户添加标签</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped fans-list">
+                        <thead>
+                        	
+                            <tr>
+                            	<th data-field="state" data-checkbox="true" data-formatter="stateFormatter"></th>
+                            	<th data-field="headImgUrl" data-align="center" data-formatter="headImg" data-sortable="true">头像</th>
+                            	<th data-field="nickName" data-align="center" data-sortable="true">用户名</th>
+                                <th data-field="sex" data-align="center" data-sortable="true" data-formatter="sex">性别</th>
+                                <th data-field="subscribeTime" data-align="center" data-formatter="time" data-sortable="true">关注时间</th>
+                                <!--<th data-field="expireSeconds" data-align="center" data-sortable="true">标签</th>-->
+                                <th data-field="id" data-align="center" data-formatter="wxEdit" data-sortable="true">查看详情</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use(["jquery","fans","bootstrapTable"],function($,fans,bootstrapTable){
+		//alert(new Date(parseInt(1424576848) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ").replace(/上午|下午/g, " "))
+		$.extend($.fn.bootstrapTable.defaults,{
+			formatLoadingMessage:function(){
+				return '正在努力地加载数据中，请稍候......';
+			},
+			formatRecordPerPage:function(pageNumber){
+				return '每页显示'+pageNumber+'条记录';
+			},
+			formatShowingRows:function(pageFrom,pageTo,totalRows){
+				return '显示第'+pageFrom+'到第'+pageTo+'条记录,总共'+totalRows+'条记录';
+			},
+			formatSearch:function(){
+				return '搜索';
+			},
+			formatNoMatches: function () {
+				return '没有找到匹配的记录';
+			},
+			formatRefresh: function () {
+				return '刷新';
+			},
+			formatToggle: function () {
+				return '切换';
+			},
+			formatColumns: function () {
+				return '列';
+			}
+		});
+		fans.init();
+	});
+	
+	function headImg(value, row) {
+		if(row.headImgUrl!=null)
+		  return '<img src='+row.headImgUrl+' style="width:50px;height:50px;"/>';
+	}
+	
+	function wxEdit(value, row) {
+		return '<a href="/AssistantUI/fansDetail?wechatId='+value+'" target="_self" lid="'+value+'" ><span class="label label-primary">查看详情</span></a> ';
+	}
+    function sex(value, row) {	
+	    if(row.sex==1)
+		  return '<span>男</span>';
+		else
+		  return '<span>女</span>';
+    }
+    
+	function time(value, row) {	
+		return new Date(parseInt(value) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ").replace(/上午|下午/g, " "); 
+	  //  return new Date('1424576848').formatYMDHMS()
+    }
+</script>
+#{/set}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.overall.dao.mapper.IOverallMessageRefMapper">
+   
+    <sql id="tableName">overall_message_ref</sql>
+    
+    <sql id="overallMessageRefColumns">id,overall_id,msg_id</sql>
+    
+    <resultMap type="OverallMessageRef" id="resultOverallMessageRefMap">
+        <id column="id" property="id"/>
+        <result column="overall_id" property="overallId"/>
+        <result column="msg_id" property="msgId"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="OverallMessageRef" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (overall_id,msg_id,gmt_created)
+      value(#{overallId},#{msgId},now())
+    </insert>
+    
+    <select id="findByOverallId" parameterType="long" resultMap="resultOverallMessageRefMap">
+        select <include refid="overallMessageRefColumns"/> from <include refid="tableName"/>
+        where overall_id=#{overallId} 
+    </select>
+</mapper>

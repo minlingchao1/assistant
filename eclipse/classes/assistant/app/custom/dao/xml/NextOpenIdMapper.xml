@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.custom.dao.mapper.INextOpenIdMapper">
+   
+    <sql id="tableName">next_openid</sql>
+    
+    <sql id="nextOpenIdColumn">id,wechat_id,next_openid</sql>
+    
+    <resultMap type="NextOpenId" id="resultNextOpenIdMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="next_openid" property="nextOpenId"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="NextOpenId" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,next_openid,gmt_created)
+       value(#{wechatId},#{nextOpenId},now())
+    </insert>
+ 
+    <update id="update" parameterType="NextOpenId">
+        update <include refid="tableName"/>
+        <set>
+            <if test="nextOpenId!=null">next_openid=#{nextOpenId}</if>
+        </set>
+        where wechat_id=#{wechatId}
+    </update>
+    
+    <select id="getAll" resultMap="resultNextOpenIdMap">
+        select <include refid="nextOpenIdColumn"/> from <include refid="tableName"/> 
+    </select>
+</mapper>

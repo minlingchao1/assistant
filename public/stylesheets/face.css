@@ -1,0 +1,66 @@
+.qqFace {
+margin-top: 4px;
+background: #fff;
+padding: 2px;
+border: 1px #dfe6f6 solid;
+}
+
+/* CSS for the smiley plugin */
+.wysiwyg-toolbar-smilies {
+    padding: 10px;
+    /*text-align: center;*/
+    white-space: normal;
+}
+.wysiwyg-toolbar-smilies img {
+    display: -moz-inline-stack; /* inline-block: http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/ */
+    display: inline-block;
+    *display: inline;
+}
+
+.emotions {
+position: absolute;
+/*top: 30px;*/
+left: 40px;
+border: 1px solid #ddd;
+padding: 5px;
+background-color: #FFF;
+z-index: 9999;
+display: none;
+}
+.emotions .emotionsGif {
+position: absolute;
+top: -1px;
+left: 430px;
+border: 1px solid #ddd;
+
+background-color: #FFF;
+text-align: center;
+width: 54px;
+height: 54px;
+}
+.emotions .emotionsGif img{
+padding-top: 15px;
+padding-left: 15px;
+padding-bottom: 10px;
+padding-right: 20px;
+margin: 0 auto;
+}
+.emotions table td div {
+background: url("/public/images/emoji/default.gif") no-repeat 0 0 scroll transparent;
+width: 24px;
+height: 24px;
+cursor: pointer;	
+}
+.emotions table {
+border-collapse: separate;
+}
+.emotions table td {
+border: 1px solid #ddd;
+padding: 1px;
+}
+ .emotions table td div {
+background: url("/public/images/emoji/default.gif") no-repeat 0 0 scroll transparent;
+width: 24px;
+height: 24px;
+cursor: pointer;
+}

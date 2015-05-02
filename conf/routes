@@ -1,0 +1,39 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       AssistantUI.home
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}
+#用户信息
+*       /merchant/{controller}/{action}           merchant.{controller}.{action}
+#微信账号信息
+*       /wx/{controller}/{action}                 wx.{controller}.{action}
+#关注消息处理
+*      /subscribe/{controller}/{action}           subscribe.{controller}.{action}
+#关键字回复
+*      /reply/{controller}/{action}               reply.{controller}.{action}
+#二维码信息处理
+*      /qrcode/{controller}/{action}              qrcode.{controller}.{action}
+#自定义菜单
+*      /menu/{controller}/{action}                menu.{controller}.{action}
+#客户管理
+*      /custom/{controller}/{action}              custom.{controller}.{action}
+#微场景
+*      /scene/{controller}/{action}               scene.{controller}.{action}
+#360全景
+*      /overall/{controller}/{action}             overall.{controller}.{action}
+#LBS
+*      /lbs/{controller}/{action}                 lbs.{controller}.{action}
+#微信URL/TOKEN验证
+GET    /vertify                           vertify.WXVertifyCtrl.vertify
+#微信消息处理
+POST   /vertify                           vertify.WXVertifyCtrl.dealMsg

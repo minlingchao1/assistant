@@ -1,0 +1,5 @@
+#map{  position:relative; left:0; top:0;}
+#mapcont{ height:300px;}
+.search-map{ position:absolute; left:80px; top:60px; z-index:2;}
+.search-map input{width:200px; float:left}
+.search-map a{width:40px; padding:0px 5px;float:left; line-height:31px;}

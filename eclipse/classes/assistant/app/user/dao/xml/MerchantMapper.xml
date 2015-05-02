@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.user.dao.mapper.IMerchantMapper">
+   
+    <sql id="tableName">merchant</sql>
+    
+    <sql id="merchantColumns">
+        id,address,email,mobile,qq,user_name
+    </sql>
+    
+    <sql id="passwd">id,passwd</sql>
+    
+    <resultMap type="Merchant" id="resultMerchantMap">
+        <id column="id" property="id"/>
+        <result column="address" property="address"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="qq" property="qq"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+    
+    <resultMap type="Merchant" id="resultPasswdMap">
+        <id column="id" property="id"/>
+        <result column="passwd" property="passwd"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Merchant" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="tableName"/>
+        (address,email,mobile,passwd,qq,user_name,gmt_created)
+        value(#{address},#{email},#{mobile},#{passwd},#{qq},#{userName},now()) 
+    </insert>
+    
+    <update id="update" parameterType="Merchant">
+        update <include refid="tableName"/>
+        <set>
+            <if test="address!=null">address=#{address},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="mobile!=null">mobile=#{mobile},</if>
+            <if test="qq!=null">qq=#{qq},</if>
+            <if test="userName!=null">user_name=#{userName}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <update id="updatePasswd" parameterType="Merchant" >
+       update <include refid="tableName"/>
+        <set>
+            <if test="passwd!=null">passwd=#{passwd}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+   <select id="findPasswdById" parameterType="long" resultMap="resultPasswdMap">
+       select <include refid="passwd"/> from <include refid="tableName"/> where id=#{id}
+   </select>
+   
+   <select id="findMerchantInfo" parameterType="long" resultMap="resultMerchantMap">
+       select <include refid="merchantColumns"/> from <include refid="tableName"/> where id=#{id}
+   </select>
+   
+   <select id="findByUserNameAndPasswd" parameterType="map" resultMap="resultMerchantMap">
+       select <include refid="merchantColumns"/> from <include refid="tableName"/>
+       where user_name=#{userName} or email=#{userName} and passwd=#{passwd}
+   </select>
+     
+</mapper>

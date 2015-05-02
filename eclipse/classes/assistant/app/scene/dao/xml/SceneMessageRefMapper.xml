@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.scene.dao.mapper.ISceneMessageRefMapper">
+   
+    <sql id="tableName">scene_message_ref</sql>
+    
+    <sql id="sceneMessageRefColumns">id,scene_id,msg_id</sql>
+    
+    <resultMap type="SceneMessageRef" id="resultSceneMessageRefMap">
+        <id column="id" property="id"/>
+        <result column="scene_id" property="sceneId"/>
+        <result column="msg_id" property="msgId"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="SceneMessageRef" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (scene_id,msg_id,gmt_created)
+      value(#{sceneId},#{msgId},now())
+    </insert>
+</mapper>

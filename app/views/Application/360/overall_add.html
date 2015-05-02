@@ -1,0 +1,204 @@
+#{extends 'main3.html' /}
+#{set title:'添加场景画面' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加全景图</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content"> 
+			    <div class="row">
+			      		<div class="col-lg-12 wechatInfo">
+			      			<div class="ibox-content">
+                              <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">全景图名称</label>
+			                        <div class="col-sm-8">
+			                            <input id="name" name="sceneName" class="form-control need" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">触发关键词</label>
+			                        <div class="col-sm-8">
+			                            <input id="keyword" name="sceneName" class="form-control need" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">图文消息封面</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-pageImg dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">全景图描述</label>
+			                        <div class="col-sm-8">
+			                            <input id="descr" name="sceneName" class="form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">不能超过50字</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-前</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-front dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-后</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-behind dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-左</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-left dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-右</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-right dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-上</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-top dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">相册图片-下</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-bottom dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">背景音乐</label>
+								    <div class="col-sm-8">
+								       <select id="musicSet" class="form-control m-b" name="account">
+                                                <option value="on">开启</option>
+                                               <option value="">关闭</option>
+                                        </select>
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">上传背景音乐</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveVoice"  class="dropz-backMusic dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+						
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button id="subOverall" class="btn btn-primary" type="button" >保存</button>
+                                <button class="btn btn-white" type="button" id="cancel">取消</button>
+                              </div>
+							  
+                            </div>
+			      		</div>
+			      	</div>
+            </div>
+        </div>
+   </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use("overallAdd",function(overallAdd){
+	  overallAdd.init();
+    });
+</script>
+#{/set}

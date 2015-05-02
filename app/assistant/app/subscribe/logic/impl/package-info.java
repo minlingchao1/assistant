@@ -1,0 +1,1 @@
+package assistant.app.subscribe.logic.impl;

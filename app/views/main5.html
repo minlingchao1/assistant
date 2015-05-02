@@ -1,0 +1,50 @@
+#{doLayout /}  
+
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript">
+	//SetConfiguration
+	seajs.config({
+		alias:{
+			"jquerynew":"jquery-1.10.2.min.js",
+			"jquery":"jquery.min.js",
+			"bootstrap":"/public/javascripts/hui/bootstrap.min.js",
+			"until":"until.js",
+			"yyucadapter":"yyucadapter.js"
+		},
+        //版本号配置
+		map: [
+		[ /^(.*\.(?:css|js))(.*)$/i, '$1?20141223' ]
+		],
+		preload: ['jquerynew']
+	});
+	seajs.use(['jquery','until','yyucadapter'],function($,dialog,template,until){
+		window.wechatId=until.getUrlParam("wechatId");
+		/**
+		 * 连接设置
+		 * 
+		 */
+		$.each($(".link"),function(i,n){
+		    var $href = $(this).attr("href");
+		    $(this).attr("href",$href+"?wechatId="+wechatId);
+		});
+		
+
+		$.browser = { 
+			version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
+			safari: /webkit/.test( userAgent ), 
+			opera: /opera/.test( userAgent ), 
+			msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+			mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
+		};
+		if(($.browser.msie&&($.browser.version == "6.0")&&!$.support.style)||$.browser.msie&&($.browser.version == "7.0")){
+			dialog({
+				title: '警告!',
+				content: '您的浏览器版本非常低,可能会导致您的浏览体验降低~~<br> 推荐您下载<a href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank">谷歌浏览器</a>或者将360等双核浏览器调至极速模式'
+			}).showModal();
+		}
+		});
+
+</script>
+#{get 'moreScripts' /}

@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		 <head>
+			<meta charset="utf-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>#{get 'title'/}</title>
+			<link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/bootstrap.min.css"/>
+		    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/font-awesome.css"/>
+		    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/custome.css"/>
+		    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/animate.css"/>
+		    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/style.css"/>
+		    #{get 'moreStyles' /} 
+		    <!--<script type="text/javascript">
+        	   USER_ID='${session.get("session_merchant_id")}';
+            </script>-->
+		</head>
+	</head>
+<body>
+	<body class="pace-done">
+	<div class="pace  pace-inactive">
+		<div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+		  <div class="pace-progress-inner"></div>
+		</div>
+		<div class="pace-activity"></div>
+	</div>
+    
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse" style="overflow: hidden; width: auto; height: 100%;">
+                <ul class="nav" id="side-menu" style="display: block;">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="/public/images/profile_small.jpg">
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="/AssistantUI/index#">
+                             <span class="clear"> 
+                                 <span class="block m-t-xs"> <strong class="font-bold">${session.get("session_merchant_name")}</strong>
+                                  <b class="caret"></b>
+                                </span>
+                             </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">修改头像</a></li>
+                                <li><a href="/AssistantUI/accountInfo">账号设置</a></li>
+                                <li><a href="/AssistantUI/changePasswd">修改密码</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/merchant/MerchantCtrl/loginOut">安全退出</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">微助手</div>
+                    </li>
+     
+                   <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">系统设置</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                             <li><a href="#">修改头像</a></li>
+			                 <li><a href="/AssistantUI/accountInfo">账号设置</a></li>
+			                 <li><a href="/AssistantUI/changePasswd">修改密码</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+             <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> 
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message"><a href="/AssistantUI/index" title="返回系统管理首页"><i class="fa fa-home"></i></a>返回系统管理首页</span>
+                        </li>
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message"><a href="/AssistantUI/wxIndex" title="返回微信管理首页"><i class="fa fa-weixin"></i></a>返回微信管理首页</span>
+                        </li>
+                        <li>
+                            <a href="/merchant/MerchantCtrl/loginOut">
+                                <i class="fa fa-sign-out"></i> 退出
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </nav>
+            </div>
+            #{doLayout /}
+            <div class="footer">
+	            <div class="pull-right">
+	                By：<a href="http://www.zi-han.net" target="_blank">zihan's blog</a>
+	            </div>
+	            <div>
+	                <strong>Copyright</strong> H+ © 2014
+	            </div>
+	        </div>
+        </div>
+    </div>
+    <div class="theme-config">
+	   <div class="theme-config-box">
+	        <div class="spin-icon">
+	            <i class="fa fa-cog fa-spin"></i>
+	        </div>
+	        <div class="skin-setttings">
+	            <div class="title">主题设置</div>
+	            <div class="setings-item">
+	                <span>收起左侧菜单</span>
+	                <div class="switch">
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+	                        <label class="onoffswitch-label" for="collapsemenu">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="setings-item">
+	                <span>固定侧边栏</span>
+	                <div class="switch">
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="fixedsidebar" class="onoffswitch-checkbox" id="fixedsidebar">
+	                        <label class="onoffswitch-label" for="fixedsidebar">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="setings-item">
+	                <span>固定顶部</span>
+	
+	                <div class="switch">
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
+	                        <label class="onoffswitch-label" for="fixednavbar">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="setings-item">
+	                <span>固定宽度</span>
+	                <div class="switch">
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
+	                        <label class="onoffswitch-label" for="boxedlayout">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="setings-item">
+	                <span>固定底部</span>
+	                <div class="switch">
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="fixedfooter" class="onoffswitch-checkbox" id="fixedfooter">
+	                        <label class="onoffswitch-label" for="fixedfooter">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<style>
+	    .fixed-nav .slimScrollDiv #side-menu {
+	        padding-bottom: 60px;
+	    }
+	</style>
+</body>
+</body>
+</html>
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var _hmt=_hmt||[];
+	(function(){
+		var hm=document.createElement("script");
+		hm.src="//hm.baidu.com/hm.js?25ecc0a6b1f4b3104c6cfff4ce13b028";
+		var s=document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm,s);
+	})();
+</script>
+<script type="text/javascript">
+	Date.prototype.format=function(format){
+		var o={
+			"M+":this.getMonth()+1,//Month
+            "d+":this.grtDate(),//Day
+            "h+":this.getHours(),//hour
+            "m+":this.getMinutes(),//minute
+            "s+":this.getSeconds(),//seconds
+            "q+":Math.floor((this.getMonth()+3)/3),
+            "S":this.getMilliseconds()//millSecond  
+		}
+		if (/(y+)/.test(format)) format = format.replace(RegExp.$1, (this.getFullYear() + "")
+		.substr(4 - RegExp.$1.length));
+		for (var k in o) if (new RegExp("(" + k + ")")
+			.test(format)) format = format.replace(RegExp.$1,
+		RegExp.$1.length == 1 ? o[k] : ("00" + o[k])
+			.substr(("" + o[k])
+			.length));
+		return format;
+	}
+	Date.prototype.formatHM=function(){
+		return this.format('h:mm');
+	}
+	Date.prototype.formatYMD=function(){
+		return this.format("yyyy-MM-dd");
+	}
+	Date.prototype.formatYMDHMS=function(){
+		return this.fomrmat('yyyy-MM-dd hh:mm:ss');
+	}
+	
+	//SetConfiguration
+	seajs.config({
+		alias:{
+			"jquerynew":"jquery-1.10.2.min.js",
+			"jquery":"jquery.min.js",
+			"bootstrap":"/public/javascripts/hui/bootstrap.min.js",
+			"hplus":"/public/javascripts/hui/hplus.js",
+			"metisMenu":"/public/javascripts/hui/plugins/jquery.metisMenu.js",
+			"pagination":"pagination.js",
+			"template":"template.js",
+			"dropzone":"dropzone.js",
+			"until":"global.js",
+			"dialog":"dialog.js",
+			"Validform":"Validform_v5.3.2_min.js",
+			"main":"/public/javascripts/page/main.js",
+			"accountInfo":"accountInfo.js",
+			"addWechat":"addWechat.js",
+			"wxlist":"wxlist.js",
+			"webuploader":"/public/javascripts/webuploader-0.1.5/webuploader.js",
+			"bootstrapTable":"bootstrap-table.min.js",
+			"slimscroll":"slimscroll.min.js",
+			"step":"jquery.step.min.js"
+		},
+		map: [
+		[ /^(.*\.(?:css|js))(.*)$/i, '$1?20141223' ]
+		],
+		preload: ['jquerynew']
+	});
+	seajs.use(["bootstrap",'slimscroll',"hplus","metisMenu","main"]);
+	seajs.use(["jquery","dialog","template"],function($,dialog,template){
+		var tar=location.pathname;
+		var userAgent = navigator.userAgent.toLowerCase(); 
+		template.helper('dateFormat', function (date, format) {
+			date = new Date(date);
+			var map = {
+				"M": date.getMonth() + 1, //月份 
+				"d": date.getDate(), //日 
+				"h": date.getHours(), //小时 
+				"m": date.getMinutes(), //分 
+				"s": date.getSeconds(), //秒 
+				"q": Math.floor((date.getMonth() + 3) / 3), //季度 
+				"S": date.getMilliseconds() //毫秒 
+			};
+			format = format.replace(/([yMdhmsqS])+/g, function(all, t){
+				var v = map[t];
+				if(v !== undefined){
+					if(all.length > 1){
+						v = '0' + v;
+						v = v.substr(v.length-2);
+					}
+					return v;
+				}
+				else if(t === 'y'){
+					return (date.getFullYear() + '').substr(4 - all.length);
+				}
+				return all;
+			});
+			return format;
+	});
+	$.browser = { 
+		version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1], 
+		safari: /webkit/.test( userAgent ), 
+		opera: /opera/.test( userAgent ), 
+		msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+		mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ) 
+	};
+	if(($.browser.msie&&($.browser.version == "6.0")&&!$.support.style)||$.browser.msie&&($.browser.version == "7.0")){
+		dialog({
+			title: '警告!',
+			content: '您的浏览器版本非常低,可能会导致您的浏览体验降低~~<br> 推荐您下载<a href="http://rj.baidu.com/soft/detail/14744.html?ald" target="_blank">谷歌浏览器</a>或者将360等双核浏览器调至极速模式'
+		}).showModal();
+	}	
+});
+</script>
+<script type="text/javascript">
+	
+    seajs.use(["jquery","hplus"],function($){
+    	// 顶部菜单固定
+    $('#fixednavbar').click(function () {
+        if ($('#fixednavbar').is(':checked')) {
+            $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
+            $("body").removeClass('boxed-layout');
+            $("body").addClass('fixed-nav');
+            $('#boxedlayout').prop('checked', false);
+        } else {
+            $(".navbar-fixed-top").removeClass('navbar-fixed-top').addClass('navbar-static-top');
+            $("body").removeClass('fixed-nav');
+        }
+    });
+
+    // 左侧菜单固定
+    $('#fixedsidebar').click(function () {
+        if ($('#fixedsidebar').is(':checked')) {
+            $("body").addClass('fixed-sidebar');
+            $('.sidebar-collapse').slimScroll({
+                height: '100%',
+                railOpacity: 0.9
+            });
+        } else {
+            $('.sidebar-collapse').slimscroll({
+                destroy: true
+            });
+            $('.sidebar-collapse').attr('style', '');
+            $("body").removeClass('fixed-sidebar');
+        }
+    });
+
+    // 收起左侧菜单
+    $('#collapsemenu').click(function () {
+        if ($('#collapsemenu').is(':checked')) {
+            $("body").addClass('mini-navbar');
+            SmoothlyMenu();
+        } else {
+            $("body").removeClass('mini-navbar');
+            SmoothlyMenu();
+        }
+    });
+
+    // 自适应宽度
+    $('#boxedlayout').click(function () {
+        if ($('#boxedlayout').is(':checked')) {
+            $("body").addClass('boxed-layout');
+            $('#fixednavbar').prop('checked', false);
+            $(".navbar-fixed-top").removeClass('navbar-fixed-top').addClass('navbar-static-top');
+            $("body").removeClass('fixed-nav');
+            $(".footer").removeClass('fixed');
+            $('#fixedfooter').prop('checked', false);
+        } else {
+            $("body").removeClass('boxed-layout');
+        }
+    });
+
+    // 底部版权固定
+    $('#fixedfooter').click(function () {
+        if ($('#fixedfooter').is(':checked')) {
+            $('#boxedlayout').prop('checked', false);
+            $("body").removeClass('boxed-layout');
+            $(".footer").addClass('fixed');
+        } else {
+            $(".footer").removeClass('fixed');
+        }
+    });
+
+    // RTL模式
+    $('#RTLmode').click(function () {
+        if ($('#RTLmode').is(':checked')) {
+            $('head').append('<link href="css/bootstrap-rtl.css" id="rtl-mode" rel="stylesheet">');
+            $('body').addClass('rtls');
+        } else {
+            $('#rtl-mode').remove();
+            $('body').removeClass('rtls');
+        }
+    });
+
+    // 皮肤选择
+    $('.spin-icon').click(function () {
+        $(".theme-config-box").toggleClass("show");
+    });
+
+    // 默认主题
+    $('.s-skin-0').click(function () {
+        $("body").removeClass("skin-1");
+        $("body").removeClass("skin-2");
+        $("body").removeClass("skin-3");
+    });
+
+    // 蓝色主题
+    $('.s-skin-1').click(function () {
+        $("body").removeClass("skin-2");
+        $("body").removeClass("skin-3");
+        $("body").addClass("skin-1");
+    });
+
+    // 灰色主题
+    $('.s-skin-2').click(function () {
+        $("body").removeClass("skin-1");
+        $("body").removeClass("skin-3");
+        $("body").addClass("skin-2");
+    });
+
+    // 黄色主题
+    $('.s-skin-3').click(function () {
+        $("body").removeClass("skin-1");
+        $("body").removeClass("skin-2");
+        $("body").addClass("skin-3");
+    });
+    })
+</script>
+#{get 'moreScripts' /}

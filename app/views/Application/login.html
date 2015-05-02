@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" media="all" href="/public/stylesheets/se7en/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" media="all" href="/public/stylesheets/font-awesome.min.css"/>
+		<link rel="stylesheet" type="text/css" media="all" href="/public/stylesheets/se7en/style.css"/>
+</head>
+<body class="login1">
+   <div class="login-wrapper">
+      <div class="login-container active">
+        <a href="./"><img width="100" height="30" src="/public/images/logo-login@2x.png"></a>
+          <div class="form-group">
+            <input id="userName" class="form-control" placeholder="用户名/邮箱地址" type="text">
+          </div>
+          <div class="form-group">
+            <input id="passwd" class="form-control" placeholder="密码" type="password">
+            <input class="sub-login" type="submit" value="">
+          </div>
+          <div class="form-options clearfix">
+            <a class="pull-right" href="/">忘记密码了？</a>
+            <div class="text-left">
+              <label class="checkbox"><input type="checkbox"><span>自动登录</span></label>
+            </div>
+          </div>  
+        <p class="signup">还没有账号？<a href="/AssistantUI/register">立即注册</a></p>
+      </div>
+    </div>
+</body>
+</html>
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+<!--[if lt IE 9]>
+  <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+	seajs.config({
+		alias:{
+			"jquery":"jquery.min.js",
+			"until":"global.js"
+		},
+        preload:['jquery']
+	});
+	seajs.use(['jquery','until'],function($,until){
+		function isPlaceholder(){  
+			var input = document.createElement('input');  
+			return 'placeholder' in input;  
+	    } 
+		if (!isPlaceholder()) {//不支持placeholder 用jquery来完成  
+		$(document).ready(function() {  
+			if(!isPlaceholder()){  
+				$("input").not("input[type='password']").each(//把input绑定事件 排除password框  
+					function(){  
+						if($(this).val()=="" && $(this).attr("placeholder")!=""){  
+							$(this).val($(this).attr("placeholder"));  
+							$(this).focus(function(){  
+								if($(this).val()==$(this).attr("placeholder")) $(this).val("");  
+							});  
+							$(this).blur(function(){  
+								if($(this).val()=="") $(this).val($(this).attr("placeholder"));  
+							});  
+						}  
+				});  
+				//对password框的特殊处理1.创建一个text框 2获取焦点和失去焦点的时候切换  
+				var pwdField    = $("input[type=password]");  
+				var pwdVal      = pwdField.attr('placeholder');  
+				pwdField.after('<input id="pwdPlaceholder" class="form-control" type="text" value='+pwdVal+' autocomplete="off" />');  
+				var pwdPlaceholder = $('#pwdPlaceholder');  
+				pwdPlaceholder.show();  
+				pwdField.hide();  
+				  
+				pwdPlaceholder.focus(function(){  
+					pwdPlaceholder.hide();  
+					pwdField.show();  
+					pwdField.focus();  
+				});  
+				  
+				pwdField.blur(function(){  
+					if(pwdField.val() == '') {  
+						pwdPlaceholder.show();  
+					 	pwdField.hide();  
+					}  
+				});  
+				  
+			}  
+		});    
+	   }
+	   document.onkeydown=function(event){
+		var e = event || window.event || arguments.callee.caller.arguments[0];		         
+		if(e && e.keyCode==13){ // enter 键
+			$(".sub-login").trigger("click")
+		 }
+	   };
+	   $(".sub-login").click(function(){
+		if(!$("#userName").val()||!$("#passwd").val()){
+			alert("请填写账号密码")
+			return
+		}
+		$.ajax({
+			url:"/merchant/MerchantCtrl/login",
+			type:"post",
+			dataType:"json",
+			beforeSend:function(){
+				until.webLoading();
+			},
+			data:{
+				userName:$("#userName").val(),
+				passwd:$("#passwd").val()
+			},
+			success:function(data){
+				if(data.success){
+//					 $.ajax({
+//						url:"/AssistantUI/index",
+//						type:"get",
+//						dataType:'json',
+//						data:{
+//							//merchantId:USER_ID ,
+//							//query:""
+//						},
+//						success:function(data) {								
+//							if(data.results.length!=0){
+//								location.href="/ActivityUi/actlist";								
+//							}else{
+//								location.href="/ActivityUi/creatact";	
+//							}
+//						}				
+//					});
+                  location.href="/AssistantUI/index";
+				}else{
+					alert("登录失败,请检查账号密码是否正确")
+				}
+			},
+			complete:function(){					
+				until.webLoading("hide");
+			}
+		})
+	})	
+	});
+</script>

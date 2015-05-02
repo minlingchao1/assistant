@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IArticleMapper">
+   
+    <sql id="tableName">article</sql>
+    <sql id="articleColumns">id,title,abstracts,img_url,content,url</sql>
+    
+    <resultMap type="Article" id="resultArticleMap">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="abstracts" property="abstracts"/>
+        <result column="img_url" property="imgUrl"/>
+        <result column="content" property="content"/>
+        <result column="url" property="url"/>
+    </resultMap>
+     
+    <insert id="insert" parameterType="Article" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (title,img_url,content,url,abstracts,gmt_created)
+       value(#{title},#{imgUrl},#{content},#{url},#{abstracts},now())
+    </insert>
+    
+    <select id="findById" parameterType="long" resultMap="resultArticleMap">
+        select <include refid="articleColumns"/> from <include refid="tableName"/> where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IVoiceMessageMapper">
+   
+    <sql id="tableName">voice_message</sql>
+    <sql id="imageMessageColumns">media_id</sql>
+    
+    
+    <insert id="insert" parameterType="VoiceMessage" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (media_id,gmt_created)
+       value(#{mediaId},now())
+    </insert>
+    
+    <delete id="delete" parameterType="VoiceMessage">
+        delete from <include refid="tableName"/> where id=#{id}
+    </delete>
+</mapper>

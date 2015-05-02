@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.qrcode.dao.mapper.IScanQrcodeMapper">
+   
+    <sql id="tableName">scan_qrcode</sql>
+    
+    <resultMap type="ScanQrcode" id="resultScanCodeMap">
+        <id column="id" property="id"/>
+        <result column="scan_count" property="scanCount"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="ScanQrcode" useGeneratedKeys="true" keyProperty="id">
+      insert(wechat_id,scan_count,gmt_created)
+      value(#{wechatId},#{scanCount},now())
+    </insert>
+    
+    <update id="update" parameterType="long">
+        <if test="scanCount!=null">scan_count=#{scanCount}</if>
+    </update>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultScanCodeMap">
+        select id,scan_count from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+   
+</mapper>

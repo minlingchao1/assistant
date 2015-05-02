@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.custom.dao.mapper.ICustomInfoMapper">
+   
+    <sql id="tableName">custom_info</sql>
+    <sql id="customInfoColumns">id,head_img_url,nick_name,sex,subscribe_time</sql>
+    
+    <resultMap type="CustomInfo" id="resultCustomInfoMap">
+        <id column="id" property="id"/>
+        <result column="head_img_url" property="headImgUrl"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="sex" property="sex"/>
+        <result column="subscribe_time" property="subscribeTime"/>
+    </resultMap>
+    
+     <resultMap type="CustomInfo" id="resultCustomInfoDetailMap">
+        <id column="id" property="id"/>
+        <result column="head_img_url" property="headImgUrl"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="sex" property="sex"/>
+        <result column="subscribe_time" property="subscribeTime"/>
+        <result column="city" property="city"/>
+        <result column="province" property="province"/>
+        <result column="country" property="country"/>
+        <result column="language" property="language"/>
+    </resultMap>
+    
+     <resultMap type="Statistics" id="resultStatisticsMap">
+        <result column="days" property="days"/>
+        <result column="count" property="count"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="CustomInfo" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,open_id,subscribe,subscribe_time,nick_name,sex,country,province,city,language,head_img_url,gmt_created)
+       value(#{wechatId},#{openId},#{subscribe},#{subscribeTime},#{nickName},#{sex},#{country},#{province},#{city},#{language},#{headImgUrl},now())
+    </insert>
+    
+    <update id="update">
+        update <include refid="tableName"/>
+        <set>
+            <if test="subscribe!=null">subscribe=#{subscribe}</if>
+            <if test="subscribe_time!=null">subscribe_time=#{subscribeTime}</if>
+            <if test="nick_name!=null">nick_name=#{nickName}</if>
+            <if test="sex!=null">sex=#{sex}</if>
+            <if test="country!=null">country=#{country}</if>
+            <if test="province!=null">province=#{province}</if>
+            <if test="city!=null">city=#{city}</if>
+            <if test="language!=null">language=#{language}</if>
+            <if test="head_img_url!=null">head_img_url=#{headImgUrl}</if>
+        </set>
+        where open_id=#{openId}
+    </update>
+ 
+    <select id="countByWechatId" parameterType="long" resultType="long">
+        select count(*) from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+    
+    <select id="countByOpenId" parameterType="String" resultType="long">
+        select count(*) from <include refid="tableName"/> where open_id=#{openId}
+    </select>
+    
+    <select id="countByDays" parameterType="long" resultMap="resultStatisticsMap">
+         select from_unixtime(subscribe_time,'%Y-%m-%d') days,count(id) count from custom_info where wechat_id=#{wechatId} group by days;
+    </select>
+    
+    <select id="getList" parameterType="long" resultMap="resultCustomInfoMap">
+        select <include refid="customInfoColumns"/> from <include refid="tableName"/> where wechat_id=#{wechat_id}
+    </select>
+    
+    <select id="showDetail" parameterType="long" resultMap="resultCustomInfoDetailMap">
+        select <include refid="customInfoColumns"/> from <include refid="tableName"/> where id=#{id}
+    </select>
+    
+    <select id="screen"  resultMap="resultCustomInfoMap">
+        select <include refid="customInfoColumns"/> from <include refid="tableName"/>
+        where subscribe_time>#{start_time} and #{endTime}>subscribe_time
+    </select>
+    
+    <select id="countScreen"  resultType="long">
+        select count(*) from <include refid="tableName"/>
+        <where>
+            <if test="startTime!=0">subscribe_time>#{startTime}</if>
+            <if test="endTime!=0"> and #{endTime}>subscribe_time</if>
+        </where>
+    </select>
+</mapper>

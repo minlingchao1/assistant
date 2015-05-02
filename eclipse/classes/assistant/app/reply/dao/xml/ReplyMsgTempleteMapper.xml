@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IReplyMsgTempleteMapper">
+   
+    <sql id="tableName">reply_msg_templete</sql>
+    <resultMap type="ReplyMsgTemplete" id="resultReplyMsgTempleteMap">
+        <id column="id" property="id"/>
+        <result column="media_id" property="mediaId"/>
+        <result column="reply_msg" property="replyMsg"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="ReplyMsgTemplete" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (reply_msg,media_id,create_time,gmt_created)
+       value(#{replyMsg},#{mediaId},#{createTime},now())
+    </insert>
+    
+    <update id="update" parameterType="ReplyMsgTemplete">
+        update <include refid="tableName"/>    
+        <set>
+            <if test="replyMsg!=null">reply_msg=#{replyMsg},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="mediaId!=null">media_id=#{mediaId}</if>
+        </set>
+        where id=#{id}
+    </update>
+    
+    <delete id="delete" parameterType="long">
+      delete from <include refid="tableName"/> where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="long" resultMap="resultReplyMsgTempleteMap">
+        select id,reply_msg,media_id,create_time from <include refid="tableName"/> where id=#{id}
+    </select>
+    
+    <select id="findAll" resultMap="resultReplyMsgTempleteMap">
+        select id,reply_msg,media_id,create_time from <include refid="tableName"/> where media_id!='0'
+    </select>
+    
+</mapper>

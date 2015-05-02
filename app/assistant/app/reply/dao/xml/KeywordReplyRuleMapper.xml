@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IKeywordReplyRuleMapper">
+   
+    <sql id="tableName">keyword_reply_rule</sql>
+    
+    <sql id="keywordReplyColumn">id,keyword,is_all_match,msg_id,wechat_id,type</sql>
+    <resultMap type="KeywordReplyRule" id="resultKeywordReplyRuleMap">
+        <id column="id" property="id"/>
+        <result column="rule_name" property="ruleName" />
+        <result column="keyword" property="keyword" />
+        <result column="is_all_match" property="isAllMatch"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="type" property="type"/>
+    </resultMap>
+    
+    <resultMap type="KeywordReplyInfoDto" id="resultKeywordReplyInfoDtoMap">
+        <id column="id" property="id"/>
+        <result column="rule_name" property="ruleName" />
+        <result column="is_all_match" property="isAllMatch"/>
+        <result column="reply_msg" property="replyMsg"/>
+        <result column="type" property="type"/>
+        <result column="keyword" property="keyword"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="ReplyMsgTemplete" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (rule_name,keyword,is_all_match,msg_id,wechat_id,user_id,type,gmt_created)
+       value(#{ruleName},#{keyword},#{isAllMatch},#{msgId},#{wechatId},#{userId},#{type},now())
+    </insert>
+    
+    <delete id="delete" parameterType="long">
+      delete from <include refid="tableName"/> where id=#{id}
+    </delete>
+    
+    <select id="fuzzyQuery" parameterType="String" resultMap="resultKeywordReplyRuleMap">
+        select <include refid="keywordReplyColumn"/> from <include refid="tableName"/>
+        where keyword like "%"#{keyword}"%" and is_all_match=1
+    </select>
+    
+    <select id="exactMatch" parameterType="String" resultMap="resultKeywordReplyRuleMap">
+        select <include refid="keywordReplyColumn"/> from <include refid="tableName"/>
+        where keyword=#{keyword} and is_all_match=0
+    </select>
+    
+    <select id="findById" parameterType="long" resultMap="resultKeywordReplyInfoDtoMap">
+        select kr.id,  kr.rule_name,kr.keyword,kr.is_all_match,kr.type,rmt.reply_msg
+        from keyword_reply_rule kr
+        left join 
+         reply_msg_templete rmt
+        on 
+          kr.msg_id=rmt.id
+        where kr.id=#{id}
+    </select>
+    
+    <select id="findMsgId" parameterType="long"  resultMap="resultKeywordReplyRuleMap">
+       select msg_id from <include refid="tableName"/> where id=#{id}
+    </select>
+    
+    <select id="findAll" parameterType="long" resultMap="resultKeywordReplyInfoDtoMap">
+        select kr.id,kr.keyword,kr.is_all_match,kr.type,rmt.reply_msg
+        from keyword_reply_rule kr
+        left join 
+         reply_msg_templete rmt
+        on 
+          kr.msg_id=rmt.id
+        where kr.wechat_id=#{wechatId} and 6 >kr.type
+    </select>
+   
+</mapper>

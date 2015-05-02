@@ -1,0 +1,61 @@
+#{extends 'main4.html' /}
+#{set title:'账户信息' /}
+<div class="row">
+      <div class="col-lg-12">
+           <div class="ibox float-e-margins">
+	            <div class="ibox-title">
+	                <h5>账户信息</h5>
+	                <div class="ibox-tools">
+	                    <a class="collapse-link">
+	                        <i class="fa fa-chevron-up"></i>
+	                    </a>
+	                   
+	                    <a class="close-link">
+	                        <i class="fa fa-times"></i>
+	                    </a>
+	                </div>
+	            </div>
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-5">
+                                <input id="account-userName" type="text" class="need form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-5">
+                                <input id="account-email" type="text" class="need form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-5">
+                                <input id="account-mobile" type="text" class="need form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">QQ</label>
+                            <div class="col-sm-5">
+                                <input id="account-qq" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    </form> 
+                    <button type="button" class="subinfo btn btn-block  btn-primary" style="margin:0 auto;width:200px">提交</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use(["jquery","accountInfo"],function($,accountInfo){
+		accountInfo.init();
+	})
+</script>
+#{/set}

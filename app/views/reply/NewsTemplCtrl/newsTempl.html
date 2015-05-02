@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>${news.title}</title>
+		<link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+	</head>
+	<body>
+		<div class="msg-item-wrapper" relid="">
+			<div id="appmsgItem1" class="msg-item">
+				<h4 class="msg-t">
+					<span class="i-title m-title" rel="title">${news.title}</span>
+				</h4>
+				<p class="msg-meta">
+					<span class="msg-date">${new Date().format('yyyy-MM-dd')}</span>
+				</p>
+				<div class="cover">
+					<img class="i-img m-img" relobj="elfinder_pscgztw" src="${news.imgUrl}" style="width: 440px;height: 180px;">
+				</div>
+				<div rel="con" class="m-con" id="m-con" name="m-con">${news.content.raw()}</div>
+			</div>
+			<div class="msg-hover-mask"></div>
+			<div class="msg-mask">
+				<span class="dib msg-selected-tip"></span>
+			</div>
+		</div>
+	</body>
+</html>

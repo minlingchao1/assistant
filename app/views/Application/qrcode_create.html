@@ -1,0 +1,88 @@
+#{extends 'main3.html' /}
+#{set title:'添加二维码' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加二维码</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content"> 
+			    <div class="row">
+			      		<div class="col-lg-12 wechatInfo">
+			      		 <form class="form-horizontal m-t" id="qrcodeForm" novalidate="novalidate"> 
+			      			<div class="ibox-content">
+			      			  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">场景名称</label>
+			                        <div class="col-sm-8">
+			                            <input id="sceneName" name="sceneName" class="form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">请您填写场景名称，方便以后查询</span> 
+			                        </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">场景ID</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="sceneId" name="sceneId" aria-required="true" aria-invalid="true">
+								      <span style="color:#CCC;">临时二维码的场景ID为32位非0整型，永久二维码为1-100000</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">	
+								    <label for="type" class="col-sm-3 control-label">二维码类型</label>
+								    <div class="col-sm-8">
+								     <select class="form-control m-b" name="account" id="actionName">
+                                        <option value="QR_SCENE">临时二维码</option>
+                                        <option value="QR_LIMIT_SCENE">永久二维码</option>
+                                     </select> 						     
+								    </div>
+								 </div>
+							  </div>
+							  
+							   <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">二维码详细信息</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="actionInfo" name="actionInfo" aria-required="true" aria-invalid="true">
+								      <span style="color:#CCC;">二维码中包含的信息</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">二维码有效时间</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="expireSeconds" name="expireSeconds" aria-required="true" aria-invalid="true" >
+								      <span style="color:#CCC;">单位为秒，最长不超过1800秒</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button class="btn btn-primary" type="submit" >保存</button>
+                                <button class="btn btn-white" type="submit" id="cancel">取消</button>
+                              </div>
+							 </form>
+							  
+                            </div>
+			      		</div>
+			      	</div>
+            </div>
+        </div>
+   </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use("qrcodeAdd",function(qrcodeAdd){
+	qrcodeAdd.init();
+    });
+</script>
+#{/set}

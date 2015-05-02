@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IScanCountMapper">
+   
+    <sql id="tableName">scan_count</sql>
+   
+    <resultMap type="Statistics" id="resultStatisticsMap">
+        <result column="days" property="days"/>
+        <result column="count" property="count"/>
+    </resultMap>
+     
+    <insert id="insert" parameterType="ScanCount" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,click_type,count,click_time,gmt_created)
+       value(#{wechatId},#{clickType},#{count},#{clickTime},now())
+    </insert>
+    
+    <select id="countByType"  resultMap="resultStatisticsMap">
+      select from_unixtime(click_time,'%Y-%m-%d') days,count(id) count from <include refid="tableName"/> where wechat_id=#{wechatId} and click_type=#{type} group by days;
+    </select>
+    
+    <select id="countAllByDays" parameterType="long" resultMap="resultStatisticsMap">
+      select from_unixtime(click_time,'%Y-%m-%d') days,count(id) count from <include refid="tableName"/> where wechat_id=#{wechatId} group by days;
+    </select>
+  
+</mapper>

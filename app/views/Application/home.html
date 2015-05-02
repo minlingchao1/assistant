@@ -1,0 +1,38 @@
+#{extends 'main2.html' /}
+#{set title:'首页' /}
+<div class="page-title">
+	   <div class="row">
+          <div class="col-lg-12">
+            <div class="widget-container stats-container">
+              <div class="col-md-4">
+                <div class="number">86</div>
+                <div class="text">公众号</div>
+              </div>
+              <div class="col-md-4">
+                <div class="number">613</div>
+                <div class="text">图文消息</div>
+              </div>
+              <div class="col-md-4">
+                <div class="number">325</div>
+                <div class="text">微活动</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6">
+             <div class="widget-container scrollable chat" id="newUser" style="height: 427px;">
+             
+             </div>
+          </div>
+          <div class="col-md-6">
+             <div class="widget-container scrollable chat" style="height: 427px;">
+             
+             </div>
+          </div>
+        </div>   
+</div>
+#{set 'moreScripts'}
+<script src="../../../public/javascripts/echarts.js" type="text/javascript" charset="utf-8"></script>
+#{/set}

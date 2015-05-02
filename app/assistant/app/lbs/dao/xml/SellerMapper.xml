@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.lbs.dao.mapper.ISellerMapper">
+   
+    <sql id="tableName">seller</sql>
+    <sql id="sellerColumns">id,seller_name,category,address,mobile</sql>
+    
+    <resultMap type="Seller" id="resultSellerMap">
+        <id column="id" property="id"/>
+        <result column="seller_name" property="sellerName"/>
+        <result column="category" property="category"/>
+        <result column="address" property="address"/>
+        <result column="mobile" property="mobile"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Seller" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (wechat_id,seller_name,descr,category,city,prov,dist,address,mobile,img,lng_lat,gmt_created)
+      value(#{wechatId},#{sellerName},#{descr},#{category},#{city},#{prov},#{dist},#{address},#{mobile},#{img},#{lngLat},now())
+    </insert>
+    
+    <select id="getList" parameterType="long" resultMap="resultSellerMap" >
+        select <include refid="sellerColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+
+</mapper>

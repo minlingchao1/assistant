@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.scene.dao.mapper.ISceneStatisticsMapper">
+   
+    <sql id="tableName">scene_statistics</sql>
+    
+    <sql id="sceneStatisticsColumns">id,scene_id,pv,uv,scene_time</sql>
+    
+    <resultMap type="SceneStatistics" id="resultSceneStatisticsMap">
+        <id column="id" property="id"/>
+        <result column="scene_id" property="sceneId"/>
+        <result column="pv" property="pv"/>
+        <result column="uv" property="uv"/>
+         <result column="scan_time" property="scan_time"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="SceneStatistics" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (scene_id,pv,uv,scan_time,gmt_created)
+      value(#{sceneId},#{pv},#{uv},#{scanTime},now())
+    </insert>
+    
+    <select id="findBySceneId" parameterType="long" resultMap="resultSceneStatisticsMap">
+        select <include refid="sceneStatisticsColumns"/> from <include refid="tableName"/>
+        where scene_id=#{sceneId}
+    </select>
+</mapper>

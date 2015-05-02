@@ -1,0 +1,120 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+    <h4 class="modal-title">图文素材</h4> 
+</div>
+
+<div class="tj msg-list">
+  <img src="/public/images/daduihao.png" style="display: none;position: absolute;z-index:999999" id="ddhpng">
+  <div id="first_col" class="b-dib vt msg-col">
+    <div id="addAppmsg" class="tc add-access">       
+		<a id="single" class="dib vm add-btn link" href="/AssistantUI/singleArticle">+单图文消息</a>         
+		<a id="multi"  class="dib vm add-btn multi-access link" href="/AssistantUI/multiArticle">+多图文消息</a>
+	</div>
+    #{list items:single, as:'s'}
+	      <div class="msg-item-wrapper" id="${s.msgId}">
+	       <div class="msg-item" itemid="${s.msgId}">
+			<h4 class="msg-t"><a href="javascript:;" class="i-title">${s.title}</a></h4>           
+				<p class="msg-meta"><span class="msg-date">${new Date().format('yyyy-MM-dd')}</span></p>
+				<div class="cover">
+					<p class="default-tip" style="display:none">封面图片</p>
+					<img src="${s.imgUrl}" class="i-img" style="">
+				</div>
+				<div class="msg-text">${s.content.raw()}</div>        
+			</div>		   								   
+			<div class="msg-opr">
+				<ul class="f0 msg-opr-list">
+					<li class="b-dib opr-item"><a data-mul="false" class="block tc opr-btn edit-btn" href="contresourceone-164119.html" data-rid="20330"><span class="th vm dib opr-icon edit-icon">编辑</span></a></li>           
+					<li class="b-dib opr-item"><a class="block tc opr-btn del-btn" href="javascript:;" data-rid="20330" onclick="deldsc(164119,this)"><span class="th vm dib opr-icon del-icon">删除</span></a></li>         
+				</ul>       
+			</div> 
+		  </div>
+	  #{/list}
+  </div>
+  <div id="second_col" class="b-dib vt msg-col" style="margin-left: 20px;">
+  	 #{list items:newsMulti, as:'M'}
+  	     <div class="msg-item-wrapper" id="${M.msgId}">
+	           <div class="msg-item multi-msg" itemid="${M.msgId}">  
+              	  %{for(int i=0;i<M.multiTempl.size();i++){ }%
+              	  		%{ if(i==0){ }%
+              	  			<div class="appmsgItem">
+	   							<h4 class="msg-t"><a href="javascript:;" class="i-title">${M.multiTempl.get(i).title}</a></h4>           
+	   							<p class="msg-meta"><span class="msg-date">${new Date().format('yyyy-MM-dd')}</span></p>
+								<div class="cover">
+									<img src="${M.multiTempl.get(i).imgUrl}" class="i-img" style="">
+								</div>
+								<p class="msg-text">${M.multiTempl.get(i).content.raw()}</p>         
+							</div>		
+              	  		%{ }else { }%
+              	  		  <div class="rel sub-msg-item appmsgItem">              
+								<span class="thumb">                 
+								<img src="${M.multiTempl.get(i).imgUrl}" class="i-img" style="">
+								</span>       
+								<h4 class="msg-t">                 
+								 <a href="javascript:;" target="_blank" class="i-title">${M.multiTempl.get(i).title}</a>                
+								</h4>       
+						  </div>
+              	  	%{ }}%
+              	  %{}}%
+		   	  </div>   
+			  <div class="msg-opr">
+				 <ul class="f0 msg-opr-list">
+					<li class="b-dib opr-item"><a data-mul="true" class="block tc opr-btn edit-btn" href="contresourcemore-157853.html" data-rid="20331"><span class="th vm dib opr-icon edit-icon">编辑</span></a></li>           
+					<li class="b-dib opr-item"><a class="block tc opr-btn del-btn" href="javascript:delddsc(157853,this);" data-rid="20331"><span class="th vm dib opr-icon del-icon">删除</span></a></li>         
+				 </ul>
+		   </div>
+		  </div>
+  	 #{/list}
+
+  </div>
+</div>
+<div style="z-index:999999999;bottom:0px;left:0px;width:100%;background-color:#fff;height: 100px;margin-top:50px;display: none;text-align:center;" id="qdxzdbtndiv">
+	<center>
+	  <button class="btn btn-w-m btn-primary" style="margin-top: 30px;" id="qdxzdbtn">确定选择</button>
+    </center>
+</div>
+
+<script src="/public/javascripts/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/global.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	window.wechatId=Global.getUrlParam("wechatId");
+		/**
+		 * 连接设置
+		 * 
+		 */
+		$.each($(".link"),function(i,n){
+		    var $href = $(this).attr("href");
+		    $(this).attr("href",$href+"?wechatId="+wechatId);
+		});
+
+		
+		$(".msg-item").click(function(){
+			
+			var o = this;
+			window.selitemid = $(o).attr('itemid'); 
+			
+			if(window.parent.location=="http://127.0.0.1/AssistantUI/menu?wechatId="+window.wechatId){
+				$("#newsMsgId").val(window.selitemid); 
+			    $("#newsMsgId").trigger("click");
+			    alert(window.parent.location);
+			}
+			
+			//alert($("#newsMsgId").val());
+			alert($(o).attr('itemid'));
+			setTimeout(function(){
+				//$(o).mask();
+				$('#qdxzdbtndiv').show();
+				$('#qdxzdbtn').show().css('visibility','visible');
+				$('#ddhpng').css('left',($(o).offset().left+$(o).width()/2-37)+'px');
+				$('#ddhpng').css('top',($(o).offset().top+$(o).height()/2-30)+'px').show();
+			},288);
+		});
+
+		$('#qdxzdbtn').click(function(){
+			
+			//$("#newsMsgId").attr("value",$("#newsId").val());
+			$('#multiArticle11if').attr('src','/reply/NewsTemplCtrl/sourceShow?id='+window.selitemid);
+			//document.getElementById('newsModal').style.display='none';
+		});
+				
+</script>

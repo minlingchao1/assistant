@@ -1,0 +1,824 @@
+#{extends 'main3.html' /}
+#{set title:'微信公众号管理' /}
+#{set 'moreStyles'}
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/face.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/dropzone.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/wysiwyg.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg_multi.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="/public/javascripts/wangeditor/wangEditor-1.2.0.css"/>-->
+<!--<link rel="stylesheet" type="text/css" href="/public/javascripts/summernote/summernote.css"/>
+<link rel="stylesheet" type="text/css" href="/public/javascripts/summernote/summernote-bs3.css"/>-->
+<link rel="stylesheet" type="text/css" href="/public/javascripts/simditor/styles/simditor.css"/>
+<!--<link rel="stylesheet" type="text/css" href="/public/javascripts/summernote/less/summernote.less"/>-->
+<!-- <link rel="stylesheet" type="text/css" href="/public/javascripts/simditor/styles/simditor.css"/>-->
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>首次关注回复</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+					<ul class="nav nav-tabs">
+					    <li class="active"><a data-toggle="tab" href="#text" aria-expanded="true" title="文字"><i class="fa fa-pencil" ></i></a>
+					    </li>
+					    <li class=""><a data-toggle="tab" href="#image" aria-expanded="false" title="图片"><i class="fa fa-image"></i></a>
+					    </li>
+					    <li class=""><a data-toggle="tab" href="#voice" title="语音"><i class="fa fa-microphone"></i></a>
+					    </li>
+					    <li class=""><a data-toggle="tab" href="#video" title="视频"><i class="fa fa-video-camera"></i></a>
+					    </li>
+					    <li class=""><a data-toggle="tab" href="#newspaper" title="图文"><i class="fa fa-newspaper-o"></i></a>
+					    </li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="text">
+					      <div class="row">
+				      		<div class="col-lg-12 ">
+				      		  <div class="ibox float-e-margins">
+				      			<div class="ibox-content" id="show">
+				      				 <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">规则名</label>
+										    <div class="col-sm-8">
+										    	<div class="input-group">
+	                                                <input id="rule-txt" type="text" class="form-control" onkeydown='countChar("rule-txt","counter-txt");' onkeyup="countChar('rule-txt','counter-txt');">
+	                                                <span id="counter-txt" class="input-group-addon" style="color:#CCC;">0/64</span>
+                                                </div>
+										      <span style="color:#CCC;">规则名最多64个字</span> 
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">关键字</label>
+										    <div class="col-sm-8">
+										      <input id="keyword-txt" type="text" class="need form-control" >
+										      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">匹配类型</label>
+										    <div class="col-sm-8">
+										      <select id="match-txt" class="form-control m-b" name="account" id="type">
+		                                        <option value="0">完全匹配</option>
+		                                        <option value="1">模糊匹配</option>
+		                                     </select> 	
+										    </div>
+										 </div>
+									  </div>
+				      				 <div class="form-horizontal">
+		                                 <div class="form-group">
+										   <label for="appSecret" class="col-sm-3 control-label">回复内容</label>
+										    <div class="col-sm-8">
+										       <div class="wysiwyg-container some-more-classes">
+						      			    	<div class="editArea" >
+													<textarea id="txtMsg" name="welcome" style="display: none;"></textarea>
+													<div id="txtMsgArea" style="overflow-y: auto; overflow-x: hidden;min-height: 200px;" class="wysiwyg-editor"  contenteditable="true"></div>
+												</div>
+			
+						      			    	<div class="wysiwyg-toolbar wysiwyg-toolbar-bottom">
+						      			    		<a class="wysiwyg-toolbar-icon" href="javascript:;" title="表情" unselectable="on"><i class="fa fa-smile-o"></i></a>
+						      			    	</div>
+						      			      </div>
+						      			      <div class="emotions">
+												<table cellpadding="0" cellspacing="0">
+													<tbody>
+														<tr>
+															<td><div class="eItem" style="background-position: 0px 0;" data-title="微笑" data-gifurl="/public/images/emoji/0.gif"></div></td>
+															<td><div class="eItem" style="background-position: -24px 0;" data-title="撇嘴" data-gifurl="/public/images/emoji/1.gif"></div></td>
+															<td><div class="eItem" style="background-position: -48px 0;" data-title="色" data-gifurl="/public/images/emoji/2.gif"></div></td>
+															<td><div class="eItem" style="background-position: -72px 0;" data-title="发呆" data-gifurl="/public/images/emoji/3.gif"></div></td>
+															<td><div class="eItem" style="background-position: -96px 0;" data-title="得意" data-gifurl="/public/images/emoji/4.gif"></div></td>
+															<td><div class="eItem" style="background-position: -120px 0;" data-title="流泪" data-gifurl="/public/images/emoji/5.gif"></div></td>
+															<td><div class="eItem" style="background-position: -144px 0;" data-title="害羞" data-gifurl="/public/images/emoji/6.gif"></div></td>
+															<td><div class="eItem" style="background-position: -168px 0;" data-title="闭嘴" data-gifurl="/public/images/emoji/7.gif"></div></td>
+															<td><div class="eItem" style="background-position: -192px 0;" data-title="睡" data-gifurl="/public/images/emoji/8.gif"></div></td>
+															<td><div class="eItem" style="background-position: -216px 0;" data-title="大哭" data-gifurl="/public/images/emoji/9.gif"></div></td>
+															<td><div class="eItem" style="background-position: -240px 0;" data-title="尴尬" data-gifurl="/public/images/emoji/10.gif"></div></td>
+															<td><div class="eItem" style="background-position: -264px 0;" data-title="发怒" data-gifurl="/public/images/emoji/11.gif"></div></td>
+															<td><div class="eItem" style="background-position: -288px 0;" data-title="调皮" data-gifurl="/public/images/emoji/12.gif"></div></td>
+															<td><div class="eItem" style="background-position: -312px 0;" data-title="呲牙" data-gifurl="/public/images/emoji/13.gif"></div></td>
+															<td><div class="eItem" style="background-position: -336px 0;" data-title="惊讶" data-gifurl="/public/images/emoji/14.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -360px 0;" data-title="难过" data-gifurl="/public/images/emoji/15.gif"></div></td>
+															<td><div class="eItem" style="background-position: -384px 0;" data-title="酷" data-gifurl="/public/images/emoji/16.gif"></div></td>
+															<td><div class="eItem" style="background-position: -408px 0;" data-title="冷汗" data-gifurl="/public/images/emoji/17.gif"></div></td>
+															<td><div class="eItem" style="background-position: -432px 0;" data-title="抓狂" data-gifurl="/public/images/emoji/18.gif"></div></td>
+															<td><div class="eItem" style="background-position: -456px 0;" data-title="吐" data-gifurl="/public/images/emoji/19.gif"></div></td>
+															<td><div class="eItem" style="background-position: -480px 0;" data-title="偷笑" data-gifurl="/public/images/emoji/20.gif"></div></td>
+															<td><div class="eItem" style="background-position: -504px 0;" data-title="可爱" data-gifurl="/public/images/emoji/21.gif"></div></td>
+															<td><div class="eItem" style="background-position: -528px 0;" data-title="白眼" data-gifurl="/public/images/emoji/22.gif"></div></td>
+															<td><div class="eItem" style="background-position: -552px 0;" data-title="傲慢" data-gifurl="/public/images/emoji/23.gif"></div></td>
+															<td><div class="eItem" style="background-position: -576px 0;" data-title="饥饿" data-gifurl="/public/images/emoji/24.gif"></div></td>
+															<td><div class="eItem" style="background-position: -600px 0;" data-title="困" data-gifurl="/public/images/emoji/25.gif"></div></td>
+															<td><div class="eItem" style="background-position: -624px 0;" data-title="惊恐" data-gifurl="/public/images/emoji/26.gif"></div></td>
+															<td><div class="eItem" style="background-position: -648px 0;" data-title="流汗" data-gifurl="/public/images/emoji/27.gif"></div></td>
+															<td><div class="eItem" style="background-position: -672px 0;" data-title="憨笑" data-gifurl="/public/images/emoji/28.gif"></div></td>
+															<td><div class="eItem" style="background-position: -696px 0;" data-title="大兵" data-gifurl="/public/images/emoji/29.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -720px 0;" data-title="奋斗" data-gifurl="/public/images/emoji/30.gif"></div></td>
+															<td><div class="eItem" style="background-position: -744px 0;" data-title="咒骂" data-gifurl="/public/images/emoji/31.gif"></div></td>
+															<td><div class="eItem" style="background-position: -768px 0;" data-title="疑问" data-gifurl="/public/images/emoji/32.gif"></div></td>
+															<td><div class="eItem" style="background-position: -792px 0;" data-title="嘘" data-gifurl="/public/images/emoji/33.gif"></div></td>
+															<td><div class="eItem" style="background-position: -816px 0;" data-title="晕" data-gifurl="/public/images/emoji/34.gif"></div></td>
+															<td><div class="eItem" style="background-position: -840px 0;" data-title="折磨" data-gifurl="/public/images/emoji/35.gif"></div></td>
+															<td><div class="eItem" style="background-position: -864px 0;" data-title="衰" data-gifurl="/public/images/emoji/36.gif"></div></td>
+															<td><div class="eItem" style="background-position: -888px 0;" data-title="骷髅" data-gifurl="/public/images/emoji/37.gif"></div></td>
+															<td><div class="eItem" style="background-position: -912px 0;" data-title="敲打" data-gifurl="/public/images/emoji/38.gif"></div></td>
+															<td><div class="eItem" style="background-position: -936px 0;" data-title="再见" data-gifurl="/public/images/emoji/39.gif"></div></td>
+															<td><div class="eItem" style="background-position: -960px 0;" data-title="擦汗" data-gifurl="/public/images/emoji/40.gif"></div></td>
+															<td><div class="eItem" style="background-position: -984px 0;" data-title="抠鼻" data-gifurl="/public/images/emoji/41.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1008px 0;" data-title="鼓掌" data-gifurl="/public/images/emoji/42.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1032px 0;" data-title="糗大了" data-gifurl="/public/images/emoji/43.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1056px 0;" data-title="坏笑" data-gifurl="/public/images/emoji/44.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -1080px 0;" data-title="左哼哼" data-gifurl="/public/images/emoji/45.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1104px 0;" data-title="右哼哼" data-gifurl="/public/images/emoji/46.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1128px 0;" data-title="哈欠" data-gifurl="/public/images/emoji/47.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1152px 0;" data-title="鄙视" data-gifurl="/public/images/emoji/48.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1176px 0;" data-title="委屈" data-gifurl="/public/images/emoji/49.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1200px 0;" data-title="快哭了" data-gifurl="/public/images/emoji/50.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1224px 0;" data-title="阴险" data-gifurl="/public/images/emoji/51.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1248px 0;" data-title="亲亲" data-gifurl="/public/images/emoji/52.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1272px 0;" data-title="吓" data-gifurl="/public/images/emoji/53.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1296px 0;" data-title="可怜" data-gifurl="/public/images/emoji/54.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1320px 0;" data-title="菜刀" data-gifurl="/public/images/emoji/55.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1344px 0;" data-title="西瓜" data-gifurl="/public/images/emoji/56.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1368px 0;" data-title="啤酒" data-gifurl="/public/images/emoji/57.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1392px 0;" data-title="篮球" data-gifurl="/public/images/emoji/58.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1416px 0;" data-title="乒乓" data-gifurl="/public/images/emoji/59.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -1440px 0;" data-title="咖啡" data-gifurl="/public/images/emoji/60.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1464px 0;" data-title="饭" data-gifurl="/public/images/emoji/61.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1488px 0;" data-title="猪头" data-gifurl="/public/images/emoji/62.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1512px 0;" data-title="玫瑰" data-gifurl="/public/images/emoji/63.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1536px 0;" data-title="凋谢" data-gifurl="/public/images/emoji/64.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1560px 0;" data-title="示爱" data-gifurl="/public/images/emoji/65.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1584px 0;" data-title="爱心" data-gifurl="/public/images/emoji/66.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1608px 0;" data-title="心碎" data-gifurl="/public/images/emoji/67.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1632px 0;" data-title="蛋糕" data-gifurl="/public/images/emoji/68.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1656px 0;" data-title="闪电" data-gifurl="/public/images/emoji/69.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1680px 0;" data-title="炸弹" data-gifurl="/public/images/emoji/70.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1704px 0;" data-title="刀" data-gifurl="/public/images/emoji/71.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1728px 0;" data-title="足球" data-gifurl="/public/images/emoji/72.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1752px 0;" data-title="瓢虫" data-gifurl="/public/images/emoji/73.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1776px 0;" data-title="便便" data-gifurl="/public/images/emoji/74.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -1800px 0;" data-title="月亮" data-gifurl="/public/images/emoji/75.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1824px 0;" data-title="太阳" data-gifurl="/public/images/emoji/76.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1848px 0;" data-title="礼物" data-gifurl="/public/images/emoji/77.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1872px 0;" data-title="拥抱" data-gifurl="/public/images/emoji/78.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1896px 0;" data-title="强" data-gifurl="/public/images/emoji/79.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1920px 0;" data-title="弱" data-gifurl="/public/images/emoji/80.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1944px 0;" data-title="握手" data-gifurl="/public/images/emoji/81.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1968px 0;" data-title="胜利" data-gifurl="/public/images/emoji/82.gif"></div></td>
+															<td><div class="eItem" style="background-position: -1992px 0;" data-title="抱拳" data-gifurl="/public/images/emoji/83.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2016px 0;" data-title="勾引" data-gifurl="/public/images/emoji/84.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2040px 0;" data-title="拳头" data-gifurl="/public/images/emoji/85.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2064px 0;" data-title="差劲" data-gifurl="/public/images/emoji/86.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2088px 0;" data-title="爱你" data-gifurl="/public/images/emoji/87.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2112px 0;" data-title="NO" data-gifurl="/public/images/emoji/88.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2136px 0;" data-title="OK" data-gifurl="/public/images/emoji/89.gif"></div></td>
+														</tr>
+														<tr>
+															<td><div class="eItem" style="background-position: -2160px 0;" data-title="爱情" data-gifurl="/public/images/emoji/90.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2184px 0;" data-title="飞吻" data-gifurl="/public/images/emoji/91.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2208px 0;" data-title="跳跳" data-gifurl="/public/images/emoji/92.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2232px 0;" data-title="发抖" data-gifurl="/public/images/emoji/93.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2256px 0;" data-title="怄火" data-gifurl="/public/images/emoji/94.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2280px 0;" data-title="转圈" data-gifurl="/public/images/emoji/95.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2304px 0;" data-title="磕头" data-gifurl="/public/images/emoji/96.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2328px 0;" data-title="回头" data-gifurl="/public/images/emoji/97.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2352px 0;" data-title="跳绳" data-gifurl="/public/images/emoji/98.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2376px 0;" data-title="挥手" data-gifurl="/public/images/emoji/99.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2400px 0;" data-title="激动" data-gifurl="/public/images/emoji/100.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2424px 0;" data-title="街舞" data-gifurl="/public/images/emoji/101.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2448px 0;" data-title="献吻" data-gifurl="/public/images/emoji/102.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2472px 0;" data-title="左太极" data-gifurl="/public/images/emoji/103.gif"></div></td>
+															<td><div class="eItem" style="background-position: -2496px 0;" data-title="右太极" data-gifurl="/public/images/emoji/104.gif"></div></td>
+														</tr>
+													</tbody>
+												</table>
+												<div class="emotionsGif"></div>
+											</div>
+										    </div>
+										 </div>
+									 </div>
+									 <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+										        <button id="subTxt" class="btn btn-w-m btn-primary" type="button">保存</button>
+                                                <button id="cancelTxt" class="btn btn-w-m btn-danger" type="button">取消</button>	
+										    </div>
+										 </div>
+									  </div>
+				      			   
+                                   
+	                            </div>		                                	
+				      		    </div>
+				      		  </div>
+					      	</div>
+					    </div>
+					    <div class="tab-pane" id="image">
+					      <div class="row">
+				      		<div class="col-lg-12 wechatInfo">
+				      		  <div class="ibox float-e-margins">
+				      			<div class="ibox-content">
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">规则名</label>
+										    <div class="col-sm-8">
+										      <div class="input-group">
+	                                                <input id="rule-img" type="text" class="form-control" onkeydown='countChar("rule-img","counter-img");' onkeyup="countChar('rule-img','counter-img');">
+	                                                <span id="counter-img" class="input-group-addon" style="color:#CCC;">0/64</span>
+                                              </div>
+										      <span style="color:#CCC;">规则名最多64个字</span> 
+										    </div>
+										 </div>
+									  </div>
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">关键字</label>
+										    <div class="col-sm-8">
+										      <input id="keyword-img" type="text" class="need form-control" id="appSecret" >
+										      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">匹配类型</label>
+										    <div class="col-sm-8">
+										      <select id="match-img" class="form-control m-b" name="account" id="type">
+		                                        <option>完全匹配</option>
+		                                        <option>模糊匹配</option>
+		                                     </select> 	
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">上传图片</label>
+										    <div class="col-sm-8">
+										      <div id="dropzone">
+						      					<form action="/merchant/MerchantCtrl/saveImg" class="dropz-img dropz dz-clickable" id="demo-upload">
+												  <div class="dz-message">
+												     <p color="rgb(141, 141, 141)">大小: 不超过2M, 格式: bmp, png, jpeg, jpg, gif</p>
+												  </div>
+											    </form>
+						      				 </div>
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+										       <button id="subImg" class="btn btn-w-m btn-primary" type="button">保存</button>
+										    </div>
+										 </div>
+									  </div>
+	                            </div>		                                	
+				      		    </div>
+				      		  </div>
+					      	</div>
+					    </div>
+					    <div class="tab-pane " id="voice">
+					      <div class="row">
+				      		<div class="col-lg-12 ">
+				      		  <div class="ibox float-e-margins">
+				      			<div class="ibox-content" >
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">规则名</label>
+										    <div class="col-sm-8">
+										      <input id="rule-voice" type="text" class="need form-control" id="appSecret" >
+										      <span style="color:#CCC;">规则名最多60个字</span> 
+										    </div>
+										 </div>
+									  </div>
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">关键字</label>
+										    <div class="col-sm-8">
+										      <input id="keyword-voice" type="text" class="need form-control" id="appSecret" >
+										      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">匹配类型</label>
+										    <div class="col-sm-8">
+										      <select id="match-voice" class="form-control m-b" name="account" id="type">
+		                                        <option value="0">完全匹配</option>
+		                                        <option value="1">模糊匹配</option>
+		                                     </select> 	
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">上传语音资源</label>
+										    <div class="col-sm-8">
+										     <div id="dropzone">
+						      					<form action="/merchant/MerchantCtrl/saveVoice" class="dropz-voice dropz dz-clickable" id="demo-upload">
+												  <div class="dz-message">
+												     <p color="rgb(141, 141, 141)">大小: 不超过5M,长度: 不超过60s,格式: mp3, wma, wav, amr</p>
+												  </div>
+											    </form>
+						      				 </div>	
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+										      <button id="subVoice" class="btn btn-w-m btn-primary" type="button">保存</button>
+										    </div>
+										 </div>
+									  </div>
+	                            </div>		                                	
+				      		    </div>
+				      		  </div>
+					      	</div>
+					    </div>
+					    <div class="tab-pane " id="video">
+					      <div class="row">
+				      		<div class="col-lg-12 ">
+				      		  <div class="ibox float-e-margins">
+				      			<div class="ibox-content" >
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">规则名</label>
+										    <div class="col-sm-8">
+										      <input id="rule-video" type="text" class="need form-control" id="appSecret" >
+										      <span style="color:#CCC;">规则名最多60个字</span> 
+										    </div>
+										 </div>
+									  </div>
+				      				<div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">关键字</label>
+										    <div class="col-sm-8">
+										      <input id="keyword-video" type="text" class="need form-control" id="appSecret" >
+										      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">匹配类型</label>
+										    <div class="col-sm-8">
+										      <select id="match-video" class="form-control m-b" name="account" id="type">
+		                                        <option>完全匹配</option>
+		                                        <option>模糊匹配</option>
+		                                     </select> 	
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label">上传视频资源</label>
+										    <div class="col-sm-8">
+							      				<div id="dropzone">
+							      					<form action="/merchant/MerchantCtrl/saveVideo" class="dropz-video dropz dz-clickable" id="demo-upload">
+													  <div class="dz-message">
+													     <p color="rgb(141, 141, 141)">大小: 不超过20M,格式: rm, rmvb, wmv, avi, mpg, mpeg, mp4</p>
+													  </div>
+												    </form>
+							      				</div>
+										    </div>
+										 </div>
+									  </div>
+									  <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+							      				 <button id="subVideo" class="btn btn-w-m btn-primary" type="button">保存</button>
+										    </div>
+										 </div>
+									  </div>
+	                            </div>		                                	
+				      		    </div>
+				      		  </div>
+					      	</div>
+					    </div>
+					    <div class="tab-pane " id="newspaper">
+					      <ul class="nav nav-tabs">
+						    <li class="active"><a data-toggle="tab" href="#single" aria-expanded="true" title="单图文">单图文</i></a>
+						    </li>
+						    <li class=""><a data-toggle="tab" href="#multi" aria-expanded="false" title="多图文">多图文</i></a>
+						    </li>
+						  </ul>
+						  <div class="tab-content">
+						    <div class="tab-pane active" id="single" style="margin-top: 20px;">
+						       <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-1 control-label">规则名</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="appSecret" >
+								      <span style="color:#CCC;">规则名最多60个字</span> 
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-1 control-label">关键字</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="need form-control" id="appSecret" >
+								      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+								    </div>
+								 </div>
+							  </div>
+						       <div class="form-horizontal">
+                                 <div class="form-group">
+                                 	<textarea id="ysdata" style="display: none;"></textarea>
+						    		<div class="col-sm-8 msg-preview" id="nrdiv1" style="width:350px;">
+										<div class="msg-item-wrapper" relid="">
+											<div id="appmsgItem1" class="msg-item">
+												<h4 class="msg-t">
+													<span class="i-title m-title" rel="title"></span>
+												</h4>
+												<p class="msg-meta">
+													<span class="msg-date">${new Date().format('yyyy-MM-dd')}</span>
+												</p>
+												<div class="cover">
+													<img class="i-img m-img" relobj="elfinder_pscgztw" src="/public/images/fmdtp.jpg" style="width: 440px;height: 180px;">
+												</div>
+												<p class="msg-text m-desc" rel="desc"></p>
+												<div rel="con" class="m-con" style="display: none;"></div>
+												<div rel="url" class="m-url"></div>
+											</div>
+											<div class="msg-hover-mask"></div>
+											<div class="msg-mask">
+												<span class="dib msg-selected-tip"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-8">
+										<div class="msg-editer-wrapper">
+											<div class="msg-editer" style="width:400px;">
+												
+													<div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">标题</label>
+													    <div class="col-sm-9">
+													      <input type="text" class="need form-control" id="single-title" >
+													      <span style="color:#CCC;">必填,不能超过64个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">封面</label>
+													    <div class="col-sm-8">
+													      <div id="dropzone">
+									      					<form action="/merchant/MerchantCtrl/saveImg" class="single-img dropz dz-clickable" id="demo-upload">
+															  <div class="dz-message">
+															     <p color="rgb(141, 141, 141)">(必须上传一张图片)建议尺寸：550像素 * 290像素</p>
+															  </div>
+														    </form>
+									      				 </div>
+													    </div>
+													 </div>
+													</div>
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">摘要</label>
+													    <div class="col-sm-9">
+													      <textarea id="single-descr" class="need form-control" ></textarea>
+													      <span style="color:#CCC;">不能超过120个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">正文</label>
+													    <div class="col-sm-9">
+													    <!--<div id="note" ></div>-->
+													      <textarea id="single-editor" style="width: 200px;height: 400px;"></textarea>
+													      <span style="color:#CCC;">不能超过120个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    
+												  	<div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">原文链接</label>
+													    <div class="col-sm-9">
+													      <input type="text" class="need form-control" id="single-url" >
+													    </div>
+													 </div>
+												    </div>
+													<!--<div class="control-group">
+													   <label class="control-label" for="isshare">是否设置分享</label>
+													   <input type="checkbox" id="isshare" name="isshare" style="margin: 5px; outline: none;">	
+													</div>-->
+											    	<!--<div class="control-group">
+													    <div class="controls">
+													      <button id="save-btn" type="button" onclick="savedate();" class="btn btn-primary btn-large">保存</button>
+													      <button id="cancel-btn" type="button" class="btn btn-large">取消</button>
+													    </div>
+												    </div>
+												    -->
+												    <!--<input id="uid" name="uid" type="hidden" value="15065">
+												    <input id="action" name="action" type="hidden" value="add">-->
+												
+											</div>
+											<span class="abs msg-arrow a-out" style="margin-top: 0px;"></span>
+											<span class="abs msg-arrow a-in" style="margin-top: 0px;"></span>
+										</div>
+									</div>
+								  </div>
+							     </div>
+							     <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+										      <button id="subVoice" class="btn btn-w-m btn-primary" type="button">保存</button>
+										      <button id="subVoice" class="btn btn-w-m btn-danger" type="button">取消</button>
+										    </div>
+										 </div>
+								 </div>
+						    </div>
+						    <div class="tab-pane" id="multi" style="margin-top: 20px;">
+						    	<div class="form-horizontal">
+	                                 <div class="form-group">
+									    <label for="appSecret" class="col-sm-1 control-label">规则名</label>
+									    <div class="col-sm-8">
+									      <input type="text" class="need form-control" id="appSecret" >
+									      <span style="color:#CCC;">规则名最多60个字</span> 
+									    </div>
+									 </div>
+								  </div>
+								  <div class="form-horizontal">
+	                                 <div class="form-group">
+									    <label for="appSecret" class="col-sm-1 control-label">关键字</label>
+									    <div class="col-sm-8">
+									      <input type="text" class="need form-control" id="appSecret" >
+									      <span style="color:#CCC;">请填入关键字，必填,多关键字以逗号为间隔</span> 
+									    </div>
+									 </div>
+								  </div>
+						    	 <div class="form-horizontal">
+                                 <div class="form-group">
+                                 	<textarea id="ysdata" style="display: none;"></textarea>
+						    		<div class="col-sm-8 msg-preview" id="nrdiv1" style="width:350px;">
+										<div class="msg-item-wrapper" relid="">
+											<div id="appmsgItem2" class="appmsgItem msg-item">
+												<h4 class="msg-t">
+													<span class="i-title m-title" rel="title"></span>
+												</h4>
+												<p class="msg-meta">
+													<span class="msg-date">${new Date().format('yyyy-MM-dd')}</span>
+												</p>
+												<div class="cover">
+													<img class="i-img m-img" relobj="elfinder_pscgztw" src="/public/images/fmdtp.jpg" style="width: 440px;height: 180px;">
+												</div>
+												<p class="msg-text m-desc" rel="desc"></p>
+												<div rel="con" class="m-con" style="display: none;"></div>
+												<div rel="url" class="m-url"></div>
+												<div rel="share" class="m-share" style="display: none;"></div>
+											</div>
+											<div class="rel sub-msg-item appmsgItem">              
+												<span class="thumb">                    
+												<img class="i-img m-img" id="2" relobj="elfinder_pscgztwm2" src="/public/images/ddspic.png" style="width: 72px;height: 72px;">
+												</span>       
+												<h4 class="msg-t">                    
+												<span class="i-title m-title">标题</span>                
+												</h4>       
+												<ul class="abs tc sub-msg-opr">         
+													<li class="b-dib sub-msg-opr-item">           
+														<a href="javascript:;" onclick="edititem(this);" class="th opr-icon edit-icon">编辑</a>         
+													</li>         
+													<li class="b-dib sub-msg-opr-item">           
+														<a href="javascript:;" onclick="delitem(this);" class="th opr-icon del-icon">删除</a>         
+													</li>       
+												</ul>    
+												<div rel="con" class="m-con" style="display: none;"></div>
+												<div rel="url" class="m-url" style="display: none;"></div>
+												<div rel="share" class="m-share" style="display: none;"></div>
+											</div>
+											
+											<div class="sub-add">            
+												<a href="javascript:;" class="block tc sub-add-btn" id="addaline">
+												<span class="vm dib"><i class="fa fa-plus"></i></span>增加一条</a>           
+											</div>
+											<div class="msg-hover-mask"></div>
+											<div class="msg-mask">
+												<span class="dib msg-selected-tip"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-8">
+										<div class="msg-editer-wrapper">
+											<div class="msg-editer" style="width:400px;">
+												
+													<div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">标题</label>
+													    <div class="col-sm-9">
+													      <input type="text" class="need form-control" id="multi-title" >
+													      <span style="color:#CCC;">必填,不能超过64个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">封面</label>
+													    <div class="col-sm-8">
+													      <div id="dropzone">
+									      					<form action="/merchant/MerchantCtrl/saveImg" class="multi-img dropz dz-clickable" id="demo-upload">
+															  <div class="dz-message">
+															     <p color="rgb(141, 141, 141)">(必须上传一张图片)建议尺寸：550像素 * 290像素</p>
+															  </div>
+														    </form>
+									      				 </div>
+													    </div>
+													 </div>
+													</div>
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">摘要</label>
+													    <div class="col-sm-9">
+													      <textarea id="multi-descr" class="need form-control" id="multi"></textarea>
+													      <span style="color:#CCC;">不能超过120个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    
+												    <div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">正文</label>
+													    <div class="col-sm-9">
+													      <textarea id="multi-editor" style="width: 200px;height: 400px;"></textarea>
+													      <span style="color:#CCC;">不能超过120个字</span> 
+													    </div>
+													 </div>
+												    </div>
+												    
+												  	<div class="form-horizontal">
+					                                 <div class="form-group">
+													    <label for="appSecret" class="col-sm-3 control-label">原文链接</label>
+													    <div class="col-sm-9">
+													      <input type="text" class="need form-control" id="multi-url" >
+													    </div>
+													 </div>
+												    </div>
+													<!--<div class="control-group">
+													   <label class="control-label" for="isshare">是否设置分享</label>
+													   <input type="checkbox" id="isshare" name="isshare" style="margin: 5px; outline: none;">	
+													</div>-->
+											    	<!--<div class="control-group">
+													    <div class="controls">
+													      <button id="save-btn" type="button" onclick="savedate();" class="btn btn-primary btn-large">保存</button>
+													      <button id="cancel-btn" type="button" class="btn btn-large">取消</button>
+													    </div>
+												    </div>
+												    -->
+												    <!--<input id="uid" name="uid" type="hidden" value="15065">
+												    <input id="action" name="action" type="hidden" value="add">-->
+												
+											</div>
+											<span class="abs msg-arrow a-out" style="margin-top: 0px;"></span>
+											<span class="abs msg-arrow a-in" style="margin-top: 0px;"></span>
+										</div>
+									</div>
+								  </div>
+							     </div>
+							      <div class="form-horizontal">
+		                                 <div class="form-group">
+										    <label for="appSecret" class="col-sm-3 control-label"></label>
+										    <div class="col-sm-8">
+										      <button id="subVoice" class="btn btn-w-m btn-primary" type="button">保存</button>
+										      <button id="subVoice" class="btn btn-w-m btn-danger" type="button">取消</button>
+										    </div>
+										 </div>
+								 </div>
+						    </div>
+						  </div>
+					   </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<!--<script src="/public/javascripts/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script src="/public/javascripts/summernote/summernote.min.js" type="text/javascript" charset="utf-8"></script>-->
+<!--<script type="text/javascript" src="/public/javascripts/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="/public/javascripts/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="/public/javascripts/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="/public/javascripts/simditor/scripts/simditor.js"></script>-->
+<!--<script type="text/javascript">
+	$(function(){
+//		$('#note').summernote({
+//			width:400
+//		});
+       var editor = new Simditor({
+                textarea: $('#note'),
+                //defaultImage: 'img/a9.jpg'
+            });
+	})
+</script>-->
+<script type="text/javascript">
+    function countChar(textareaName,spanName){
+	  document.getElementById(spanName).innerHTML=0+document.getElementById(textareaName).value.length+"/64";
+	  if(document.getElementById(textareaName).value.length>=64){
+		  window.alert("已经是最大字数了哦！")
+		  return false;
+	  }
+	}
+	function delitem(o){
+			if(window.dqdiv2[0] == window.curedt[0]){
+				edititem(null,true);
+			}
+			if($('.appmsgItem').size()>2){
+				$(o).parent().parent().parent().remove();
+			}else{
+				alert('多图文最少不得少于两篇内容');
+			}
+    }
+	function edititem(o,first){
+	  	if(first || ccjy()) {
+		if(first){
+			window.dqdiv2 = $('#appmsgItem2');
+			$('.msg-editer-wrapper').css('marginTop','40px');
+		}else{
+			$('.msg-editer-wrapper').css('marginTop',($(o).offset().top-399)+'px');
+		}		
+		window.dqdiv2 = window.curedt;	
+		$('#multi-title').val(window.dqdiv2.find('.m-title').text());
+		$('#multi-url').val(window.dqdiv2.find('.m-url').text());
+		///
+//		var mid = window.dqdiv2.find('.m-img').attr("id");
+//		if(mid!='' && mid!='undefined' && mid!=null){
+//      ///
+//      $('.select_img').attr('id','pscgztwm'+mid);
+//		}
+//		if(window.dqdiv2.find('.m-share').text() == 1){
+//			document.getElementById("isshare").checked = true;
+//		}else{
+//			document.getElementById("isshare").checked = false;
+//		}
+	  }
+	}
+	 function ccjy(){
+	 	//	 	window.dqdiv2.find('.m-con').html(window.kindeditor_fg.html());
+		var tit = $.trim(window.dqdiv2.find('.m-title').text());
+		var img = window.dqdiv2.find('img').attr('src');
+		var url = $.trim(window.dqdiv2.find('.m-url').text());
+		var con = $.trim(window.dqdiv2.find('.m-con').html());
+//		var share = $.trim(window.dqdiv2.find('.m-share').text());
+//		if(tit==''){
+//			alert('请填写标题');
+//			return false;
+//		 }
+	    return true;
+	   }
+</script>
+<script type="text/javascript">
+//  seajs.use(["jquery","module","hotkey","uploader","simditor"],function($){
+//  	var editor = new Simditor({ textarea: $('#summer') });
+//  })
+    
+//  seajs.use(["jquery","bootstrap","note"],function($,bootstrap,note){
+//  	 $('#note').summernote();
+//  })
+//  seajs.use(["jquery","wysiwyg","hotkeys"],function($){
+//  	 
+//  })
+//  seajs.use(["jquery","wangeditor"],function($){
+//  	var $editor=$('#summernote').wangEditor();
+//  })
+	seajs.use("keywordAdd",function(keywordAdd){
+		keywordAdd.init();
+	});	   
+</script>
+#{/set}
+
+
+
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.reply.dao.mapper.IMenuReplyRuleMapper">
+   
+    <sql id="tableName">menu_reply_rule</sql>
+    <sql id="menuReplyRuleColumns">id,menu_key,msg_type,wechat_id,msg_id</sql>
+    
+    <resultMap type="MenuReplyRule" id="resultMenuRuleMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="msg_type" property="msgType"/>
+        <result column="msg_id" property="msgId"/>
+        <result column="menu_key" property="menuKey"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="MenuReplyRule" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,msg_type,menu_key,msg_id,gmt_created)
+       value(#{wechatId},#{msgType},#{menuKey},#{msgId},now())
+    </insert>
+    
+    <select id="findByKey" resultMap="resultMenuRuleMap">
+        select <include refid="menuReplyRuleColumns"/> from <include refid="tableName"/>
+        where menu_key=#{eventKey} and wechat_id=#{wechatId}
+    </select>
+    
+</mapper>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>用户信息注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/bootstrap.min.css"/>
+	    <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css"/>
+	    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/font-awesome.css"/>
+	    <link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+	    <link rel="stylesheet" type="text/css" href="/public/stylesheets/hui/style.css"/>
+	</head>
+	<style>
+		#top {
+			height: 68px;
+			padding-top: 10px;
+			width: 970px;
+			min-width: 750px;
+			margin: 0 auto;
+		}
+		.section {
+			border-top: 1px solid #DDD;
+		}
+		.actinfo span {
+			color: #ccc
+		}
+		.reg-success {
+			text-align: center;
+			border-top: 1px solid #DDD;
+		}
+		.reg-success a {
+			font-size: 14px;
+			margin: 0 10px;
+		}
+		.reg-success p {
+			line-height: 200px;
+			font-size: 34px;
+		}
+	</style>
+<body style="background: #f7f7f7">
+	<div id="top" role="banner">
+		<div class="navbar-header">
+			<a href="/AssistantUI/index" class="navbar-brand">
+				<img src="../../../public/images/logo.png"/>
+			</a>
+		</div>
+	</div>
+     <div class="col-lg-12 reg" style="margin: 20px 0;">
+        <div class="ibox float-e-margins" >
+            
+            <div  class="ibox-content" style="background: #f7f7f7;">
+                <form class="form-horizontal m-t" id="signupForm" novalidate="novalidate"> 
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">用户名：</label>
+                        <div class="col-sm-4">
+                            <input id="userName" name="username" class="form-control" type="text" aria-required="true" aria-invalid="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">密码：</label>
+                        <div class="col-sm-4">
+                            <input id="passwd" name="password" class="form-control" type="password">
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">确认密码：</label>
+                        <div class="col-sm-4">
+                            <input id="confirm_password" name="confirm_password" class="form-control" type="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">邮箱：</label>
+                        <div class="col-sm-4">
+                            <input id="email" name="email" class="form-control" type="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">手机号：</label>
+                        <div class="col-sm-4">
+                            <input id="mobile" name="mobile" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">QQ：</label>
+                        <div class="col-sm-4">
+                            <input id="qq" name="qq" class="form-control" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">同意协议：</label>
+                        <div class="col-sm-4">
+                            <input type="checkbox" class="checkbox" id="agree" name="agree">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button class="subact btn btn-primary" type="submit" >提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     <div class="reg-success" style="display:none;">
+		<p>恭喜你!注册成功!页面将于<b>5</b>秒后跳转到后台</p>
+		<a href="/AssistantUI/index" target="_self">立即进入后台</a>
+		<a href="/AssistantUI/home" target="_self">返回首页</a>
+	</div>  
+</body>
+<script src="/public/javascripts/sea.js" type="text/javascript" charset="utf-8"></script>
+<script src="/public/javascripts/seajs-preload.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	//sea.js配置
+	seajs.config({
+		//设置别名，方便调用
+		alias:{
+			"jquery":"jquery.min.js",
+			"bootstrap":"bootstrap.min.js",
+			"bootstrapTable": "bootstrap-table.min.js",
+			"dialog":"dialog.js",
+			"pagination":"pagination.js",
+			"templete":"templete.js",
+			"until":"global.js",
+            "validate":"/public/javascripts/validate/jquery.validate.min.js",
+            "additionalValidate":"/public/javascripts/validate/additional-methods.js",
+		},
+		map:[
+			[/^(.*\.(?:css|js))(.*)$/i, '$1?20141218']
+		],
+		preload:['jquery']
+	});
+	seajs.use(['jquery','validate','additionalValidate'],function($,validate,additionalValidate){
+		
+        //以下为修改jQuery Validation插件兼容Bootstrap的方法，没有直接写在插件中是为了便于插件升级
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+            },
+            success: function (element) {
+                element.closest('.form-group').removeClass('has-error').addClass('has-success');
+            },
+            errorElement: "span",
+            errorClass: "help-block m-b-none",
+            validClass: "help-block m-b-none",
+            onsubmit:true,// 是否在提交是验证  
+
+        });
+         //以下为官方示例
+        $().ready(function () {
+            // validate signup form on keyup and submit
+            $("#signupForm").validate({
+                rules: {
+                    username: {
+                        required: true,
+                        minlength: 2
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        
+                    },
+                    confirm_password: {
+                        required: true,
+                        minlength: 6,
+                        
+                        equalTo: "#passwd"
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    mobile:{
+                    	required:false,
+                    	isPhone:true
+                    },
+                    qq:{
+                    	required:false,
+                    	qq:true
+                    },
+                    topic: {
+                        required: "#newsletter:checked",
+                        minlength: 2
+                    },
+                    agree: "required"
+                },
+                messages: {  
+                    username: {
+                        required: "请输入您的用户名",
+                        minlength: "用户名必须两个字符以上"
+                    },
+                    password: {
+                        required: "请输入您的密码",
+                        minlength: "密码必须5个字符以上"
+                    },
+                    confirm_password: {
+                        required: "请再次输入密码",
+                        minlength: "密码必须5个字符以上",
+                        equalTo: "两次输入的密码不一致"
+                    },
+                    email: "邮箱格式不正确",
+                    agree: "必须同意协议后才能注册"
+                },
+                submitHandler:function(form){
+                	var param = $("#signupForm").serialize();
+                	//alert(param);
+                	$.ajax({
+                		type:"post",
+                		url:"/merchant/MerchantCtrl/register",
+                		dataType:"json",
+		            	data:{
+		            		userName:$("#userName").val(),
+		            		passwd:$("#passwd").val(),
+		            		email:$("#email").val(),
+		            		mobile:$("#mobile").val(),
+		            		qq:$("#qq").val(),
+                        },
+		            	success:function(data){
+		            		//alert(data.success);
+		            		if(data.success){
+		            			$(".reg-success").show();
+		            			setInterval(function(){
+		            				$(".reg-success b").html($(".reg-success b").html()-1);
+		            			},1000)
+		            			$(".reg").hide();
+		            			setTimeout(function(){
+		            				location.href="/AssistantUI/index";
+		            			},5000)
+		            		}else{
+		            			alert(data.message||"注册失败");
+		            		}
+		            	}
+                	});
+                },
+                invalidHandler: function(form, validator) {  //不通过回调  
+                  return false;  
+               }  
+            });
+        });
+	})
+</script>
+</html>

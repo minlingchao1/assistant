@@ -1,0 +1,130 @@
+#{extends 'main3.html' /}
+#{set title:'添加场景画面' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/ui-dialog.css"/>
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/upload.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>添加场景画面</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content"> 
+			    <div class="row">
+			      		<div class="col-lg-12 wechatInfo">
+			      			<div class="ibox-content">
+			      			  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="accountName" class=" col-sm-3 control-label">排序</label>
+			                        <div class="col-sm-8">
+			                            <input id="reorder" name="order" class="form-control" type="text" aria-required="true" aria-invalid="true">
+			                            <span style="color:#CCC;">数值越大越靠前</span> 
+			                        </div>
+								 </div>
+							  </div>
+							 <div class="js_scene_picture">
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">画面样式</label>
+								    <div class="col-sm-8">
+								       <select id="imgSet" class="form-control m-b js_scene_style_select" name="account">
+                                                <option value="0" data-type="pure">纯图片式</option>
+                                                <option value="1" data-type="btn">带按钮图片式</option>
+                                        </select>
+								    </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">画面内容</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-openImg dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal js_scene_style js_btn hide">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label ">按钮图片</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<form action="/merchant/MerchantCtrl/saveImg"  class="dropz-btnImg dropz dz-clickable" id="demo-upload">
+											   <div class="dz-message">
+											     <p color="rgb(141, 141, 141)">点击上传</p>
+											   </div>
+										    </form>
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							  <div class="form-horizontal js_scene_style js_btn hide">
+								  <div class="form-group js_scene_style js_btn hide">
+									    <label for="appId" class="col-sm-3 control-label ">按钮位置</label>
+									    <div class="col-sm-8">
+									       <select id="btnPos" class="form-control m-b" name="account">
+	                                                <option value="top">按钮靠上</option>
+	                                                <option value="middle">按钮居中</option>
+	                                                <option value="bottom">按钮靠下</option>
+	                                        </select>
+									    </div>
+							      </div>
+						      </div>
+							  <div class="form-horizontal js_scene_style js_btn hide">
+                                 <div class="form-group">
+								    <label for="appId" class="col-sm-3 control-label">按钮链接地址</label>
+								    <div class="col-sm-8 uploadwrap" >
+								       <div id="dropzone">
+					      					<input id="btnUrl" type="text" class="need form-control"  name="actionInfo" aria-required="true" aria-invalid="true">
+				      				   </div>
+								     <span style="color:#CCC;">只支持JPG图片<span> 
+								     </div>
+								 </div>
+							  </div>
+							 </div> 
+							  <div class="col-sm-4 col-sm-offset-3">
+                                <button id="subSceneImg" class="btn btn-primary" type="button" >保存</button>
+                                <button class="btn btn-white" type="button" id="cancel">取消</button>
+                              </div>
+							  
+                            </div>
+			      		</div>
+			      	</div>
+            </div>
+        </div>
+   </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	seajs.use("sceneImgAdd",function(sceneImgAdd){
+	  sceneImgAdd.init();
+    });
+     seajs.use("jquery",function($){
+	     $(function(){
+	    	 $(".js_scene_picture").each(function(){
+			        var type=$(this).find(".js_scene_style_select option:selected").data("type");
+			        //alert(type);
+			        $(this).find(".js_scene_style").addClass('hide');
+			        $(this).find(".js_"+type).removeClass('hide');
+			 });
+	      })
+	      $(document).on("change",".js_scene_style_select",function(){
+	      	//alert(type);
+	        var $p=$(this).parents(".js_scene_picture"),type=$(this).find("option:selected").data("type");
+	        $p.find(".js_scene_style").addClass('hide');
+	        $p.find(".js_"+type).removeClass('hide');
+	    });
+    })
+</script>
+#{/set}

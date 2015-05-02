@@ -1,0 +1,142 @@
+#{extends 'main3.html' /}
+#{set 'moreStyles'}
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/appmsg.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/javascripts/ueditor/themes/default/css/ueditor.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/modal.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/dropzone.css"/>
+ <link rel="stylesheet" type="text/css" href="/public/stylesheets/wysiwyg.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>单图文消息新增</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+              <div class="form-horizontal">
+                 <div class="form-group">
+                 	<textarea id="ysdata" style="display: none;"></textarea>
+		    		<div class="col-sm-8 msg-preview" id="nrdiv1" style="width:350px;">
+		    			<div class="viewBox">
+							<img src="/public/images/iphone.png" width="375">
+							<div class="viewCon">
+								<!--<iframe src="" id="J_iframe" frameborder="no" style="border:0;width:320px;height:561px;overflow:auto;overflow-x:hidden;"></iframe>-->
+								<div class="msg-item-wrapper" relid="">
+									<div id="appmsgItem1" class="msg-item">
+										<h4 class="msg-t">
+											<span class="i-title m-title" rel="title"></span>
+										</h4>
+										<p class="msg-meta">
+											<span class="msg-date">${new Date().format('yyyy-MM-dd')}</span>
+										</p>
+										<div class="cover">
+											<img class="i-img m-img" relobj="elfinder_pscgztw" src="/public/images/fmdtp.jpg" style="width: 440px;height: 180px;">
+										</div>
+										<p class="msg-text m-desc" rel="desc"></p>
+										<div rel="con" class="m-con" id="m-con" name="m-con"></div>
+										<div rel="url" class="m-url" id="m-url" name="m-url"></div>
+									</div>
+									<div class="msg-hover-mask"></div>
+									<div class="msg-mask">
+										<span class="dib msg-selected-tip"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						<div class="msg-editer-wrapper">						  
+							<div class="msg-editer" style="width:400px;">
+								<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">封面</label>
+								    <div class="col-sm-8">
+								      <div id="dropzone">
+				      					<form action="/merchant/MerchantCtrl/saveImg" class="single-img dropz dz-clickable" id="demo-upload">
+										  <div class="dz-message">
+										     <p color="rgb(141, 141, 141)">(必须上传一张图片)建议尺寸：550像素 * 290像素</p>
+										  </div>
+									    </form>
+				      				 </div>
+								    </div>
+								 </div>
+								</div>
+							  <form class="form-horizontal m-t" id="newsForm" novalidate="novalidate"> 
+								<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">标题</label>
+								    <div class="col-sm-9">
+								      <input id="title" name="title" type="text" class="need form-control"  aria-required="true" aria-invalid="true">
+								      <span style="color:#CCC;">必填,不能超过64个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							    
+							    <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">摘要</label>
+								    <div class="col-sm-9">
+								      <textarea id="descr" name="descr" class="need form-control" aria-required="true" aria-invalid="true"></textarea>
+								      <span style="color:#CCC;">不能超过120个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							    
+							    <div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label" >正文</label>
+								    <div class="col-sm-9">
+								    <!--<div id="note" ></div>-->
+								      <!--<div class="mark-img-btn" id="J_vedioUp">111111111</div>-->
+								      <textarea id="con" name="con" style="width: 400px;height: 400px;" aria-required="true" aria-invalid="true"></textarea>
+								      <span style="color:#CCC;">不能超过120个字</span> 
+								    </div>
+								 </div>
+							    </div>
+							    
+							  	<div class="form-horizontal">
+                                 <div class="form-group">
+								    <label for="appSecret" class="col-sm-3 control-label">原文链接</label>
+								    <div class="col-sm-9">
+								      <input id="url" name="url" type="text" class="need form-control"  aria-required="true" aria-invalid="true">
+								    </div>
+								 </div>
+							    </div>
+							    </div>
+							    <span class="abs msg-arrow a-out" style="margin-top: 0px;"></span>
+							    <span class="abs msg-arrow a-in" style="margin-top: 0px;"></span>
+								<div class="form-horizontal">
+	                                 <div class="form-group">
+									    <label for="appSecret" class="col-sm-3 control-label"></label>
+									    <div class="col-sm-8">
+									      <button  class="btn btn-w-m btn-primary" type="submit" >保存</button>
+									      <button id="cancel" class="btn btn-w-m btn-danger" type="button">取消</button>
+									    </div>
+									 </div>
+								 </div>
+							  </form>
+						</div>
+					</div>
+				  </div>
+			     </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+	  seajs.use('singleArticle',function(singleArticle){
+	    singleArticle.init();
+      });
+</script>
+
+#{/set}

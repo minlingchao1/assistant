@@ -1,0 +1,79 @@
+#{extends 'main4.html' /}
+#{set title:'首页' /}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="/public/stylesheets/bootstrap-table.min.css"/>
+#{/set}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>微信公众号管理</h5>
+                <div class="ibox-tools open">
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    <a class="close-link"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <a class="btn btn-primary" href="/AssistantUI/addWechat"><i class="fa fa-weixin"> </i>添加微信公众账号</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped wx-list">
+                        <thead>
+                            <tr>
+                                <th data-field="accountName" data-align="center" data-sortable="true">公众号名称</th>
+                                <th data-field="url" data-align="center" data-sortable="true">接口地址</th>
+                                <th data-field="token" data-align="center" data-sortable="true">Token</th>
+                                <th data-field="id" data-align="center" data-formatter="wxEdit" data-sortable="true">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+#{set 'moreScripts'}
+<script type="text/javascript">
+
+	function wxEdit(value, row) {
+		return '<a href="/AssistantUi/wxIndex?wechatId='+value+'" target="_self" lid="'+value+'" ><span class="label label-warning">管理</span></a>  <a href="/AssistantUI/addWechat?wechatId='+value+'" target="_self" lid="'+value+'" ><span class="label label-primary">编辑</span></a>  <a href="/ActivityUi/creatact?aid='+value+'" target="_self" lid="'+value+'" ><span class="label label-danger">删除</span></a> ';
+	}
+	seajs.use(["jquery","wxlist","bootstrapTable"],function($,wxlist,bootstrapTable){
+		$.extend($.fn.bootstrapTable.defaults,{
+			formatLoadingMessage:function(){
+				return '正在努力地加载数据中，请稍候......';
+			},
+			formatRecordPerPage:function(pageNumber){
+				return '每页显示'+pageNumber+'条记录';
+			},
+			formatShowingRows:function(pageFrom,pageTo,totalRows){
+				return '显示第'+pageFrom+'到第'+pageTo+'条记录,总共'+totalRows+'条记录';
+			},
+			formatSearch:function(){
+				return '搜索';
+			},
+			formatNoMatches: function () {
+				return '没有找到匹配的记录';
+			},
+			formatRefresh: function () {
+				return '刷新';
+			},
+			formatToggle: function () {
+				return '切换';
+			},
+			formatColumns: function () {
+				return '列';
+			}
+		});
+		wxlist.init();
+	})
+</script>
+#{/set}
+

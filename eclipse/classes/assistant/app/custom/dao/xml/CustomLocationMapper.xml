@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.custom.dao.mapper.ICustomLocationMapper">
+   
+    <sql id="tableName">custom_location</sql>
+    
+    <sql id="locationColumns">id,wechat_id,opneid,lng,lat,precisions</sql>
+    
+    <resultMap type="CustomLocation" id="resultLocationMap">
+        <id column="id" property="id"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="openId" property="openid"/>
+        <result column="lng" property="lng"/>
+        <result column="lat" property="lat"/>
+        <result column="precisions" property="precisions"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="CustomLocation" useGeneratedKeys="true" keyProperty="id">
+       insert into <include refid="tableName"/> 
+       (wechat_id,openId,from_user_name,to_user_name,msg_type,create_time,precisions,lng,lat,gmt_created)
+       value(#{wechatId},#{openId},#{fromUserName},#{toUserName},#{createTime},#{msgType},#{precisions},#{lng},#{lat},now())
+    </insert>
+    
+    <select id="findByWechatId" parameterType="long" resultMap="resultLocationMap">
+        select <include refid="locationColumns"/> from <include refid="tableName"/> where wechat_id=#{wechatId}
+    </select>
+ 
+</mapper>

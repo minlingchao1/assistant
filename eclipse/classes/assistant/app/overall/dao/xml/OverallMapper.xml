@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.overall.dao.mapper.IOverallMapper">
+   
+    <sql id="tableName">overall</sql>
+    
+    <sql id="overallListColumns">id,name,descr</sql>
+    <sql id="overallColumns">id,name,descr,left_url,right_url,top_url,bottom_url,front_url,behind_url,music_set,back_music</sql>
+    
+    <resultMap type="Overall" id="resultOverallListMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="descr" property="descr"/>
+    </resultMap>
+    
+     <resultMap type="Overall" id="resultOverallMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="descr" property="descr"/>
+        <result column="left_url" property="leftUrl"/>
+        <result column="right_url" property="rightUrl"/>
+        <result column="top_url" property="topUrl"/>
+        <result column="bottom_url" property="bottomUrl"/>
+        <result column="front_url" property="frontUrl"/>
+        <result column="behind_url" property="behindUrl"/>
+        <result column="music_set" property="musicSet"/>
+        <result column="back_music" property="backMusic"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Overall" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (wechat_id,name,descr,left_url,right_url,top_url,bottom_url,front_url,behind_url,music_set,back_music,gmt_created)
+      value(#{wechatId},#{name},#{descr},#{leftUrl},#{rightUrl},#{topUrl},#{bottomUrl},#{frontUrl},#{behindUrl},#{musicSet},#{backMusic},now())
+    </insert>
+    
+    <select id="getList" parameterType="long" resultMap="resultOverallListMap">
+        select <include refid="overallListColumns"/> from <include refid="tableName"/>
+        where wechat_id=#{wechatId} 
+    </select>
+    
+    <select id="findById" parameterType="long" resultMap="resultOverallMap">
+        select <include refid="overallColumns"/> from <include refid="tableName"/>
+        where id=#{id} 
+    </select>
+</mapper>

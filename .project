@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>assistant</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.playframework.playclipse.playNature</nature>
+	</natures>
+	<linkedResources><link><name>mybatisplay-0.3.0</name><type>2</type><location>D:/JavaDevelop/PlayFrameWork/play-1.2.4/play-1.2.4/modules/mybatisplay-0.3.0/app</location></link>
+<link><name>conf/mybatisplay-0.3.0</name><type>2</type><location>D:/JavaDevelop/PlayFrameWork/play-1.2.4/play-1.2.4/modules/mybatisplay-0.3.0/conf</location></link>
+</linkedResources>
+</projectDescription>

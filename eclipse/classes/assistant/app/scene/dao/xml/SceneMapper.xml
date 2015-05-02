@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.scene.dao.mapper.ISceneMapper">
+   
+    <sql id="tableName">scene</sql>
+    
+    <sql id="sceneColumns">id,status,scene_name,start,end,share_title,share_content,open_img,open_set,out_img,out_set,slide,back_music,music_set,open_btn_img,open_btn_url,open_btn_pos,out_btn_img,out_btn_url,out_btn_pos</sql>
+    
+     <sql id="sceneListColumns">id,scene_name,start,end,status</sql>
+    
+    <resultMap type="Scene" id="resultSceneMap">
+        <id column="id" property="id"/>
+        <result column="scene_name" property="sceneName"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="share_title" property="shareTitle"/>
+        <result column="share_content" property="shareContent"/>
+        <result column="open_img" property="openImg"/>
+        <result column="open_set" property="openSet"/>
+        <result column="out_img" property="outImg"/>
+        <result column="out_set" property="outSet"/>
+        <result column="slide" property="slide"/>
+        <result column="back_music" property="backMusic"/>
+        <result column="music_set" property="musicSet"/>
+        <result column="open_btn_img" property="openBtnImg"/>
+        <result column="open_btn_url" property="openBtnUrl"/>
+        <result column="open_btn_pos" property="openBtnPos"/>
+        <result column="out_btn_img" property="outBtnImg"/>
+        <result column="out_btn_url" property="outBtnUrl"/>
+        <result column="out_btn_pos" property="outBtnPos"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    
+    <resultMap type="Scene" id="resultSceneListMap">
+        <id column="id" property="id"/>
+        <result column="scene_name" property="sceneName"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    
+   
+    
+    <insert id="insert" parameterType="Scene" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (wechat_id,scene_name,start,end,share_title,share_content,open_img,open_set,out_img,out_set,slide,back_music,music_set,open_btn_img,open_btn_url,open_btn_pos,out_btn_img,out_btn_url,out_btn_pos,status,gmt_created)
+      value(#{wechatId},#{sceneName},#{start},#{end},#{shareTitle},#{shareContent},#{openImg},#{openSet},#{outImg},#{outSet},#{slide},#{backMusic},#{musicSet},#{openBtnImg},#{openBtnUrl},#{openBtnPos},#{outBtnImg},#{outBtnUrl},#{outBtnPos},#{status},now())
+    </insert>
+    
+    <update id="update">
+       update <include refid="tableName"/>
+       <set>
+         <if test="sceneName!=null">scene_name=#{sceneName},</if>
+         <if test="start!=null">start=#{start},</if>
+         <if test="end!=null">end=#{end},</if>
+         <if test="shareTitle!=null">share_title=#{shareTitle},</if>
+         <if test="shareContent!=null">share_content=#{shareContent},</if>
+         <if test="openImg!=null">open_img=#{openImg},</if>
+         <if test="openSet!=null">open_set=#{openSet},</if>
+         <if test="outImg!=null">out_img=#{outImg},</if>
+         <if test="outSet!=null">out_set=#{outSet},</if>
+         <if test="slide!=null">slide=#{slide},</if>
+         <if test="backMusic!=null">back_music=#{backMusic},</if>
+         <if test="musicSet!=null">music_set=#{musicSet},</if>
+         <if test="openBtnImg!=null">open_btn_img=#{openBtnImg},</if>
+         <if test="openBtnUrl!=null">open_btn_url=#{openBtnUrl},</if>
+         <if test="openBtnPos!=null">open_btn_pos=#{openBtnPos},</if>
+         <if test="outBtnImg!=null">out_btn_img=#{outBtnImg},</if>
+         <if test="outBtnUrl!=null">out_btn_url=#{outBtnUrl},</if>
+         <if test="outBtnPos!=null">out_btn_pos=#{outBtnPos},</if>
+         <if test="status!=null">status=#{status}</if>
+       </set>
+       where id=#{id}
+    </update>
+    
+    <select id="findById" parameterType="long" resultMap="resultSceneMap">
+        select <include refid="sceneColumns"/> from <include refid="tableName"/>
+        where id=#{id} 
+    </select>
+    
+    <select id="getList" parameterType="long" resultMap="resultSceneListMap">
+        select <include refid="sceneListColumns"/> from <include refid="tableName"/>
+        where wechat_id=#{wechatId} 
+    </select>
+    
+    <select id="listAll" parameterType="long" resultMap="resultSceneListMap">
+        select <include refid="sceneListColumns"/> from <include refid="tableName"/>
+       
+    </select>
+    
+</mapper>

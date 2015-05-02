@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="assistant.app.lbs.dao.mapper.ISellerMessageRefMapper">
+   
+    <sql id="tableName">seller_message_ref</sql>
+    
+    <sql id="sellerMsgRefColumns">id,msg_id</sql>
+    
+    <resultMap type="SellerMessageRef" id="resultSellerMessageRefMap">
+        <id column="id" property="id"/>
+        <result column="msg_id" property="msgId"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="SellerMessageRef" useGeneratedKeys="true" keyProperty="id">
+      insert into <include refid="tableName"/>
+      (seller_id,msg_id,gmt_created)
+      value(#{sellerId},#{msgId},now())
+    </insert>
+    
+    <select id="findBySellerId" parameterType="long" resultMap="resultSellerMessageRefMap">
+        select <include refid="sellerMsgRefColumns"/> from <include refid="tableName"/> where seller_id=#{sellerId}
+    </select>
+
+</mapper>
